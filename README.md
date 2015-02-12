@@ -17,6 +17,9 @@ Code example:
 #   include "stringify/jss_fusion_adapted_struct.h"
 #endif
 
+#include <string>
+#include <vector>
+
 struct ConfigContent : public JSON::FusionStruct <ConfigContent>
                      , public JSON::ParsableStruct <ConfigContent>
 {
