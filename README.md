@@ -5,7 +5,7 @@ This library is not fine tuned for speed.
 The slowest part should be the boost/property_tree library used for parsing JSON.
 
 Dependencies:
-> boost/property_tree
+> boost/property_tree <br>
 > boost/fusion
 
 Code example:
