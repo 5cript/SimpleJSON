@@ -1,5 +1,5 @@
 # SimpleJSON
-A JSON stringifier / parser that uses boost fusion introspection methods for automagic POD struct &lt;-> JSON conversion
+A JSON stringifier / parser that uses boost fusion introspection methods for automagic struct &lt;-> JSON conversion
 
 This library is not fine tuned for speed. 
 The slowest part should be the boost/property_tree library used for parsing JSON.
