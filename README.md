@@ -26,7 +26,7 @@ struct ConfigContent : public JSON::FusionStruct <ConfigContent>
   int id;
   std::string libPath;
   std::vector <std::string> someArray;
-}
+};
 
 BOOST_FUSION_ADAPT_STRUCT
 (
@@ -41,21 +41,23 @@ ConfigContent parse(std::string const& json)
   ConfigContent cc;
   auto tree = JSON::parse_json(json);
   JSON::js_parse(cc, "config_content", tree);
+  return cc;
 }
 
 std::string stringify(ConfigContent const& cc)
 {
-  return JSON::js_try_stringify("config_content", cc);
+  return std::string("{\"config_content\":") + JSON::js_try_stringify("config_content", cc) + "}";
 }
 
-int main() 
+int main()
 {
   std::string str;
   ConfigContent cc;
-  
+  cc.id = 2;
+
   str = stringify(cc);
   auto unnecessarilyComplexCopy = parse(str);
-  
-  // unnecessarilyComplexCopy == cc
+
+  // assert unnecessarilyComplexCopy == cc
 }
 ```
