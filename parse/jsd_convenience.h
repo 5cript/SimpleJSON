@@ -22,7 +22,7 @@ namespace JSON
     }
 }
 
-#define json_deserialize(NAME) JSON::js_try_parse(#NAME, NAME)
-#define json_deserialize_opt(NAME, OPTIONS) JSON::js_try_parse(#NAME, NAME, OPTIONS)
+#define json_deserialize(NAME) JSON::try_parse(#NAME, NAME)
+#define json_deserialize_opt(NAME, OPTIONS) JSON::try_parse(#NAME, NAME, OPTIONS)
 
 #endif // JSD_CONVENIENCE_H_INCLUDED

@@ -24,7 +24,7 @@ namespace JSON
     }
 }
 
-#define json_serialize(NAME, STREAM) JSON::js_try_stringify(STREAM, #NAME, NAME)
-#define json_serialize_opt(NAME, STREAM, OPTIONS) JSON::js_try_stringify(STREAM, #NAME, NAME, OPTIONS)
+#define json_serialize(NAME, STREAM) JSON::try_stringify(STREAM, #NAME, NAME)
+#define json_serialize_opt(NAME, STREAM, OPTIONS) JSON::try_stringify(STREAM, #NAME, NAME, OPTIONS)
 
 #endif // JSS_CONVENIENCE_H_INCLUDED
