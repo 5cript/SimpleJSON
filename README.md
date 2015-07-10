@@ -1,12 +1,18 @@
 # SimpleJSON
 A JSON stringifier / parser that uses boost fusion introspection methods for automagic struct &lt;-> JSON conversion
 
+INFO: The library changed from version 1.0 to 1.1 so that it breaks working code.
+      All functions now receive a stream parameter and return this passed stream.
+      This is far more convenient and faster too. Its "the C++ style". Sorry for inconvenience, but
+      this is certainly a step forward.
+
 This library is not fine tuned for speed. 
-The slowest part should be the boost/property_tree library used for parsing JSON.
 
 Dependencies:
 > boost/property_tree <br>
-> boost/fusion
+> boost/fusion <br>
+> boost/mpl <br>
+> boost/phoenix <br>
 
 Code example:
 ```C++
@@ -19,13 +25,14 @@ Code example:
 
 #include <string>
 #include <vector>
+#include <sstream>
 
 struct ConfigContent : public JSON::FusionStruct <ConfigContent>
                      , public JSON::ParsableStruct <ConfigContent>
 {
-  int id;
-  std::string libPath;
-  std::vector <std::string> someArray;
+    int id;
+    std::string libPath;
+    std::vector <std::string> someContainer;
 };
 
 BOOST_FUSION_ADAPT_STRUCT
@@ -33,31 +40,44 @@ BOOST_FUSION_ADAPT_STRUCT
     ConfigContent,
     (int, id)
     (std::string, libPath)
-    (std::vector <std::string>, someArray)
+    (std::vector <std::string>, someContainer)
 )
 
-ConfigContent parse(std::string const& json)
+ConfigContent parse(std::istream& json)
 {
-  ConfigContent cc;
-  auto tree = JSON::parse_json(json);
-  JSON::js_parse(cc, "config_content", tree);
-  return cc;
+    ConfigContent cc;
+    auto tree = JSON::parse_json(json);
+    JSON::parse(cc, "config_content", tree);
+    return cc;
 }
 
-std::string stringify(ConfigContent const& cc)
+std::ostream& stringify(std::ostream& stream, ConfigContent const& cc)
 {
-  return std::string("{\"config_content\":") + JSON::js_try_stringify("config_content", cc) + "}";
+    stream << "{";
+    JSON::try_stringify(stream, "config_content", cc, JSON::ProduceNamedOutput);
+    stream << "}";
+    return stream;
 }
 
 int main()
 {
-  std::string str;
-  ConfigContent cc;
-  cc.id = 2;
+    ConfigContent cc;
+    cc.id = 2;
+    cc.libPath = "./somewhere";
+    cc.someContainer = {"Hello", "World"};
 
-  str = stringify(cc);
-  auto unnecessarilyComplexCopy = parse(str);
+    std::stringstream sstr;
+    stringify(sstr, cc);
+    auto unnecessarilyComplexCopy = parse(sstr);
 
-  // assert unnecessarilyComplexCopy == cc
+    /////////////////////////////////////////////////////////////////////////
+    // Lets check if we got what we set
+    /////////////////////////////////////////////////////////////////////////
+
+    std::cout << sstr.str() << "\n\n";
+    std::cout << cc.id << "\n";
+    std::cout << cc.libPath << "\n";
+    for (auto const& i : cc.someContainer)
+        std::cout << i << "\n";
 }
 ```
