@@ -35,19 +35,6 @@ namespace JSON
         };
     }
 
-    namespace Internal
-    {
-        /*
-        template <typename T,
-                  class = typename std::enable_if<Internal::is_js_object<T>::value>::type >
-        std::ostream& operator << (std::ostream& os, T const& object)
-        {
-            os << '{' << object.CLASS_STRINGIFY_FUNCTION_NAME(os, DEFAULT_OPTIONS) << '}';
-            return os;
-        }
-        */
-    }
-
     template <typename T,
               class = typename std::enable_if<std::is_class<T>::value>::type,
               class = typename std::enable_if<Internal::is_js_object<T>::value>::type >
@@ -65,6 +52,9 @@ namespace JSON
     }
 
     std::ostream& js_make_object(std::ostream& stream, std::vector <std::string> const& elements, StringificationOptions const& options = DEFAULT_OPTIONS);
+
+    #define JSON_VERIFY_CLASS_VALIDITY(T) \
+    static_assert (JSON::Internal::is_js_object <T>::value, "The class/struct is not a stringifiable struct, please check the function signature");
 }
 
 #endif // JSS_OBJECT_H_INCLUDED
