@@ -51,8 +51,8 @@ namespace JSON
             void operator()(Index, T& object, std::string const& name, PropertyTree const& tree, ParsingOptions const& options) const
             {
 				parse(boost::fusion::at<Index>(object),
-						 name + "." + boost::fusion::extension::struct_member_name<T, Index::value>::call(),
-						 tree, options);
+                      name + "." + boost::fusion::extension::struct_member_name<T, Index::value>::call(),
+					  tree, options);
             }
             _helper(int len) : len(len) {}
         private:
