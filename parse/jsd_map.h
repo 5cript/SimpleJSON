@@ -6,8 +6,8 @@
 namespace JSON
 {
 	template <typename ValueT, typename CompareT = std::less <ValueT>, class AllocT = std::allocator <ValueT>>
-	void js_parse(std::map<std::string, ValueT, CompareT, AllocT>& value, std::string const& name,
-					  PropertyTree const& object, ParsingOptions const& options = DEFAULT_PARSER_OPTIONS)
+	void parse(std::map<std::string, ValueT, CompareT, AllocT>& value, std::string const& name,
+               PropertyTree const& object, ParsingOptions const& options = DEFAULT_PARSER_OPTIONS)
 	{
 		try
 		{
@@ -15,7 +15,7 @@ namespace JSON
 			for (auto const& i : pt)
 			{
 				ValueT temp;
-				js_parse(temp, "", i.second, options);
+				parse(temp, "", i.second, options);
 				value[i.first] = temp;
 			}
 		}

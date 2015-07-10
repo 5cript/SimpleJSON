@@ -9,8 +9,9 @@
 #include <sstream>
 #include <iterator>
 #include <iomanip>
+#include <iosfwd>
 
-// js_stringify signature: (std::string const&, T, StringificationOptions, SFINAE_ADDITIONS)
+// stringify signature: (std::ostream& stream, std::string const&, T, StringificationOptions, SFINAE_ADDITIONS)
 
 namespace JSON
 {
@@ -23,7 +24,7 @@ namespace JSON
 
     constexpr auto TemplateRecursionMaximum = 8;
 
-    #define CLASS_STRINGIFY_FUNCTION_NAME js_stringify
+    #define CLASS_STRINGIFY_FUNCTION_NAME stringify
     #define APPLY_IO_MANIPULATERS(STREAM) options.io_options.apply(STREAM)
 
     #define WRITE_NAME(STREAM)                          \

@@ -24,7 +24,7 @@ namespace JSON
     }
 
     template <typename T>
-    std::string js_stringify(std::initializer_list <std::string> const& names, std::initializer_list <T> values, StringificationOptions const& options = DEFAULT_OPTIONS)
+    std::ostream& stringify (std::ostream& stream, std::initializer_list <std::string> const& names, std::initializer_list <T> values, StringificationOptions const& options = DEFAULT_OPTIONS)
     {
         std::vector <std::string> result;
         std::deque <std::string> d_names {names};
@@ -33,33 +33,35 @@ namespace JSON
         {
             if (!d_names.empty())
             {
-                result.push_back(js_stringify(d_names.front(), i, options));
+                result.push_back(stringify(d_names.front(), i, options));
                 d_names.pop_front();
             }
             else
             {
-                result.push_back(js_stringify(std::string("_") + std::to_string(counter), i, options));
+                result.push_back(stringify(std::string("_") + std::to_string(counter), i, options));
             }
             ++counter;
         }
-        return js_make_object(result, options);
+        js_make_object(stream, result, options);
+        return stream;
     }
 
     template <typename T>
-    std::string js_stringify(std::initializer_list <_JS_STRING_PAIR<T>> pairs, StringificationOptions const& options = DEFAULT_OPTIONS)
+    std::ostream& stringify (std::ostream& stream, std::initializer_list <_JS_STRING_PAIR<T>> pairs, StringificationOptions const& options = DEFAULT_OPTIONS)
     {
         std::vector <std::string> result;
         for (auto const& i : pairs)
         {
-            result.push_back(js_stringify(i.name, i.value));
+            result.push_back(stringify(i.name, i.value));
         }
-        return js_make_object(result, options);
+        js_make_object(stream, result, options);
+        return stream;
     }
 
     template <typename T>
-    std::string js_stringify(std::string const& name, std::initializer_list <T> pairs, StringificationOptions const& options = DEFAULT_OPTIONS)
+    std::ostream& stringify (std::ostream& stream, std::string const& name, std::initializer_list <T> pairs, StringificationOptions const& options = DEFAULT_OPTIONS)
     {
-        return js_stringify(name, std::vector<T> {pairs});
+        return stringify(name, std::vector<T> {pairs});
     }
 }
 

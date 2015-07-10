@@ -9,16 +9,18 @@ namespace JSON
 
     // ARITHMETIC
     template <typename T,
-              class = typename std::enable_if<   std::is_arithmetic<T>::value
+              class = typename std::enable_if<  (std::is_arithmetic<T>::value && !std::is_same<T, char>::value && !std::is_same<T, wchar_t>::value)
                                               || std::is_enum<T>::value         >::type >
-    std::string js_stringify(std::string const& name, T value, StringificationOptions const& options = DEFAULT_OPTIONS)
+    std::ostream& stringify(std::ostream& stream, std::string const& name, T value, StringificationOptions const& options = DEFAULT_OPTIONS)
     {
-        std::stringstream sstr;
-        APPLY_IO_MANIPULATERS(sstr);
-        WRITE_NAME(sstr);
-        sstr << value;
-        return sstr.str();
+        APPLY_IO_MANIPULATERS(stream);
+        WRITE_NAME(stream);
+        stream << value;
+        return stream;
     }
+
+    std::ostream& stringify(std::ostream& stream, std::string const& name, char value, StringificationOptions const& options = DEFAULT_OPTIONS);
+    std::ostream& stringify(std::ostream& stream, std::string const& name, wchar_t value, StringificationOptions const& options = DEFAULT_OPTIONS);
 }
 
 #endif // JSS_FUNDAMENTAL_H_INCLUDED

@@ -6,7 +6,7 @@
 
 namespace JSON
 {
-    std::string js_stringify(std::string const& name, std::string const& value, StringificationOptions const& options = DEFAULT_OPTIONS);
+    std::ostream& stringify (std::ostream& stream, std::string const& name, std::string const& value, StringificationOptions const& options = DEFAULT_OPTIONS);
 }
 
 #endif // JSS_STRING_H_INCLUDED

@@ -30,35 +30,33 @@ namespace JSON
     }
 
     template <typename IteratorT,
-              typename = typename std::enable_if <Internal::can_js_stringify<typename IteratorT::value_type>::value>::type >
-    std::string js_stringify(const std::string& name, Internal::IteratorRange<IteratorT> const& range, StringificationOptions options = DEFAULT_OPTIONS,
+              typename = typename std::enable_if <Internal::can_stringify<typename IteratorT::value_type>::value>::type >
+    std::ostream& stringify (std::ostream& stream, const std::string& name, Internal::IteratorRange<IteratorT> const& range, StringificationOptions options = DEFAULT_OPTIONS,
                              typename std::enable_if <is_random_access_iterator<IteratorT>::value>::type* = nullptr)
     {
-        std::stringstream sstr;
         options.ignore_name = true;
-        WRITE_ARRAY_START(sstr);
+        WRITE_ARRAY_START(stream);
         if (range.end() > range.begin())
         {
             auto i = range.begin();
             for (; i < range.end() - 1; ++i)
             {
-                sstr << js_stringify({}, *i, options);
-                sstr << options.delimiter;
+                stringify (stream, {}, *i, options);
+                stream << options.delimiter;
             }
-            sstr << js_stringify({}, *i, options);
+            stringify (stream, {}, *i, options);
         }
-        WRITE_ARRAY_END(sstr);
-        return sstr.str();
+        WRITE_ARRAY_END(stream);
+        return stream;
     }
 
     template <typename IteratorT,
-              typename = typename std::enable_if <Internal::can_js_stringify<typename IteratorT::value_type>::value>::type >
-    std::string js_stringify(const std::string& name, Internal::IteratorRange<IteratorT> const& range, StringificationOptions options = DEFAULT_OPTIONS,
+              typename = typename std::enable_if <Internal::can_stringify<typename IteratorT::value_type>::value>::type >
+    std::ostream& stringify (std::ostream& stream, const std::string& name, Internal::IteratorRange<IteratorT> const& range, StringificationOptions options = DEFAULT_OPTIONS,
                              typename std::enable_if <is_bidirectional_iterator<IteratorT>::value>::type* = nullptr)
     {
-        std::stringstream sstr;
         options.ignore_name = true;
-        WRITE_ARRAY_START(sstr);
+        WRITE_ARRAY_START(stream);
         if (range.begin() != range.end())
         {
             auto i = range.begin();
@@ -66,23 +64,22 @@ namespace JSON
             --e;
             for (; i != e; ++i)
             {
-                sstr << js_stringify({}, *i, options);
-                sstr << options.delimiter;
+                stringify (stream, {}, *i, options);
+                stream << options.delimiter;
             }
-            sstr << js_stringify({}, *i, options);
+            stringify (stream, {}, *i, options);
         }
-        WRITE_ARRAY_END(sstr);
-        return sstr.str();
+        WRITE_ARRAY_END(stream);
+        return stream;
     }
 
     template <typename IteratorT,
-              typename = typename std::enable_if <Internal::can_js_stringify<typename IteratorT::value_type>::value>::type >
-    std::string js_stringify(const std::string& name, Internal::IteratorRange<IteratorT> const& range, StringificationOptions options = DEFAULT_OPTIONS,
+              typename = typename std::enable_if <Internal::can_stringify<typename IteratorT::value_type>::value>::type >
+    std::ostream& stringify (std::ostream& stream, const std::string& name, Internal::IteratorRange<IteratorT> const& range, StringificationOptions options = DEFAULT_OPTIONS,
                              typename std::enable_if <is_forward_iterator<IteratorT>::value>::type* = nullptr)
     {
-        std::stringstream sstr;
         options.ignore_name = true;
-        WRITE_ARRAY_START(sstr);
+        WRITE_ARRAY_START(stream);
         if (range.begin() != range.end())
         {
             auto i = range.begin();
@@ -90,13 +87,13 @@ namespace JSON
             std::advance(e, std::distance(i, range.end()) - 1);
             for (; i != e; ++i)
             {
-                sstr << js_stringify({}, *i, options);
-                sstr << options.delimiter;
+                stringify (stream, {}, *i, options);
+                stream << options.delimiter;
             }
-            sstr << js_stringify({}, *i, options);
+            stringify (stream, {}, *i, options);
         }
-        WRITE_ARRAY_END(sstr);
-        return sstr.str();
+        WRITE_ARRAY_END(stream);
+        return stream;
     }
 }
 

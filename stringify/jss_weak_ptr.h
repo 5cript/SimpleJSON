@@ -8,12 +8,12 @@
 namespace JSON
 {
     template <typename T,
-              typename = typename std::enable_if <Internal::can_js_stringify<T>::value>::type >
-    std::string js_stringify(const std::string& name, std::weak_ptr<T> const& value, StringificationOptions const& options = DEFAULT_OPTIONS)
+              typename = typename std::enable_if <Internal::can_stringify<T>::value>::type >
+    std::ostream& stringify (std::ostream& stream, const std::string& name, std::weak_ptr<T> const& value, StringificationOptions const& options = DEFAULT_OPTIONS)
     {
         if (value.expired())
             throw WeakPtrExpiredException{};
-        return js_stringify(name, value.lock(), options);
+        return stringify(stream, name, value.lock(), options);
     }
 
 }
