@@ -1,5 +1,12 @@
 # SimpleJSON
 
+
+1. [Preface](https://github.com/5cript/SimpleJSON#preface)
+2. [Introduction](https://github.com/5cript/SimpleJSON#introduction)
+3. [Details](https://github.com/5cript/SimpleJSON#details)
+  * [How does stringify work?](https://github.com/5cript/SimpleJSON#how-does-stringify-work)
+  * [stringify behaviour (and STL stringification)](https://github.com/5cript/SimpleJSON#stringify-behaviour-and-stl-stuff-stringification)
+
 ## Preface
 Please submit pull requests if you don't agree with some behaviour or found a bug, I would appreciate it.
 Even though the current version is labeled 1.1. I will not not make breaking changes. Although they should be subtle 
