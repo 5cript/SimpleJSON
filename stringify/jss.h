@@ -2,6 +2,7 @@
 #define JSS_H_INCLUDED
 
 // Do not include this file! include only those headers that you need
+// + jss_undefine
 
 #include "jss_core.h"
 #include "jss_fundamental.h"

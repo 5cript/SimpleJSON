@@ -6,15 +6,16 @@
 
 namespace JSON
 {
-    std::string js_stringify(std::string const& name, std::mutex& value, StringificationOptions const& options = DEFAULT_OPTIONS)
+    std::ostream& stringify(std::ostream& stream, std::string const& name, std::mutex& value, StringificationOptions const& options = DEFAULT_OPTIONS)
     {
-        std::stringstream sstr;
-        WRITE_NAME(sstr);
-        sstr << '"'
-             << [&]() -> bool { bool v = value.try_lock(); if (v) value.unlock(); return v; }()
-             << '"'
+        /*
+        WRITE_NAME(stream);
+        stream << '"'
+               << [&]() -> bool { bool v = value.try_lock(); if (v) value.unlock(); return v; }()
+               << '"'
         ;
-        return sstr.str();
+        */
+        return stream;
     }
 }
 

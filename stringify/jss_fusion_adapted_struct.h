@@ -23,9 +23,9 @@ namespace JSON
     class AdaptedStringifier
     {
     public:
-        std::string operator()(T const& object, StringificationOptions const& options) const
+        std::ostream& operator()(std::ostream& stream, T const& object, StringificationOptions const& options) const
         {
-            //! If you get an Error here, you likely forgot to use BOOST_FUSION_ADAPT_STRUCT !
+            //! If you get an Error here, you likely forgot to use BOOST_FUSION_ADAPT_STRUCT / BOOST_FUSION_DECLARE_STRUCT !
 
             typedef boost::mpl::range_c<
                 int,
@@ -33,9 +33,10 @@ namespace JSON
                 boost::fusion::result_of::size<T>::type::value
             > range;
 
-            std::stringstream sstr;
-            boost::mpl::for_each<range>(std::bind<void>(_helper(boost::fusion::result_of::size<T>::type::value), std::placeholders::_1, std::ref(sstr), std::ref(object), std::ref(options)));
-            return sstr.str();
+            stream << '{';
+            boost::mpl::for_each<range> (std::bind<void>(_helper(boost::fusion::result_of::size<T>::type::value), std::placeholders::_1, std::ref(stream), std::ref(object), std::ref(options)));
+            stream << '}';
+            return stream;
         }
     private:
         class _helper
@@ -44,7 +45,7 @@ namespace JSON
             template<class Index>
             void operator()(Index, std::ostream& os, T const& object, StringificationOptions const& options) const
             {
-                os << js_stringify(boost::fusion::extension::struct_member_name<T, Index::value>::call(), boost::fusion::at<Index>(object), options);
+                stringify(os, boost::fusion::extension::struct_member_name<T, Index::value>::call(), boost::fusion::at<Index>(object), options);
                 if (Index::value+1 != len)
                     os << options.delimiter;
             }
@@ -57,11 +58,11 @@ namespace JSON
     template <typename Derived>
     struct FusionStruct
     {
-        std::string js_stringify(StringificationOptions options) const
+        std::ostream& stringify(std::ostream& stream, StringificationOptions options) const
         {
             options.in_object = true;
             AdaptedStringifier<Derived> stringifier;
-            return stringifier(*static_cast <Derived const*> (this), options);
+            return stringifier(stream, *static_cast <Derived const*> (this), options);
         }
         virtual ~FusionStruct() = default;
     };

@@ -7,13 +7,13 @@
 namespace JSON
 {
 	template <typename T>
-	void js_parse(std::atomic<T>& value, std::string const& name,
-					  PropertyTree const& object, ParsingOptions const& options = DEFAULT_PARSER_OPTIONS)
+	void parse(std::atomic<T>& value, std::string const& name,
+               PropertyTree const& object, ParsingOptions const& options = DEFAULT_PARSER_OPTIONS)
 	{
 		try
 		{
 			T temp;
-			js_parse(temp, name, object, options);
+			parse(temp, name, object, options);
 			value.store(std::move(temp));
 		}
 		catch (boost::property_tree::ptree_bad_data& exc)

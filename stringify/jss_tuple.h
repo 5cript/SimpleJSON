@@ -6,6 +6,7 @@
 #include <tuple>
 #include <deque>
 #include <initializer_list>
+#include <sstream>
 
 // note: you can use the overloads to specify names for each object of the tuple
 
@@ -22,39 +23,43 @@ namespace JSON
         {
             if (!names.empty())
             {
-                result.push_back(js_stringify(names.front(), std::get<counter>(tuple), options));
+                std::stringstream sstr;
+                stringify(sstr, names.front(), std::get<counter>(tuple), options);
+                result.push_back(sstr.str());
                 names.pop_front();
             }
             else
             {
-                result.push_back(js_stringify(std::string("_") + std::to_string(counter), std::get<counter>(tuple), options));
+                std::stringstream sstr;
+                stringify(sstr, std::string("_") + std::to_string(counter), std::get<counter>(tuple), options);
+                result.push_back(sstr.str());
             }
             traverse_tuple <TupleType, counter + 1, Types...>(tuple, result, names, options);
         }
     }
 
     template <template <typename, typename = std::allocator <std::string> > class NameContainerT, typename ... Types>
-    std::string js_stringify(std::string const& name, NameContainerT <std::string> const& names, std::tuple <Types...> values, StringificationOptions options = DEFAULT_OPTIONS)
+    std::ostream& stringify (std::ostream& stream, std::string const& name, NameContainerT <std::string> const& names, std::tuple <Types...> values, StringificationOptions options = DEFAULT_OPTIONS)
     {
         std::deque <std::string> d_names {names.begin(), names.end()};
         std::vector <std::string> result;
         options.ignore_name = false;
         options.in_object = true;
         JS_Tuple::traverse_tuple<std::tuple> (values, result, d_names, options);
-        return js_make_object(result);
+        return js_make_object(stream, result);
     }
 
     template <typename ... Types>
-    std::string js_stringify(std::string const& name, std::initializer_list <std::string> const& names, std::tuple <Types...> values, StringificationOptions const& options = DEFAULT_OPTIONS)
+    std::ostream& stringify (std::ostream& stream, std::string const& name, std::initializer_list <std::string> const& names, std::tuple <Types...> values, StringificationOptions const& options = DEFAULT_OPTIONS)
     {
-        return js_stringify <std::deque>(name, std::deque<std::string>{names}, values, options);
+        return stringify <std::deque>(stream, name, std::deque<std::string>{names}, values, options);
     }
 
     // for classes and checkings
     template <typename ... Types>
-    std::string js_stringify(std::string const& name, std::tuple <Types...> values, StringificationOptions const& options = DEFAULT_OPTIONS)
+    std::ostream& stringify (std::ostream& stream, std::string const& name, std::tuple <Types...> values, StringificationOptions const& options = DEFAULT_OPTIONS)
     {
-        return js_stringify(name, {}, values, options);
+        return stringify(stream, name, {}, values, options);
     }
 }
 

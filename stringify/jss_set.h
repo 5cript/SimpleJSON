@@ -7,51 +7,49 @@
 namespace JSON
 {
     template <typename KVT, typename CompareT = std::less <KVT>, class AllocT = std::allocator <KVT> >
-    std::string js_stringify(std::string const& name, std::set<KVT, CompareT, AllocT> const& values, StringificationOptions options)
+    std::ostream& stringify (std::ostream& stream, std::string const& name, std::set<KVT, CompareT, AllocT> const& values, StringificationOptions options)
     {
         using namespace Internal;
 
-        std::stringstream sstr;
-        WRITE_ARRAY_START(sstr);
+        WRITE_ARRAY_START(stream);
         if (!values.empty())
         {
             options.ignore_name = true;
-            APPLY_IO_MANIPULATERS(sstr);
+            APPLY_IO_MANIPULATERS(stream);
             auto bfe = values.end();
             bfe--;
             for (auto i = values.begin(); i != bfe; ++i)
             {
-                sstr << js_stringify({}, *i, options);
-                sstr << options.delimiter;
+                stringify (stream, {}, *i, options);
+                stream << options.delimiter;
             }
-            sstr << js_stringify({}, *values.rbegin(), options);
+            stringify (stream, {}, *values.rbegin(), options);
         }
-        WRITE_ARRAY_END(sstr);
-        return sstr.str();
+        WRITE_ARRAY_END(stream);
+        return stream;
     }
 
     template <typename KVT, typename CompareT = std::less <KVT>, class AllocT = std::allocator <KVT> >
-    std::string js_stringify(std::string const& name, std::multiset<KVT, CompareT, AllocT> const& values, StringificationOptions options)
+    std::ostream& stringify (std::ostream& stream, std::string const& name, std::multiset<KVT, CompareT, AllocT> const& values, StringificationOptions options)
     {
         using namespace Internal;
 
-        std::stringstream sstr;
-        WRITE_ARRAY_START(sstr);
+        WRITE_ARRAY_START(stream);
         if (!values.empty())
         {
             options.ignore_name = true;
-            APPLY_IO_MANIPULATERS(sstr);
+            APPLY_IO_MANIPULATERS(stream);
             auto bfe = values.end();
             bfe--;
             for (auto i = values.begin(); i != bfe; ++i)
             {
-                sstr << js_stringify({}, *i, options);
-                sstr << options.delimiter;
+                stringify (stream, {}, *i, options);
+                stream << options.delimiter;
             }
-            sstr << js_stringify({}, *values.rbegin(), options);
+            stringify (stream, {}, *values.rbegin(), options);
         }
-        WRITE_ARRAY_END(sstr);
-        return sstr.str();
+        WRITE_ARRAY_END(stream);
+        return stream;
     }
 }
 

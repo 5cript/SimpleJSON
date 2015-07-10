@@ -6,11 +6,11 @@
 namespace JSON
 {
 	template <typename T,
-			  class = typename std::enable_if<   std::is_arithmetic<T>::value
-                                              || std::is_enum<T>::value         >::type 
+			  class = typename std::enable_if<  (std::is_arithmetic<T>::value && !std::is_same<T, char>::value && !std::is_same<T, wchar_t>::value)
+                                              || std::is_enum<T>::value         >::type
 			 >
-	void js_parse(T& value, std::string const& name,
-					  PropertyTree const& object, ParsingOptions const& options = DEFAULT_PARSER_OPTIONS)
+	void parse(T& value, std::string const& name,
+			   PropertyTree const& object, ParsingOptions const& options = DEFAULT_PARSER_OPTIONS)
 	{
 		try
 		{
@@ -21,6 +21,11 @@ namespace JSON
 			DEFAULT_ERROR_HANDLER(T(), T());
 		}
 	}
+
+	void parse(char& value, std::string const& name,
+               PropertyTree const& object, ParsingOptions const& options = DEFAULT_PARSER_OPTIONS);
+    void parse(wchar_t& value, std::string const& name,
+			   PropertyTree const& object, ParsingOptions const& options = DEFAULT_PARSER_OPTIONS);
 }
 
 #endif

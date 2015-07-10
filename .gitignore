@@ -1,2 +1,6 @@
 /main.cpp
 /SimpleJSON.cbp
+/SimpleJSON.layout
+*.depend
+/bin/*
+/obj/*

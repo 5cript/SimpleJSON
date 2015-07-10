@@ -7,12 +7,12 @@
 namespace JSON
 {
     template <typename T,
-              typename = typename std::enable_if <Internal::can_js_stringify<T>::value>::type >
-    std::string js_stringify(const std::string& name, std::unique_ptr<T> const& value, StringificationOptions const& options = DEFAULT_OPTIONS)
+              typename = typename std::enable_if <Internal::can_stringify<T>::value>::type >
+    std::ostream& stringify(std::ostream& stream, const std::string& name, std::unique_ptr<T> const& value, StringificationOptions const& options = DEFAULT_OPTIONS)
     {
         if (!value)
             throw UniquePtrNullptrException{};
-        return js_stringify(name, *value, options);
+        return stringify(stream, name, *value, options);
     }
 }
 

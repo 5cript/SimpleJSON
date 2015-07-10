@@ -7,16 +7,17 @@
 namespace JSON
 {
     template <typename KeyT, typename ValueT,
-              typename = typename std::enable_if <Internal::can_js_stringify<KeyT>::value && Internal::can_js_stringify<ValueT>::value>::type >
-    std::string js_stringify(std::string const& name, std::pair <KeyT, ValueT> const& value, StringificationOptions const& options)
+              typename = typename std::enable_if <Internal::can_stringify<KeyT>::value && Internal::can_stringify<ValueT>::value>::type >
+    std::ostream& stringify(std::ostream& stream, std::string const& name, std::pair <KeyT, ValueT> const& value, StringificationOptions options)
     {
-        std::stringstream sstr;
-        WRITE_OBJECT_START(sstr);
-        sstr << js_stringify("first", value.first, options);
-        sstr << options.delimiter;
-        sstr << js_stringify("second", value.second, options);
-        WRITE_OBJECT_END(sstr);
-        return sstr.str();
+        WRITE_OBJECT_START(stream);
+        options.ignore_name = false;
+        options.in_object = true;
+        stringify(stream, "first", value.first, options);
+        stream << options.delimiter;
+        stringify(stream, "second", value.second, options);
+        WRITE_OBJECT_END(stream);
+        return stream;
     }
 }
 

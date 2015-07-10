@@ -8,8 +8,8 @@
 namespace JSON
 {
 	template <typename T, unsigned N>
-	void js_parse(std::array<T, N>& value, std::string const& name,
-					  PropertyTree const& object, ParsingOptions const& options = DEFAULT_PARSER_OPTIONS)
+	void parse(std::array<T, N>& value, std::string const& name,
+               PropertyTree const& object, ParsingOptions const& options = DEFAULT_PARSER_OPTIONS)
 	{
 		try
 		{
@@ -18,7 +18,7 @@ namespace JSON
 			for (auto const& i : pt)
 			{
 				T temp;
-				js_parse(temp, "", i.second, options);
+				parse(temp, "", i.second, options);
 				if (pos != N)
 					value[pos++] = temp;
 				else if (options.invBehaviour != InvalidPropertyHandlingBehaviour::IGNORE)

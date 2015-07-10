@@ -30,6 +30,7 @@ namespace JSON
             , ioflags {ioflags}
         { }
 
+        void apply(std::ostream& ss) const;
         void apply(std::stringstream& ss) const;
         void apply(std::ostringstream& ss) const;
     };
@@ -43,17 +44,24 @@ namespace JSON
         IO_Options io_options;
         bool in_object;
 
-        StringificationOptions (bool ignore_name = false, std::string delimiter = ",", bool reverse_order = false, PointerHandling ptr_behaviour = {}, IO_Options io_options = {})
+        StringificationOptions (bool ignore_name = false,
+                                std::string delimiter = ",",
+                                bool reverse_order = false,
+                                PointerHandling ptr_behaviour = {},
+                                IO_Options io_options = {},
+                                bool in_object = false)
             : ignore_name {ignore_name}
             , delimiter {delimiter}
             , reverse_order {reverse_order}
             , ptr_behaviour {ptr_behaviour}
             , io_options {io_options}
-            , in_object {false}
+            , in_object {in_object}
         {}
     };
 
     #define DEFAULT_OPTIONS StringificationOptions{}
+
+    static auto const ProduceNamedOutput = StringificationOptions{false, ",", false, {}, {}, true};
 }
 
 #endif // JSS_OPTIONS_H_INCLUDED

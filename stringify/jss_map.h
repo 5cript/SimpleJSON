@@ -9,72 +9,72 @@ namespace JSON
     namespace Internal
     {
         template <typename T,
-                  typename = typename std::enable_if <Internal::can_js_stringify<T>::value>::type >
-        std::string js_stringify_map_pair(std::pair <const std::string, T> const& value, StringificationOptions const& options)
+                  typename = typename std::enable_if <Internal::can_stringify<T>::value>::type >
+        void stringify_map_pair (std::ostream& stream, std::pair <const std::string, T> const& value, StringificationOptions const& options)
         {
-            return js_stringify(value.first, value.second, options);
+            stringify(stream, value.first, value.second, options);
         }
 
         template <typename KeyT, typename ValueT,
-                  typename = typename std::enable_if <Internal::can_js_stringify<ValueT>::value && Internal::can_js_stringify<KeyT>::value>::type >
-        std::string js_stringify_map_pair_2(std::pair <const KeyT, ValueT> const& value, StringificationOptions const& options)
+                  typename = typename std::enable_if <Internal::can_stringify<ValueT>::value && Internal::can_stringify<KeyT>::value>::type >
+        void stringify_map_pair_2 (std::ostream& stream, std::pair <const KeyT, ValueT> const& value, StringificationOptions const& options)
         {
-            return js_stringify({}, value.first, options) + options.delimiter + js_stringify({}, value.second, options);
+            stringify(stream, {}, value.first, options);
+            stream << options.delimiter;
+            stringify(stream, {}, value.second, options);
         }
     }
 
     template <typename ValueT, typename CompareT = std::less <ValueT>, class AllocT = std::allocator <ValueT>,
-              typename = typename std::enable_if <Internal::can_js_stringify<ValueT>::value>::type >
-    std::string js_stringify(std::string const& name, std::map<std::string, ValueT, CompareT, AllocT> const& values, StringificationOptions options)
+              typename = typename std::enable_if <Internal::can_stringify<ValueT>::value>::type >
+    std::ostream& stringify (std::ostream& stream, std::string const& name, std::map<std::string, ValueT, CompareT, AllocT> const& values, StringificationOptions options)
     {
         using namespace Internal;
-        options.in_object = true;
 
-        std::stringstream sstr;
-        WRITE_OBJECT_START(sstr);
+        WRITE_OBJECT_START(stream);
+        options.in_object = true;
         if (!values.empty())
         {
-            APPLY_IO_MANIPULATERS(sstr);
+            APPLY_IO_MANIPULATERS(stream);
             auto bfe = values.end();
             bfe--;
             for (auto i = values.begin(); i != bfe; ++i)
             {
-                sstr << js_stringify_map_pair(*i, options);
-                sstr << options.delimiter;
+                stringify_map_pair(stream, *i, options);
+                stream << options.delimiter;
             }
-            sstr << js_stringify_map_pair(*values.rbegin(), options);
+            stringify_map_pair(stream, *values.rbegin(), options);
         }
-        WRITE_OBJECT_END(sstr);
-        return sstr.str();
+        WRITE_OBJECT_END(stream);
+        return stream;
     }
 
     template <typename KeyT, typename ValueT, typename CompareT = std::less <ValueT>, class AllocT = std::allocator <ValueT>,
-              typename = typename std::enable_if <Internal::can_js_stringify<ValueT>::value>::type >
-    std::string js_stringify(std::string const& name, std::multimap<KeyT, ValueT, CompareT, AllocT> const& values, StringificationOptions options)
+              typename = typename std::enable_if <Internal::can_stringify<ValueT>::value>::type >
+    std::ostream& stringify(std::ostream& stream, std::string const& name, std::multimap<KeyT, ValueT, CompareT, AllocT> const& values, StringificationOptions options)
     {
         using namespace Internal;
 
-        std::stringstream sstr;
-        WRITE_ARRAY_START(sstr);
+        WRITE_ARRAY_START(stream);
         if (!values.empty())
         {
             options.ignore_name = true;
-            APPLY_IO_MANIPULATERS(sstr);
+            APPLY_IO_MANIPULATERS(stream);
             auto bfe = values.end();
             bfe--;
             for (auto i = values.begin(); i != bfe; ++i)
             {
-                WRITE_ARRAY_START(sstr);
-                sstr << js_stringify_map_pair_2(*i, options);
-                WRITE_ARRAY_END(sstr);
-                sstr << options.delimiter;
+                WRITE_ARRAY_START(stream);
+                stringify_map_pair_2(stream, *i, options);
+                WRITE_ARRAY_END(stream);
+                stream << options.delimiter;
             }
-            WRITE_ARRAY_START(sstr);
-            sstr << js_stringify_map_pair_2(*values.rbegin(), options);
-            WRITE_ARRAY_END(sstr);
+            WRITE_ARRAY_START(stream);
+            stringify_map_pair_2(stream, *values.rbegin(), options);
+            WRITE_ARRAY_END(stream);
         }
-        WRITE_ARRAY_END(sstr);
-        return sstr.str();
+        WRITE_ARRAY_END(stream);
+        return stream;
     }
 }
 

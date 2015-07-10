@@ -6,8 +6,8 @@
 namespace JSON
 {
 	template <typename T, typename U>
-	void js_parse(std::pair <T, U>& value, std::string const& name,
-					  PropertyTree const& object, ParsingOptions const& options = DEFAULT_PARSER_OPTIONS)
+	void parse(std::pair <T, U>& value, std::string const& name,
+               PropertyTree const& object, ParsingOptions const& options = DEFAULT_PARSER_OPTIONS)
 	{
 		try
 		{

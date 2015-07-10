@@ -7,27 +7,26 @@
 namespace JSON
 {
     template <typename T>
-    std::string js_stringify(std::string const& name, std::valarray <T> const& values, StringificationOptions const& options = DEFAULT_OPTIONS,
-                             typename std::enable_if<Internal::can_js_stringify<T>::value>::type* = nullptr)
+    std::ostream& stringify(std::ostream& stream, std::string const& name, std::valarray <T> const& values, StringificationOptions const& options = DEFAULT_OPTIONS,
+                            typename std::enable_if<Internal::can_stringify<T>::value>::type* = nullptr)
     {
         using namespace Internal;
 
-        std::stringstream sstr;
-        WRITE_ARRAY_START(sstr);
+        WRITE_ARRAY_START(stream);
         if (values.size() != 0)
         {
-            APPLY_IO_MANIPULATERS(sstr);
+            APPLY_IO_MANIPULATERS(stream);
             auto noNameOption = options;
             noNameOption.ignore_name = true;
             for (auto i = std::begin(values); i != std::end(values) -1 ; ++i)
             {
-                sstr << js_stringify({}, *i, noNameOption);
-                sstr << options.delimiter;
+                stringify(stream, {}, *i, noNameOption);
+                stream << options.delimiter;
             }
-            sstr << js_stringify({}, *(std::end(values) - 1), noNameOption);
+            stream << stringify(stream, {}, *(std::end(values) - 1), noNameOption);
         }
-        WRITE_ARRAY_END(sstr);
-        return sstr.str();
+        WRITE_ARRAY_END(stream);
+        return stream;
     }
 }
 

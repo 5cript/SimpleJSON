@@ -2,11 +2,10 @@
 
 namespace JSON
 {
-    std::string js_stringify(std::string const& name, StringificationOptions const& options)
+    std::ostream& stringify(std::ostream& stream, std::string const& name, StringificationOptions const& options)
     {
-        std::stringstream sstr;
-        APPLY_IO_MANIPULATERS(sstr);
-        WRITE_NAME(sstr);
-        return sstr.str();
+        APPLY_IO_MANIPULATERS(stream);
+        WRITE_NAME(stream);
+        return stream;
     }
 }
