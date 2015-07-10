@@ -30,6 +30,7 @@ namespace JSON
             , ioflags {ioflags}
         { }
 
+        void apply(std::ostream& ss) const;
         void apply(std::stringstream& ss) const;
         void apply(std::ostringstream& ss) const;
     };

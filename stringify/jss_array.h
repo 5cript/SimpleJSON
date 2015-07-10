@@ -9,23 +9,22 @@
 namespace JSON
 {
     template <typename T, std::size_t N,
-              typename = typename std::enable_if <Internal::can_js_stringify<T>::value>::type >
-    std::string js_stringify(std::string const& name, std::array<T, N> const& values, StringificationOptions options = DEFAULT_OPTIONS)
+              typename = typename std::enable_if <Internal::can_stringify<T>::value>::type >
+    std::ostream& stringify(std::ostream& stream, std::string const& name, std::array<T, N> const& values, StringificationOptions options = DEFAULT_OPTIONS)
     {
-        std::stringstream sstr;
         options.ignore_name = true;
-        WRITE_ARRAY_START(sstr);
+        WRITE_ARRAY_START(stream);
         if (!values.empty())
         {
             for (auto i = values.begin(); i != values.end() - 1; ++i)
             {
-                sstr << js_stringify({}, *i, options);
-                sstr << options.delimiter;
+                stringify(stream, {}, *i, options);
+                stream << options.delimiter;
             }
-            sstr << values.back();
+            stream << values.back();
         }
-        WRITE_ARRAY_END(sstr);
-        return sstr.str();
+        WRITE_ARRAY_END(stream);
+        return stream;
     }
 }
 
