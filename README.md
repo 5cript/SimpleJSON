@@ -6,21 +6,17 @@
 3. [Details](https://github.com/5cript/SimpleJSON#details)
   * [How does stringify work?](https://github.com/5cript/SimpleJSON#how-does-stringify-work)
   * [stringify behaviour (and STL stringification)](https://github.com/5cript/SimpleJSON#stringify-behaviour-and-stl-stuff-stringification)
+4. [Reference](https://github.com/5cript/SimpleJSON#reference)
 
 ## Preface
 Please submit pull requests if you don't agree with some behaviour or found a bug, I would appreciate it.
 Even though the current version is labeled 1.1. I will not not make breaking changes. Although they should be subtle 
 like naming changes. Don't use things within the namespace called 'JSON::Internal', it is guaranteed to change constantly.
-
-I use this library in quite a lot of my projects now.
-* Mostly for configs.
-* Sometimes for networking.
-* For log files.
  
 ## Introduction
 A JSON stringifier / parser that uses boost fusion introspection methods for automagic struct &lt;-> JSON conversion
 
-Its supports (almost) all STL contstructs and converts them to a meaningful JSON representation and vice versa.
+Its supports almost all STL contstructs in stringify and the most important for parse. 
 With the STL as a basis it is an easy to extend mechanism using classes. Use boost fusion and the provided utility
 (see example below) or provide your own parse/stringify methods.
 
@@ -108,7 +104,7 @@ int main()
 ### How does stringify work?
 There is just one function for stringification. This stringify function is heavily overloaded and makes use of SFINAE in almost every overload. The compiler then finds the correct overload to stringify the parameter.
 
-* The library supports almost all STL containers as well as fundamental types. <br>
+* The library supports almost all STL containers (stringify supports even more) as well as fundamental types. <br>
 * Containers will decay into json arrays, if their value_type is a stringifiable (this is recursive).
 * Classes will turn into objects, if it is adapted, derives from FusionStruct<> and each parameter is stringifiable.
 * The stringify class member is called if provided, you have to make sure yourself that what you produce makes sense.
@@ -141,3 +137,6 @@ std::unique_ptr <T> | What T would produce. | Throws if invalid.
 std::weak_ptr <T> | what T would produce | Throws if invalid.
 std::tuple | {"_1": ..., "_2": ..., ...} | 
 std::valarray <T> | [...] | 
+
+## Reference
+Please visit the wiki: [Wiki](https://github.com/5cript/SimpleJSON/wiki)
