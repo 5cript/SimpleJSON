@@ -9,8 +9,8 @@
 namespace JSON
 {
 	template <typename T>
-	void js_parse(std::set<T>& value, std::string const& name,
-					  PropertyTree const& object, ParsingOptions const& options = DEFAULT_PARSER_OPTIONS)
+	void parse(std::set<T>& value, std::string const& name,
+               PropertyTree const& object, ParsingOptions const& options = DEFAULT_PARSER_OPTIONS)
 	{
 		try
 		{
@@ -18,7 +18,7 @@ namespace JSON
 			for (auto const& i : pt)
 			{
 				T temp;
-				js_parse(temp, "", i.second, options);
+				parse(temp, "", i.second, options);
 				value.insert(std::move(temp));
 			}
 		}
