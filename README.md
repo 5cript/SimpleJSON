@@ -75,9 +75,9 @@ int main()
     /////////////////////////////////////////////////////////////////////////
 
     std::cout << sstr.str() << "\n\n";
-    std::cout << cc.id << "\n";
-    std::cout << cc.libPath << "\n";
-    for (auto const& i : cc.someContainer)
+    std::cout << unnecessarilyComplexCopy.id << "\n";
+    std::cout << unnecessarilyComplexCopy.libPath << "\n";
+    for (auto const& i : unnecessarilyComplexCopy.someContainer)
         std::cout << i << "\n";
 }
 ```
