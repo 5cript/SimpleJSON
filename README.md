@@ -124,7 +124,7 @@ std::atomic <T> | What T would produce. | Caution! Obviously calls load().
 std::bitset | [1, 0, ...] |
 std::string | "..." |
 fundamental types | themselves |
-std::initializer_list | [...] | Or if names are provided ["name1":..., "name2":...].
+std::initializer_list | [...] | Or if names are provided {"name1":..., "name2":...}.
 JSON::IteratorRange <STL_IteratorT> | [...] |
 std::map <T, U> | [[T1, U1], [T2, U2], ...] | General case
 std::map <std::string, T> | {"key": "value", "key2": "value2", ...} | Specialization
@@ -134,7 +134,7 @@ std::stack | [...] | Don't use if possible, better use deque.
 std::queue | [...] | Don't use if possible, better use deque.
 std::shared_ptr <T> | What T would produce. | Throws if invalid.
 std::unique_ptr <T> | What T would produce. | Throws if invalid.
-std::weak_ptr <T> | what T would produce | Throws if invalid.
+std::weak_ptr <T> | What T would produce | Throws if invalid.
 std::tuple | {"_1": ..., "_2": ..., ...} | 
 std::valarray <T> | [...] | 
 
