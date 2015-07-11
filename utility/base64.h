@@ -139,7 +139,7 @@ namespace JSON
             if (c == '/')
                 return 63;
             else
-                std::invalid_argument ("input contains characters that are not base64");
+                throw std::invalid_argument ("input contains characters that are not base64");
             return 0;
         };
 
