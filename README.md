@@ -120,23 +120,23 @@ std::list | [...] |
 std::forward_list | [...] | Who uses forward_list anyway?
 std::array | [...] |
 std::pair  | {"first": ..., "second": ...} |
-std::atomic <T> | What T would produce. | Caution! Obviously calls load().
+std::atomic &lt;T> | What T would produce. | Caution! Obviously calls load().
 std::bitset | [1, 0, ...] |
 std::string | "..." |
 fundamental types | themselves |
 std::initializer_list | [...] | Or if names are provided {"name1":..., "name2":...}.
 JSON::IteratorRange <STL_IteratorT> | [...] |
-std::map <T, U> | [[T1, U1], [T2, U2], ...] | General case
-std::map <std::string, T> | {"key": "value", "key2": "value2", ...} | Specialization
+std::map &lt;T, U> | [[T1, U1], [T2, U2], ...] | General case
+std::map &lt;std::string, T> | {"key": "value", "key2": "value2", ...} | Specialization
 std::mutex | nothing | Only use if you must!
 std::set | [...] |
 std::stack | [...] | Don't use if possible, better use deque.
 std::queue | [...] | Don't use if possible, better use deque.
-std::shared_ptr <T> | What T would produce. | Throws if invalid.
-std::unique_ptr <T> | What T would produce. | Throws if invalid.
-std::weak_ptr <T> | What T would produce | Throws if invalid.
+std::shared_ptr &lt;T> | What T would produce. | Throws if invalid.
+std::unique_ptr &lt;T> | What T would produce. | Throws if invalid.
+std::weak_ptr &lt;T> | What T would produce | Throws if invalid.
 std::tuple | {"_1": ..., "_2": ..., ...} | 
-std::valarray <T> | [...] | 
+std::valarray &lt;T> | [...] | 
 
 ## Reference
 Please visit the wiki: [Wiki](https://github.com/5cript/SimpleJSON/wiki)
