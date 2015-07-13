@@ -20,9 +20,7 @@ Its supports almost all STL contstructs in stringify and the most important for 
 With the STL as a basis it is an easy to extend mechanism using classes. Use boost fusion and the provided utility
 (see example below) or provide your own parse/stringify methods.
 
-INFO: The library changed from version 1.0 to 1.1 so that it breaks working code.
-      All functions now receive a stream parameter and return this passed stream.
-      This is far more convenient and faster too. Its "the C++ style". Sorry for the inconvenience.
+INFO: I changed the versions from 1.x something something to 0.x something something, because I realised that I am likely not going to hesitate breaking interface or implementation. This has still very much potential and is wide open for improvements.
 
 NOTE: This library is not fine tuned for speed. 
 
