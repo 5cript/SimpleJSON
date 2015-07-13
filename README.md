@@ -10,8 +10,7 @@
 
 ## Preface
 Please submit pull requests if you don't agree with some behaviour or found a bug, I would appreciate it.
-Even though the current version is labeled 1.1. I will not not make breaking changes. Although they should be subtle 
-like naming changes. Don't use things within the namespace called 'JSON::Internal', it is guaranteed to change constantly.
+I recently changed the versioning on the releases to indicate that this lib ist still under development and free to change.
  
 ## Introduction
 A JSON stringifier / parser that uses boost fusion introspection methods for automagic struct &lt;-> JSON conversion
