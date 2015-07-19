@@ -3,9 +3,9 @@
 
 namespace JSON
 {
-	enum class InvalidPropertyHandlingBehaviour : int
+	enum class InvalidPropertyHandlingBehaviour
 	{
-		IGNORE,
+		IGNORE_ALL_ERROR,
 		DEFAULT,
 		TAG,
 		THROW
