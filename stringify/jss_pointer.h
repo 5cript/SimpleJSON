@@ -18,9 +18,9 @@ namespace JSON
     {
         switch (options.ptr_behaviour)
         {
-            case (PointerHandling::IGNORE):
+            case (PointerHandling::IGNORE_POINTERS):
             {
-                // IGNORE
+                // IGNORE_POINTERS
             }
             case (PointerHandling::DEREFERENCE):
             {

@@ -6,7 +6,7 @@ namespace JSON
     {
         switch (options.ptr_behaviour)
         {
-            case (PointerHandling::IGNORE):
+            case (PointerHandling::IGNORE_POINTERS):
             {
             }
             case (PointerHandling::DEREFERENCE):
