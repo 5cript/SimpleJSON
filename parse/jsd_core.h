@@ -17,7 +17,7 @@ namespace JSON
 		case (InvalidPropertyHandlingBehaviour::TAG):			\
 			value = TAG_VALUE;									\
 			return;												\
-		case (InvalidPropertyHandlingBehaviour::IGNORE):		\
+		case (InvalidPropertyHandlingBehaviour::IGNORE_ALL_ERROR):		\
 			return;												\
 		case (InvalidPropertyHandlingBehaviour::THROW):			\
 			throw exc;											\

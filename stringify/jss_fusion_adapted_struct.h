@@ -61,6 +61,7 @@ namespace JSON
         std::ostream& stringify(std::ostream& stream, StringificationOptions options) const
         {
             options.in_object = true;
+            options.ignore_name = false;
             AdaptedStringifier<Derived> stringifier;
             return stringifier(stream, *static_cast <Derived const*> (this), options);
         }

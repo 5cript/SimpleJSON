@@ -9,7 +9,7 @@ namespace JSON
 {
     enum class PointerHandling : int
     {
-        IGNORE, // Default
+        IGNORE_POINTERS, // Default
         DEREFERENCE, // derefences until it is not a pointer anymore
         ADDRESS
     };

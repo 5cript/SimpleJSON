@@ -21,7 +21,7 @@ namespace JSON
 				parse(temp, "", i.second, options);
 				if (pos != N)
 					value[pos++] = temp;
-				else if (options.invBehaviour != InvalidPropertyHandlingBehaviour::IGNORE)
+				else if (options.invBehaviour != InvalidPropertyHandlingBehaviour::IGNORE_ALL_ERROR)
 					throw std::out_of_range("there is more data to be read, but the array is full");
 			}
 		}
