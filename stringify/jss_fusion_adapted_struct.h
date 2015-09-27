@@ -14,7 +14,7 @@
 #include <boost/fusion/include/for_each.hpp>
 #include <boost/mpl/range_c.hpp>
 #include <boost/mpl/for_each.hpp>
-#include <boost/phoenix/phoenix.hpp>
+//#include <boost/phoenix/phoenix.hpp>
 #include <boost/fusion/include/size.hpp>
 
 namespace JSON
