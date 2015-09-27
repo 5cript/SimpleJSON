@@ -3,7 +3,7 @@
 
 namespace JSON
 {
-	enum class InvalidPropertyHandlingBehaviour
+    enum class InvalidPropertyHandlingBehaviour : int
 	{
 		IGNORE_ALL_ERROR,
 		DEFAULT,
