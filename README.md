@@ -10,8 +10,7 @@
 
 ## Preface
 Please submit pull requests if you don't agree with some behaviour or found a bug, I would appreciate it.
-Even though the current version is labeled 1.1. I will not not make breaking changes. Although they should be subtle 
-like naming changes. Don't use things within the namespace called 'JSON::Internal', it is guaranteed to change constantly.
+I recently changed the versioning on the releases to indicate that this lib ist still under development and free to change.
  
 ## Introduction
 A JSON stringifier / parser that uses boost fusion introspection methods for automagic struct &lt;-> JSON conversion
@@ -20,9 +19,7 @@ Its supports almost all STL contstructs in stringify and the most important for 
 With the STL as a basis it is an easy to extend mechanism using classes. Use boost fusion and the provided utility
 (see example below) or provide your own parse/stringify methods.
 
-INFO: The library changed from version 1.0 to 1.1 so that it breaks working code.
-      All functions now receive a stream parameter and return this passed stream.
-      This is far more convenient and faster too. Its "the C++ style". Sorry for the inconvenience.
+INFO: I changed the versions from 1.x something something to 0.x something something, because I realised that I am likely not going to hesitate breaking interface or implementation. This has still very much potential and is wide open for improvements.
 
 NOTE: This library is not fine tuned for speed. 
 
@@ -120,23 +117,23 @@ std::list | [...] |
 std::forward_list | [...] | Who uses forward_list anyway?
 std::array | [...] |
 std::pair  | {"first": ..., "second": ...} |
-std::atomic <T> | What T would produce. | Caution! Obviously calls load().
+std::atomic &lt;T> | What T would produce. | Caution! Obviously calls load().
 std::bitset | [1, 0, ...] |
 std::string | "..." |
 fundamental types | themselves |
 std::initializer_list | [...] | Or if names are provided {"name1":..., "name2":...}.
 JSON::IteratorRange <STL_IteratorT> | [...] |
-std::map <T, U> | [[T1, U1], [T2, U2], ...] | General case
-std::map <std::string, T> | {"key": "value", "key2": "value2", ...} | Specialization
+std::map &lt;T, U> | [[T1, U1], [T2, U2], ...] | General case
+std::map &lt;std::string, T> | {"key": "value", "key2": "value2", ...} | Specialization
 std::mutex | nothing | Only use if you must!
 std::set | [...] |
 std::stack | [...] | Don't use if possible, better use deque.
 std::queue | [...] | Don't use if possible, better use deque.
-std::shared_ptr <T> | What T would produce. | Throws if invalid.
-std::unique_ptr <T> | What T would produce. | Throws if invalid.
-std::weak_ptr <T> | What T would produce | Throws if invalid.
+std::shared_ptr &lt;T> | What T would produce. | Throws if invalid.
+std::unique_ptr &lt;T> | What T would produce. | Throws if invalid.
+std::weak_ptr &lt;T> | What T would produce | Throws if invalid.
 std::tuple | {"_1": ..., "_2": ..., ...} | 
-std::valarray <T> | [...] | 
+std::valarray &lt;T> | [...] | 
 
 ## Reference
 Please visit the wiki: [Wiki](https://github.com/5cript/SimpleJSON/wiki)
