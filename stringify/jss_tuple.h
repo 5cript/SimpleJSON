@@ -15,7 +15,7 @@ namespace JSON
     namespace JS_Tuple {
         template <template <typename ...> class TupleType, std::size_t counter = 0, typename ... Types>
         inline typename std::enable_if<counter == sizeof...(Types), void>::type
-        traverse_tuple(TupleType <Types...>&, std::vector <std::string>& result, std::deque <std::string>&, StringificationOptions const&) {}
+        traverse_tuple(TupleType <Types...>&, std::vector <std::string>&, std::deque <std::string>&, StringificationOptions const&) {}
 
         template <template <typename ...> class TupleType, std::size_t counter = 0, typename ... Types>
         inline typename std::enable_if<counter < sizeof...(Types), void>::type
@@ -39,7 +39,7 @@ namespace JSON
     }
 
     template <template <typename, typename = std::allocator <std::string> > class NameContainerT, typename ... Types>
-    std::ostream& stringify (std::ostream& stream, std::string const& name, NameContainerT <std::string> const& names, std::tuple <Types...> values, StringificationOptions options = DEFAULT_OPTIONS)
+    std::ostream& stringify (std::ostream& stream, std::string const&, NameContainerT <std::string> const& names, std::tuple <Types...> values, StringificationOptions options = DEFAULT_OPTIONS)
     {
         std::deque <std::string> d_names {names.begin(), names.end()};
         std::vector <std::string> result;
