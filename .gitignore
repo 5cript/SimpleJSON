@@ -4,3 +4,4 @@
 *.depend
 /bin/*
 /obj/*
+/test.txt
