@@ -1,59 +1,87 @@
 #ifndef BEAUTY_STREAM_H_INCLUDED
 #define BEAUTY_STREAM_H_INCLUDED
 
-#include <iostream>
+#include <iosfwd>
+#include <stack>
+#include <ctype.h>                        // toupper
+#include <boost/iostreams/categories.hpp> // output_filter_tag
+#include <boost/iostreams/operations.hpp> // put
 
-template <typename UnderlyingStreamT>
+enum class NestingState
+{
+    IN_ARRAY,
+    IN_CLASS
+};
+
+/**
+ *  This class is not meant to be used anywhere else than inside a try_stringify() call.
+ *  It is used to produce very simple beautified json output.
+ **/
 class BeautifiedStreamWrapper
 {
 public:
-    using char_type = typename UnderlyingStreamT::char_type;
-    using traits_type = typename UnderlyingStreamT::traits_type;
-    using int_type = typename UnderlyingStreamT::int_type;
-    using pos_type = typename UnderlyingStreamT::pos_type;
-    using off_type = typename UnderlyingStreamT::off_type;
+    typedef char                   char_type;
+    typedef boost::iostreams::output_filter_tag  category;
 
-public:
-    BeautifiedStreamWrapper(UnderlyingStreamT* stream)
-        : stream_(stream)
-    { }
+    BeautifiedStreamWrapper();
 
-    friend BeautifiedStreamWrapper& operator<<(BeautifiedStreamWrapper& stream, char_type c) {
-        if (c == '}')
+    template <typename Sink>
+    bool put(Sink& snk, char c)
+    {
+        namespace io = boost::iostreams;
+
+        if (c == '{')
+        {
+            if (nestingStack_.top() == NestingState::IN_ARRAY)
+            {
+                io::put(snk, '\n');
+                for (int i = 0; i != indentation_; ++i)
+                    io::put(snk, '\t');
+            }
+
+            nestingStack_.push(NestingState::IN_CLASS);
+        }
+        else if (c == '[')
+            nestingStack_.push(NestingState::IN_ARRAY);
+        else if (c == '}' || c == ']') // assuming that json data is well formed
+            nestingStack_.pop();
+
+        if (c == '}' && indentation_ > 0)
             indentation_--;
 
-        for (ind = indentation_; ind; --ind)
-            *stream_ << '\t';
-
-        *stream_ << c;
-        if (c == ',' || c == '{')
-            *stream_ << '\n';
         if (c == '{')
             indentation_++;
 
-        return *this;
-    }
+        if (c == '}')
+        {
+            io::put(snk, '\n');
+            for (int i = 0; i != indentation_; ++i)
+                io::put(snk, '\t');
+        }
 
-    friend BeautifiedStreamWrapper& operator<<(BeautifiedStreamWrapper& stream, std::basic_string <char_type> const& str) {
-        if (str.back() == '}')
-            indentation_--;
+        io::put(snk, c);
 
-        for (ind = indentation_; ind; --ind)
-            *stream_ << '\t';
+        if (c == ':')
+            io::put(snk, ' ');
 
-        *stream_ << str;
+        if (c == '{' || (c == ',' && nestingStack_.top() != NestingState::IN_ARRAY))
+        {
+            io::put(snk, '\n');
+            for (int i = 0; i != indentation_; ++i)
+                io::put(snk, '\t');
+        }
+        else if (c == ',' && nestingStack_.top() == NestingState::IN_ARRAY)
+        {
+            io::put(snk, ' ');
+        }
 
-        if (str.front() == ',' || str.front() == '{')
-            *stream_ << '\n';
-        if (str.front() == '{')
-            indentation_++;
-
-        return *this;
+        return true;
     }
 
 private:
-    UnderlyingStreamT* stream_;
     int indentation_;
+    std::stack <NestingState> nestingStack_;
 };
+
 
 #endif // BEAUTY_STREAM_H_INCLUDED
