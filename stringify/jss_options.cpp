@@ -20,7 +20,7 @@ namespace JSON
             ss << std::setw(width);
         ss << std::setiosflags(ioflags);
     }
-    void IO_Options::apply(std::ostream& ss) const
+    void IO_Options::apply(std::ostream&) const
     {
         return;
     }
