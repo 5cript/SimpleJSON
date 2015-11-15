@@ -29,7 +29,12 @@ namespace JSON
                        InvalidPathHandlingBehaviour invalidPathHandler = InvalidPathHandlingBehaviour::TAG);
 	};
 
-	#define DEFAULT_PARSER_OPTIONS ParsingOptions{}
+	const auto DefaultParserOptions = ParsingOptions{};
+	const auto IngoreErrorsParserOptions = ParsingOptions{InvalidPropertyHandlingBehaviour::IGNORE_ALL_ERROR, InvalidPathHandlingBehaviour::IGNORE_ALL_ERROR};
+	const auto IgnoreMissingParserOptions = ParsingOptions{InvalidPropertyHandlingBehaviour::THROW, InvalidPathHandlingBehaviour::IGNORE_ALL_ERROR};
+	const auto TagMissingParserOptions = ParsingOptions{InvalidPropertyHandlingBehaviour::THROW, InvalidPathHandlingBehaviour::TAG};
+
+	#define DEFAULT_PARSER_OPTIONS DefaultParserOptions
 }
 
 #endif

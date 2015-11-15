@@ -13,7 +13,8 @@ namespace JSON
 	{
 		try
 		{
-			auto pt = object.tree.get_child(name);
+		    GET_CHILD(name, pt, {});
+
 			int pos = 0;
 			for (auto const& i : pt)
 			{

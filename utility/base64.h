@@ -83,7 +83,7 @@ namespace JSON
 		size_type size() const { return binary_.size(); }
 		size_type max_size() const noexcept { return binary_.max_size(); }
 		bool empty() const { return binary_.empty(); }
-		
+
 		void push_back(value_type const& v) { binary_.push_back(v); }
 		void pop_back() { binary_.pop_back(); }
 		void clear() noexcept { binary_.clear(); }
@@ -150,7 +150,7 @@ namespace JSON
     template <typename CharType, template <typename T, typename = std::allocator <T> > class ContainerT>
     void decodeBase64(std::string const& input, ContainerT <CharType>& bytes)
     {
-		static CharType const table[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
+		// static CharType const table[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
 
         bytes.clear();
 

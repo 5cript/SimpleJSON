@@ -10,11 +10,11 @@ namespace JSON
     {
         try
         {
-            std::string s = object.tree.get<std::string>(name);
+            std::string s;
+            GET_VALUE(std::string, name, s, char());
+
             if (!s.empty())
                 value = s[0];
-            else
-                value = char();
         }
 		catch (boost::property_tree::ptree_bad_data& exc)
 		{
@@ -30,11 +30,11 @@ namespace JSON
     {
         try
         {
-            std::string s = object.tree.get<std::string>(name);
+            std::string s;
+            GET_VALUE(std::string, name, s, wchar_t());
+
             if (!s.empty())
                 value = s[0];
-            else
-                value = wchar_t();
         }
 		catch (boost::property_tree::ptree_bad_data& exc)
 		{

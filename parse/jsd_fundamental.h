@@ -14,7 +14,7 @@ namespace JSON
 	{
 		try
 		{
-			value = object.tree.get<T>(name);
+		    GET_VALUE(T, name, value, T());
 		}
 		catch (boost::property_tree::ptree_bad_data& exc)
 		{
