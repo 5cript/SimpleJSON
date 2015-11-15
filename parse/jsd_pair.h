@@ -11,8 +11,8 @@ namespace JSON
 	{
 		try
 		{
-			value.first = object.tree.get<T>(name+".first");
-			value.second = object.tree.get<U>(name+".second");
+		    GET_VALUE(T, name+".first", value.first, std::make_pair(T(), U()));
+		    GET_VALUE(T, name+".second", value.second, std::make_pair(T(), U()));
 		}
 		catch (boost::property_tree::ptree_bad_data& exc)
 		{

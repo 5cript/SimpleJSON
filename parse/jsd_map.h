@@ -11,7 +11,7 @@ namespace JSON
 	{
 		try
 		{
-			auto pt = object.tree.get_child(name);
+			GET_CHILD(name, pt, (std::map<std::string, ValueT>()));
 			for (auto const& i : pt)
 			{
 				ValueT temp;

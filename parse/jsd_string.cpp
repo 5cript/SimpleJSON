@@ -7,7 +7,7 @@ void parse(std::string& value, std::string const& name,
 {
     try
     {
-        value = object.tree.get<std::string>(name);
+        GET_VALUE(std::string, name, value, "<undefined>");
     }
     catch (boost::property_tree::ptree_bad_data& exc)
     {
