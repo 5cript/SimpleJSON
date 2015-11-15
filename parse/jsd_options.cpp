@@ -2,7 +2,9 @@
 
 namespace JSON
 {
-	ParsingOptions::ParsingOptions(InvalidPropertyHandlingBehaviour invBehaviour)
-		: invBehaviour(invBehaviour)
+	ParsingOptions::ParsingOptions(InvalidPropertyHandlingBehaviour invalidPropertyHandler,
+                                   InvalidPathHandlingBehaviour invalidPathHandler)
+		: invalidPropertyHandler(invalidPropertyHandler)
+		, invalidPathHandler(invalidPathHandler)
 	{}
 }

@@ -19,10 +19,14 @@ namespace JSON
 				value[i.first] = temp;
 			}
 		}
-		catch (boost::property_tree::ptree_bad_path& exc)
+		catch (boost::property_tree::ptree_bad_data& exc)
 		{
-			DEFAULT_ERROR_HANDLER((std::map<std::string, ValueT>()), (std::map<std::string, ValueT>()));
+			DEFAULT_PROPERTY_ERROR_HANDLER((std::map<std::string, ValueT>()), (std::map<std::string, ValueT>()));
 		}
+        catch (boost::property_tree::ptree_bad_path& exc)
+        {
+			DEFAULT_PATH_ERROR_HANDLER((std::map<std::string, ValueT>()), (std::map<std::string, ValueT>()));
+        }
 	}
 }
 

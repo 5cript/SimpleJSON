@@ -22,10 +22,14 @@ namespace JSON
 				value.insert(std::move(temp));
 			}
 		}
-		catch (boost::property_tree::ptree_bad_path& exc)
+		catch (boost::property_tree::ptree_bad_data& exc)
 		{
-			DEFAULT_ERROR_HANDLER(std::set<T>{}, std::set<T>{});
+			DEFAULT_PROPERTY_ERROR_HANDLER(std::set<T>{}, std::set<T>{});
 		}
+        catch (boost::property_tree::ptree_bad_path& exc)
+        {
+			DEFAULT_PATH_ERROR_HANDLER(std::set<T>{}, std::set<T>{});
+        }
 	}
 }
 

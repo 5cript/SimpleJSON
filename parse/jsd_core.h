@@ -9,8 +9,8 @@
 
 namespace JSON
 {
-	#define DEFAULT_ERROR_HANDLER(DEFAULT_VALUE, TAG_VALUE)		\
-	switch (options.invBehaviour) {								\
+    #define DEFAULT_PROPERTY_ERROR_HANDLER(DEFAULT_VALUE, TAG_VALUE)		\
+	switch (options.invalidPropertyHandler) {								\
 		case (InvalidPropertyHandlingBehaviour::DEFAULT):		\
 			value = DEFAULT_VALUE;								\
 			return;												\
@@ -20,6 +20,23 @@ namespace JSON
 		case (InvalidPropertyHandlingBehaviour::IGNORE_ALL_ERROR):		\
 			return;												\
 		case (InvalidPropertyHandlingBehaviour::THROW):			\
+			throw exc;											\
+		default:												\
+			return;												\
+	}															\
+	// MAKRO END
+
+	#define DEFAULT_PATH_ERROR_HANDLER(DEFAULT_VALUE, TAG_VALUE)		\
+	switch (options.invalidPathHandler) {								\
+		case (InvalidPathHandlingBehaviour::DEFAULT):		\
+			value = DEFAULT_VALUE;								\
+			return;												\
+		case (InvalidPathHandlingBehaviour::TAG):			\
+			value = TAG_VALUE;									\
+			return;												\
+		case (InvalidPathHandlingBehaviour::IGNORE_ALL_ERROR):		\
+			return;												\
+		case (InvalidPathHandlingBehaviour::THROW):			\
 			throw exc;											\
 		default:												\
 			return;												\

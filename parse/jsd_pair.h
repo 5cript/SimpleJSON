@@ -16,8 +16,13 @@ namespace JSON
 		}
 		catch (boost::property_tree::ptree_bad_data& exc)
 		{
-			DEFAULT_ERROR_HANDLER(std::make_pair(T(), U()), std::make_pair(T(), U()));
+			DEFAULT_PROPERTY_ERROR_HANDLER(std::make_pair(T(), U()), std::make_pair(T(), U()));
 		}
+        catch (boost::property_tree::ptree_bad_path& exc)
+        {
+			DEFAULT_PATH_ERROR_HANDLER(std::make_pair(T(), U()), std::make_pair(T(), U()));
+        }
+
 	}
 }
 

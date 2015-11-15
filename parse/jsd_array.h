@@ -21,14 +21,18 @@ namespace JSON
 				parse(temp, "", i.second, options);
 				if (pos != N)
 					value[pos++] = temp;
-				else if (options.invBehaviour != InvalidPropertyHandlingBehaviour::IGNORE_ALL_ERROR)
+				else if (options.invalidPropertyHandler != InvalidPropertyHandlingBehaviour::IGNORE_ALL_ERROR)
 					throw std::out_of_range("there is more data to be read, but the array is full");
 			}
 		}
 		catch (boost::property_tree::ptree_bad_data& exc)
 		{
-			DEFAULT_ERROR_HANDLER({}, {});
+			DEFAULT_PROPERTY_ERROR_HANDLER({}, {});
 		}
+        catch (boost::property_tree::ptree_bad_path& exc)
+        {
+			DEFAULT_PATH_ERROR_HANDLER({}, {});
+        }
 	}
 }
 

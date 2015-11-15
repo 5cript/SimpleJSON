@@ -19,10 +19,14 @@ namespace JSON
 				value.emplace_back(std::move(temp));
 			}
 		}
-		catch (boost::property_tree::ptree_bad_path& exc)
+		catch (boost::property_tree::ptree_bad_data& exc)
 		{
-			DEFAULT_ERROR_HANDLER({}, {});
+			DEFAULT_PROPERTY_ERROR_HANDLER({}, {});
 		}
+        catch (boost::property_tree::ptree_bad_path& exc)
+        {
+			DEFAULT_PATH_ERROR_HANDLER({}, {});
+        }
 	}
 }
 

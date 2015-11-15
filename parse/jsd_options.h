@@ -11,11 +11,22 @@ namespace JSON
 		THROW
 	};
 
+	enum class InvalidPathHandlingBehaviour : int
+	{
+		IGNORE_ALL_ERROR,
+		DEFAULT,
+		TAG,
+		THROW
+	};
+
 	struct ParsingOptions
     {
-		InvalidPropertyHandlingBehaviour invBehaviour;
+		InvalidPropertyHandlingBehaviour invalidPropertyHandler;
+		InvalidPathHandlingBehaviour invalidPathHandler;
 
-		ParsingOptions(InvalidPropertyHandlingBehaviour invBehaviour = InvalidPropertyHandlingBehaviour::THROW);
+
+		ParsingOptions(InvalidPropertyHandlingBehaviour invalidPropertyHandler = InvalidPropertyHandlingBehaviour::THROW,
+                       InvalidPathHandlingBehaviour invalidPathHandler = InvalidPathHandlingBehaviour::TAG);
 	};
 
 	#define DEFAULT_PARSER_OPTIONS ParsingOptions{}

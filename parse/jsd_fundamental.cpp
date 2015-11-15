@@ -16,9 +16,13 @@ namespace JSON
             else
                 value = char();
         }
-        catch (boost::property_tree::ptree_bad_data& exc)
+		catch (boost::property_tree::ptree_bad_data& exc)
+		{
+			DEFAULT_PROPERTY_ERROR_HANDLER(char(), char());
+		}
+        catch (boost::property_tree::ptree_bad_path& exc)
         {
-            DEFAULT_ERROR_HANDLER(char(), char());
+			DEFAULT_PATH_ERROR_HANDLER(char(), char());
         }
     }
     void parse(wchar_t& value, std::string const& name,
@@ -32,9 +36,13 @@ namespace JSON
             else
                 value = wchar_t();
         }
-        catch (boost::property_tree::ptree_bad_data& exc)
+		catch (boost::property_tree::ptree_bad_data& exc)
+		{
+			DEFAULT_PROPERTY_ERROR_HANDLER(wchar_t(), wchar_t());
+		}
+        catch (boost::property_tree::ptree_bad_path& exc)
         {
-            DEFAULT_ERROR_HANDLER(wchar_t(), wchar_t());
+			DEFAULT_PATH_ERROR_HANDLER(wchar_t(), wchar_t());
         }
     }
 }
