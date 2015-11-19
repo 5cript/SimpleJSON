@@ -121,7 +121,6 @@ std::atomic &lt;T> | What T would produce. | Caution! Obviously calls load().
 std::bitset | [1, 0, ...] |
 std::string | "..." |
 fundamental types | themselves |
-std::initializer_list | [...] | Or if names are provided {"name1":..., "name2":...}.
 JSON::IteratorRange <STL_IteratorT> | [...] |
 std::map &lt;T, U> | [[T1, U1], [T2, U2], ...] | General case
 std::map &lt;std::string, T> | {"key": "value", "key2": "value2", ...} | Specialization
@@ -134,6 +133,7 @@ std::unique_ptr &lt;T> | What T would produce. | Throws if invalid.
 std::weak_ptr &lt;T> | What T would produce | Throws if invalid.
 std::tuple | {"_1": ..., "_2": ..., ...} | 
 std::valarray &lt;T> | [...] | 
+boost::optional <T> | T or nothing | Very useful for making things optional... ofc
 
 ## Reference
 Please visit the wiki: [Wiki](https://github.com/5cript/SimpleJSON/wiki)
