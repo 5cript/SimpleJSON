@@ -32,10 +32,10 @@ Dependencies:
 Code example:
 ```C++
 #ifndef Q_MOC_RUN // A Qt workaround, for those of you who use Qt
-#   include "parse/jsd.h"
-#   include "parse/jsd_convenience.h"
-#   include "stringify/jss.h"
-#   include "stringify/jss_fusion_adapted_struct.h"
+#   include "SimpleJSON/parse/jsd.h"
+#   include "SimpleJSON/parse/jsd_convenience.h"
+#   include "SimpleJSON/stringify/jss.h"
+#   include "SimpleJSON/tringify/jss_fusion_adapted_struct.h"
 #endif
 
 #include <string>
