@@ -12,8 +12,8 @@ namespace JSON
               typename = typename std::enable_if <Internal::can_stringify<T>::value>::type >
     std::ostream& stringify(std::ostream& stream, std::string const& name, std::array<T, N> const& values, StringificationOptions options = DEFAULT_OPTIONS)
     {
-        options.ignore_name = true;
         WRITE_ARRAY_START(stream);
+        options.ignore_name = true;
         bool first = true;
         for (auto const& i : values)
         {
