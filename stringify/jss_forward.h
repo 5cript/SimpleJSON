@@ -13,7 +13,7 @@ namespace JSON
     std::ostream& stringify(std::ostream& stream, std::string const& name, ContainerT <T> const& values, StringificationOptions const& options = DEFAULT_OPTIONS,
                                typename std::enable_if<has_forward_iterator<T, ContainerT>::value>::type* = nullptr)
     {
-        Internal::stringify_i(stream, name, values, [](ContainerT <T> const& c){ auto b = c.cbegin(); std::advance(b, std::distance(b, c.cend()) - 1); return b; }, options);
+        Internal::stringify_i(stream, name, values, options);
         return stream;
     }
 }

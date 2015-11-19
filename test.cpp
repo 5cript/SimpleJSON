@@ -29,7 +29,7 @@ BOOST_FUSION_ADAPT_STRUCT
 #define TEST(O, RESULT_STRING) \
 { \
     std::stringstream sstr; \
-    JSON::stringify (sstr, std::string(""), O, JSON::DEFAULT_OPTIONS); \
+    JSON::stringify (sstr, std::string("name"), O, JSON::DEFAULT_OPTIONS); \
     if (sstr.str() != RESULT_STRING) { std::cerr << "[FAIL   ] Expected: '" << RESULT_STRING << "' Got: '" << sstr.str() <<  "'\n"; failed++; }\
     else std::cout << "[SUCCESS] " << RESULT_STRING << "\n"; \
 }
@@ -53,7 +53,7 @@ void testAll()
 
     TEST((std::queue <int>{}), "[]")
     TEST((std::set <std::string> {"first", "second"}), "[\"first\",\"second\"]")
-    TEST((std::tuple <int, float> {2, 1.2f}), "{\"_0\":2,\"_1\":1.2}")
+    TEST((std::tuple <int, float> {2, 1.2f}), "\"name\":{\"_0\":2,\"_1\":1.2}")
 
     TEST(Object{}, "{\"id\":5,\"str\":\"Hello\"}")
 }

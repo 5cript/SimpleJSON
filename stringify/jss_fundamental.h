@@ -13,7 +13,6 @@ namespace JSON
                                               || std::is_enum<T>::value         >::type >
     std::ostream& stringify(std::ostream& stream, std::string const& name, T value, StringificationOptions const& options = DEFAULT_OPTIONS)
     {
-        APPLY_IO_MANIPULATERS(stream);
         WRITE_NAME(stream);
         stream << value;
         return stream;

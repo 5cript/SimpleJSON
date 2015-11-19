@@ -3,6 +3,8 @@
 
 #include "jss_core.h"
 #include "jss_object.h"
+#include "jss_optional.h"
+
 #include <tuple>
 #include <deque>
 #include <initializer_list>
@@ -21,6 +23,8 @@ namespace JSON
         inline typename std::enable_if<counter < sizeof...(Types), void>::type
         traverse_tuple(TupleType <Types...>& tuple, std::vector <std::string>& result, std::deque <std::string>& names, StringificationOptions const& options)
         {
+            static_assert (!Internal::is_optional <typename std::tuple_element <counter, TupleType<Types...>>::type>::value, "A tuple may not contain boost::optional types");
+
             if (!names.empty())
             {
                 std::stringstream sstr;
@@ -39,13 +43,14 @@ namespace JSON
     }
 
     template <template <typename, typename = std::allocator <std::string> > class NameContainerT, typename ... Types>
-    std::ostream& stringify (std::ostream& stream, std::string const&, NameContainerT <std::string> const& names, std::tuple <Types...> values, StringificationOptions options = DEFAULT_OPTIONS)
+    std::ostream& stringify (std::ostream& stream, std::string const& name, NameContainerT <std::string> const& names, std::tuple <Types...> values, StringificationOptions options = DEFAULT_OPTIONS)
     {
         std::deque <std::string> d_names {names.begin(), names.end()};
         std::vector <std::string> result;
         options.ignore_name = false;
         options.in_object = true;
         JS_Tuple::traverse_tuple<std::tuple> (values, result, d_names, options);
+        WRITE_NAME(stream);
         return js_make_object(stream, result);
     }
 

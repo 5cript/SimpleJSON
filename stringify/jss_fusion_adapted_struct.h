@@ -7,6 +7,8 @@
 #include "jss_object.h"
 #endif
 
+#include "jss_optional.h"
+
 #include <iostream>
 #include <boost/fusion/mpl.hpp>
 #include <boost/fusion/adapted.hpp>
@@ -14,7 +16,6 @@
 #include <boost/fusion/include/for_each.hpp>
 #include <boost/mpl/range_c.hpp>
 #include <boost/mpl/for_each.hpp>
-//#include <boost/phoenix/phoenix.hpp>
 #include <boost/fusion/include/size.hpp>
 
 namespace JSON
@@ -33,8 +34,10 @@ namespace JSON
                 boost::fusion::result_of::size<T>::type::value
             > range;
 
+            bool first = true;
+
             stream << '{';
-            boost::mpl::for_each<range> (std::bind<void>(_helper(boost::fusion::result_of::size<T>::type::value), std::placeholders::_1, std::ref(stream), std::ref(object), std::ref(options)));
+            boost::mpl::for_each<range> (std::bind<void>(_helper(boost::fusion::result_of::size<T>::type::value), std::placeholders::_1, std::ref(stream), std::ref(first), std::ref(object), std::ref(options)));
             stream << '}';
             return stream;
         }
@@ -43,11 +46,16 @@ namespace JSON
         {
         public:
             template<class Index>
-            void operator()(Index, std::ostream& os, T const& object, StringificationOptions const& options) const
+            void operator()(Index, std::ostream& os, bool& first, T const& object, StringificationOptions const& options) const
             {
-                stringify(os, boost::fusion::extension::struct_member_name<T, Index::value>::call(), boost::fusion::at<Index>(object), options);
-                if (Index::value+1 != len)
-                    os << options.delimiter;
+                auto const& member = boost::fusion::at<Index>(object);
+                if (Internal::is_optional_set(member))
+                {
+                    if (!first)
+                        os << options.delimiter;
+                    stringify(os, boost::fusion::extension::struct_member_name<T, Index::value>::call(), member, options);
+                    first = false;
+                }
             }
             _helper(int len) : len(len) {}
         private:

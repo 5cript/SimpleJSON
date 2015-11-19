@@ -4,6 +4,7 @@
 #include "jss_core.h"
 #include "jss_object.h"
 #include "jss_check.h"
+#include "jss_optional.h"
 #include <functional>
 
 namespace JSON { namespace Internal
@@ -11,24 +12,24 @@ namespace JSON { namespace Internal
     template <typename T, template <typename, class = std::allocator <T> > class ContainerT,
               typename FuncT = std::function <typename ContainerT<T>::const_iterator(ContainerT<T> const&)>,
               class = typename std::enable_if<Internal::can_stringify<typename ContainerT<T>::value_type>::value>::type >
-    inline std::ostream& stringify_i(std::ostream& stream, std::string const& name, ContainerT <T> const& values, FuncT end_iter, StringificationOptions const& options = DEFAULT_OPTIONS)
+    inline std::ostream& stringify_i(std::ostream& stream, std::string const& name, ContainerT <T> const& values, StringificationOptions const& options = DEFAULT_OPTIONS)
     {
         using namespace Internal;
 
         WRITE_ARRAY_START(stream);
-        if (!values.empty())
+        auto noNameOption = options;
+        noNameOption.ignore_name = true;
+
+        bool first = true;
+        for (auto const& i : values)
         {
-            auto end = end_iter(values);
-            APPLY_IO_MANIPULATERS(stream);
-            auto noNameOption = options;
-            noNameOption.ignore_name = true;
-            auto i = values.begin();
-            for (; i != end; ++i)
+            if (Internal::is_optional_set(i))
             {
-                stringify(stream, {}, *i, noNameOption);
-                stream << options.delimiter;
+                if (!first)
+                    stream << options.delimiter;
+                stringify(stream, {}, i, noNameOption);
+                first = false;
             }
-            stringify(stream, {}, *i, noNameOption);
         }
         WRITE_ARRAY_END(stream);
         return stream;

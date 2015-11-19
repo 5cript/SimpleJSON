@@ -29,7 +29,6 @@ namespace JSON
             case (PointerHandling::ADDRESS):
             {
                 WRITE_NAME(stream);
-                APPLY_IO_MANIPULATERS(stream);
                 stream << reinterpret_cast <uint_of_size<sizeof(void*)>::type> (ptr);
             }
             default: {};

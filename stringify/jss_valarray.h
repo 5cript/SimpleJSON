@@ -2,6 +2,8 @@
 #define RSS_VALARRY_H_INCLUDED
 
 // has no allocator and therefore is not compatible in jss_container
+#include "jss_optional.h"
+
 #include <valarray>
 
 namespace JSON
@@ -13,17 +15,19 @@ namespace JSON
         using namespace Internal;
 
         WRITE_ARRAY_START(stream);
-        if (values.size() != 0)
+        auto noNameOption = options;
+        noNameOption.ignore_name = true;
+
+        bool first = true;
+        for (auto const& i : values)
         {
-            APPLY_IO_MANIPULATERS(stream);
-            auto noNameOption = options;
-            noNameOption.ignore_name = true;
-            for (auto i = std::begin(values); i != std::end(values) -1 ; ++i)
+            if (Internal::is_optional_set(i))
             {
-                stringify(stream, {}, *i, noNameOption);
-                stream << options.delimiter;
+                if (!first)
+                    stream << options.delimiter;
+                stringify(stream, {}, i, noNameOption);
+                first = false;
             }
-            stream << stringify(stream, {}, *(std::end(values) - 1), noNameOption);
         }
         WRITE_ARRAY_END(stream);
         return stream;

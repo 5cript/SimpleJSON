@@ -2,8 +2,8 @@
 #define JSS_ARRAY_H_INCLUDED
 
 #include "jss_core.h"
-#include "jss_struct.h"
 #include "jss_iterator.h"
+#include "jss_optional.h"
 #include <array>
 
 namespace JSON
@@ -14,14 +14,16 @@ namespace JSON
     {
         options.ignore_name = true;
         WRITE_ARRAY_START(stream);
-        if (!values.empty())
+        bool first = true;
+        for (auto const& i : values)
         {
-            for (auto i = values.begin(); i != values.end() - 1; ++i)
+            if (Internal::is_optional_set(i))
             {
-                stringify(stream, {}, *i, options);
-                stream << options.delimiter;
+                if (!first)
+                    stream << options.delimiter;
+                stringify(stream, {}, i, options);
+                first = false;
             }
-            stream << values.back();
         }
         WRITE_ARRAY_END(stream);
         return stream;
