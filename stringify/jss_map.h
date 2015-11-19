@@ -2,6 +2,7 @@
 #define JSS_MAP_H_INCLUDED
 
 #include "jss_core.h"
+#include "jss_optional.h"
 #include <map>
 
 namespace JSON
@@ -33,17 +34,17 @@ namespace JSON
 
         WRITE_OBJECT_START(stream);
         options.in_object = true;
-        if (!values.empty())
+
+        bool first = true;
+        for (auto const& i : values)
         {
-            APPLY_IO_MANIPULATERS(stream);
-            auto bfe = values.end();
-            bfe--;
-            for (auto i = values.begin(); i != bfe; ++i)
+            if (is_optional_set(i.second))
             {
-                stringify_map_pair(stream, *i, options);
-                stream << options.delimiter;
+                if (!first)
+                    stream << options.delimiter;
+                stringify_map_pair(stream, i, options);
+                first = false;
             }
-            stringify_map_pair(stream, *values.rbegin(), options);
         }
         WRITE_OBJECT_END(stream);
         return stream;
@@ -56,22 +57,20 @@ namespace JSON
         using namespace Internal;
 
         WRITE_ARRAY_START(stream);
-        if (!values.empty())
+        options.ignore_name = true;
+
+        bool first = true;
+        for (auto const& i : values)
         {
-            options.ignore_name = true;
-            APPLY_IO_MANIPULATERS(stream);
-            auto bfe = values.end();
-            bfe--;
-            for (auto i = values.begin(); i != bfe; ++i)
+            if (is_optional_set(i.second))
             {
+                if (!first)
+                    stream << options.delimiter;
                 WRITE_ARRAY_START(stream);
-                stringify_map_pair_2(stream, *i, options);
+                stringify_map_pair_2(stream, i, options);
                 WRITE_ARRAY_END(stream);
-                stream << options.delimiter;
+                first = false;
             }
-            WRITE_ARRAY_START(stream);
-            stringify_map_pair_2(stream, *values.rbegin(), options);
-            WRITE_ARRAY_END(stream);
         }
         WRITE_ARRAY_END(stream);
         return stream;

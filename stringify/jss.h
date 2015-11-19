@@ -13,10 +13,8 @@
 #include "jss_forward_list.h"
 #include "jss_iterator.h"
 #include "jss_array.h"
-#include "jss_struct.h"
 #include "jss_tuple.h"
 #include "jss_object.h"
-#include "jss_initializer_list.h"
 #include "jss_convenience.h"
 #include "jss_queue.h"
 #include "jss_stack.h"
@@ -29,6 +27,7 @@
 #include "jss_atomic.h"
 #include "jss_smart_ptr.h"
 #include "jss_check.h"
+#include "jss_optional.h"
 
 #include "jss_undefine.h"
 

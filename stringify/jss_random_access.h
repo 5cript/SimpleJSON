@@ -13,7 +13,7 @@ namespace JSON
                                 typename std::enable_if<has_random_access_iterator<T, ContainerT>::value>::type* = nullptr,
                                 typename std::enable_if<Internal::can_stringify<typename ContainerT<T>::value_type>::value>::type* = nullptr)
     {
-        Internal::stringify_i(stream, name, values, [](ContainerT <T> const& c) { return c.end() - 1; }, options);
+        Internal::stringify_i(stream, name, values, options);
         return stream;
     }
 }

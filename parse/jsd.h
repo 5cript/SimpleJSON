@@ -11,5 +11,6 @@
 #include "jsd_atomic.h"
 #include "jsd_fusion_adapted_struct.h"
 #include "jsd_object.h"
+#include "jsd_optional.h"
 
 #endif

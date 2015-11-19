@@ -25,7 +25,6 @@ namespace JSON
     constexpr auto TemplateRecursionMaximum = 8;
 
     #define CLASS_STRINGIFY_FUNCTION_NAME stringify
-    #define APPLY_IO_MANIPULATERS(STREAM) options.io_options.apply(STREAM)
 
     #define WRITE_NAME(STREAM)                          \
     if (!options.ignore_name && options.in_object)      \

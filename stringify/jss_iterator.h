@@ -3,6 +3,7 @@
 
 #include "jss_core.h"
 #include "iterator_traits.h"
+#include "jss_optional.h"
 
 namespace JSON
 {
@@ -32,65 +33,28 @@ namespace JSON
     template <typename IteratorT,
               typename = typename std::enable_if <Internal::can_stringify<typename IteratorT::value_type>::value>::type >
     std::ostream& stringify (std::ostream& stream, const std::string& name, Internal::IteratorRange<IteratorT> const& range, StringificationOptions options = DEFAULT_OPTIONS,
-                             typename std::enable_if <is_random_access_iterator<IteratorT>::value>::type* = nullptr)
+                             typename std::enable_if <is_random_access_iterator<IteratorT>::value ||
+                                                      is_bidirectional_iterator<IteratorT>::value ||
+                                                      is_forward_iterator<IteratorT>::value>::type* = nullptr)
     {
-        options.ignore_name = true;
         WRITE_ARRAY_START(stream);
-        if (range.end() > range.begin())
-        {
-            auto i = range.begin();
-            for (; i < range.end() - 1; ++i)
-            {
-                stringify (stream, {}, *i, options);
-                stream << options.delimiter;
-            }
-            stringify (stream, {}, *i, options);
-        }
-        WRITE_ARRAY_END(stream);
-        return stream;
-    }
-
-    template <typename IteratorT,
-              typename = typename std::enable_if <Internal::can_stringify<typename IteratorT::value_type>::value>::type >
-    std::ostream& stringify (std::ostream& stream, const std::string& name, Internal::IteratorRange<IteratorT> const& range, StringificationOptions options = DEFAULT_OPTIONS,
-                             typename std::enable_if <is_bidirectional_iterator<IteratorT>::value>::type* = nullptr)
-    {
         options.ignore_name = true;
-        WRITE_ARRAY_START(stream);
-        if (range.begin() != range.end())
+        if (range.end() != range.begin())
         {
-            auto i = range.begin();
             auto e = range.end();
-            --e;
-            for (; i != e; ++i)
-            {
-                stringify (stream, {}, *i, options);
-                stream << options.delimiter;
-            }
-            stringify (stream, {}, *i, options);
-        }
-        WRITE_ARRAY_END(stream);
-        return stream;
-    }
-
-    template <typename IteratorT,
-              typename = typename std::enable_if <Internal::can_stringify<typename IteratorT::value_type>::value>::type >
-    std::ostream& stringify (std::ostream& stream, const std::string& name, Internal::IteratorRange<IteratorT> const& range, StringificationOptions options = DEFAULT_OPTIONS,
-                             typename std::enable_if <is_forward_iterator<IteratorT>::value>::type* = nullptr)
-    {
-        options.ignore_name = true;
-        WRITE_ARRAY_START(stream);
-        if (range.begin() != range.end())
-        {
             auto i = range.begin();
-            auto e = i;
-            std::advance(e, std::distance(i, range.end()) - 1);
-            for (; i != e; ++i)
+
+            bool first = true;
+            for (;i != e; ++i)
             {
-                stringify (stream, {}, *i, options);
-                stream << options.delimiter;
+                if (Internal::is_optional_set(*i))
+                {
+                    if (!first)
+                        stream << options.delimiter;
+                    stringify(stream, {}, *i, options);
+                    first = false;
+                }
             }
-            stringify (stream, {}, *i, options);
         }
         WRITE_ARRAY_END(stream);
         return stream;

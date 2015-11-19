@@ -2,6 +2,7 @@
 #define JSS_PAIR_H_INCLUDED
 
 #include "jss_object.h"
+#include "jss_optional.h"
 #include <utility>
 
 namespace JSON
@@ -14,7 +15,8 @@ namespace JSON
         options.ignore_name = false;
         options.in_object = true;
         stringify(stream, "first", value.first, options);
-        stream << options.delimiter;
+        if (Internal::is_optional_set(value.first))
+            stream << options.delimiter;
         stringify(stream, "second", value.second, options);
         WRITE_OBJECT_END(stream);
         return stream;
