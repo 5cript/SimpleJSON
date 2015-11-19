@@ -7,7 +7,7 @@
 
 namespace JSON
 {
-	template <typename T, unsigned N>
+	template <typename T, std::size_t N>
 	void parse(std::array<T, N>& value, std::string const& name,
                PropertyTree const& object, ParsingOptions const& options = DEFAULT_PARSER_OPTIONS)
 	{
