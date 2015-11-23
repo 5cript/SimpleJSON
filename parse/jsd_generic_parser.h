@@ -18,6 +18,7 @@ namespace JSON
 
 		PropertyTree(boost::property_tree::ptree tree = {});
 	};
+
 	PropertyTree parse_json(std::istream& stream);
 	PropertyTree parse_json(std::string const& str);
 	boost::optional<PropertyTree> parse_auto(std::istream& stream);
