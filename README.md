@@ -35,7 +35,7 @@ Code example:
 #   include "SimpleJSON/parse/jsd.h"
 #   include "SimpleJSON/parse/jsd_convenience.h"
 #   include "SimpleJSON/stringify/jss.h"
-#   include "SimpleJSON/tringify/jss_fusion_adapted_struct.h"
+#   include "SimpleJSON/stringify/jss_fusion_adapted_struct.h"
 #endif
 
 #include <string>
