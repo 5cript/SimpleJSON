@@ -10,7 +10,14 @@
 
 ## Preface
 Please submit pull requests if you don't agree with some behaviour or found a bug, I would appreciate it.
-I recently changed the versioning on the releases to indicate that this lib ist still under development and free to change.
+The library is further matured now and changes less. 
+
+This library can parse and stringify and is designed for easy use.
+Nobody wants to write parsing and stringification methods for every class they write. We rather want it
+to work "just like that" without thinking about it. This is where this library fits in.
+This idea of producing and consuming JSON has become the "Hello World of Introspection".
+
+Since release 0.3, the library also features basic JSON beautification using boost iostreams.
  
 ## Introduction
 A JSON stringifier / parser that uses boost fusion introspection methods for automagic struct &lt;-> JSON conversion
@@ -19,15 +26,13 @@ Its supports almost all STL contstructs in stringify and the most important for 
 With the STL as a basis it is an easy to extend mechanism using classes. Use boost fusion and the provided utility
 (see example below) or provide your own parse/stringify methods.
 
-INFO: I changed the versions from 1.x something something to 0.x something something, because I realised that I am likely not going to hesitate breaking interface or implementation. This has still very much potential and is wide open for improvements.
-
-NOTE: This library is not fine tuned for speed. 
+NOTE: The performance of this library is mostly influenced by boost property tree which is used for parsing JSON.
+The main focus of this library is not speed, but ease of use and convenience. If you want to be fast, try RapidJson (not saying it is particullarly slow, but probably not suitable for high data frequency or big bulk data application)
 
 Dependencies:
 > boost/property_tree <br>
 > boost/fusion <br>
 > boost/mpl <br>
-> boost/phoenix <br>
 
 Code example:
 ```C++
@@ -103,8 +108,8 @@ There is just one function for stringification. This stringify function is heavi
 
 * The library supports almost all STL containers (stringify supports even more) as well as fundamental types. <br>
 * Containers will decay into json arrays, if their value_type is a stringifiable (this is recursive).
-* Classes will turn into objects, if it is adapted, derives from FusionStruct<> and each parameter is stringifiable.
-* The stringify class member is called if provided, you have to make sure yourself that what you produce makes sense.
+* Classes will turn into objects, if it is adapted, derives from FusionStruct<> and each member is stringifiable.
+* For other classes, the "stringify" method is called, if provided, but then you will have to make sure on your own to produce a valid output. (The base64 wrapper uses this).
 
 ### stringify behaviour (and STL stuff stringification)
 It is quite import to know how certain STL constructs translate into JSON and here is a brief summary:
@@ -122,8 +127,7 @@ std::bitset | [1, 0, ...] |
 std::string | "..." |
 fundamental types | themselves |
 JSON::IteratorRange <STL_IteratorT> | [...] |
-std::map &lt;T, U> | [[T1, U1], [T2, U2], ...] | General case
-std::map &lt;std::string, T> | {"key": "value", "key2": "value2", ...} | Specialization
+std::map &lt;std::string, T> | {"key": "value", "key2": "value2", ...} | A map basically represents a JSON object
 std::mutex | nothing | Only use if you must!
 std::set | [...] |
 std::stack | [...] | Don't use if possible, better use deque.
