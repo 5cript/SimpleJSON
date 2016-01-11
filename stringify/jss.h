@@ -28,7 +28,8 @@
 #include "jss_smart_ptr.h"
 #include "jss_check.h"
 #include "jss_optional.h"
+#include "jss_renamed.h"
 
-#include "jss_undefine.h"
+// #include "jss_undefine.h"
 
 #endif // JSS_H_INCLUDED

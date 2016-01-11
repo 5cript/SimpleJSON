@@ -1,5 +1,5 @@
-#ifndef ITERATOR_TRAITS_H_INCLUDED
-#define ITERATOR_TRAITS_H_INCLUDED
+#ifndef JSS_ITERATOR_TRAITS_H_INCLUDED
+#define JSS_ITERATOR_TRAITS_H_INCLUDED
 
 #include <iterator>
 #include <type_traits>

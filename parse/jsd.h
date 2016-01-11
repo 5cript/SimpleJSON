@@ -12,5 +12,6 @@
 #include "jsd_optional.h"
 #include "jsd_fusion_adapted_struct.h"
 #include "jsd_object.h"
+#include "jsd_renamed.h"
 
 #endif
