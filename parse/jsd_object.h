@@ -8,14 +8,14 @@ namespace JSON
 	namespace Internal
 	{
 		template <typename Type, typename enable = void>
-		class isParsableStruct
+		class isParsable
 		{
 		public:
 			static const bool value = false;
 		};
 
 		template <typename Type>
-		class isParsableStruct <Type, typename std::enable_if<std::is_class<Type>::value>::type>
+		class isParsable <Type, typename std::enable_if<std::is_class<Type>::value>::type>
 		{
 		private:
 			class yes { char m; };
@@ -43,7 +43,7 @@ namespace JSON
 	}
 
 	template <typename T>
-	typename std::enable_if <Internal::isParsableStruct<T>::value, void>::type
+	typename std::enable_if <Internal::isParsable<T>::value, void>::type
 	parse(T& value, std::string const& name, PropertyTree const& tree, ParsingOptions const& options = DEFAULT_PARSER_OPTIONS)
 	{
 		value.parse(name, tree, options);

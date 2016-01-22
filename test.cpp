@@ -12,8 +12,8 @@
 // TODO: needs more tests
 
 // this does not need to be more complex. works recursively, so other tests will fulfill our needs
-struct Object : public JSON::StringifiableStruct <Object>
-              , public JSON::ParsableStruct <Object>
+struct Object : public JSON::Stringifiable <Object>
+              , public JSON::Parsable <Object>
 {
     int id = 5;
     std::string str = "Hello";

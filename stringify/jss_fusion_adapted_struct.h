@@ -64,7 +64,7 @@ namespace JSON
     };
 
     template <typename Derived>
-    struct StringifiableStruct
+    struct Stringifiable
     {
         std::ostream& stringify(std::ostream& stream, StringificationOptions options) const
         {
@@ -73,7 +73,7 @@ namespace JSON
             AdaptedStringifier<Derived> stringifier;
             return stringifier(stream, *static_cast <Derived const*> (this), options);
         }
-        virtual ~StringifiableStruct() = default;
+        virtual ~Stringifiable() = default;
     };
 }
 
