@@ -47,8 +47,8 @@ Code example:
 #include <vector>
 #include <sstream>
 
-struct ConfigContent : public JSON::FusionStruct <ConfigContent>
-                     , public JSON::ParsableStruct <ConfigContent>
+struct ConfigContent : public JSON::Stringifiable <ConfigContent>
+                     , public JSON::Parsable <ConfigContent>
 {
     int id;
     std::string libPath;
@@ -108,7 +108,7 @@ There is just one function for stringification. This stringify function is heavi
 
 * The library supports almost all STL containers (stringify supports even more) as well as fundamental types. <br>
 * Containers will decay into json arrays, if their value_type is a stringifiable (this is recursive).
-* Classes will turn into objects, if it is adapted, derives from FusionStruct<> and each member is stringifiable.
+* Classes will turn into objects, if it is adapted, derives from Stringifiable<> and each member is stringifiable.
 * For other classes, the "stringify" method is called, if provided, but then you will have to make sure on your own to produce a valid output. (The base64 wrapper uses this).
 
 ### stringify behaviour (and STL stuff stringification)
