@@ -12,7 +12,7 @@
 // TODO: needs more tests
 
 // this does not need to be more complex. works recursively, so other tests will fulfill our needs
-struct Object : public JSON::FusionStruct <Object>
+struct Object : public JSON::StringifiableStruct <Object>
               , public JSON::ParsableStruct <Object>
 {
     int id = 5;
