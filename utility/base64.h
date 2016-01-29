@@ -53,9 +53,37 @@ namespace JSON
             : binary_(std::move(container))
         { }
 
+        /**
+         *  This constructor does stop on the null terminator '\0' (exclusive).
+         */
+        Base64Binary (const CharType* init)
+            : binary_()
+        {
+            for (auto const* c = init; *c != '\0'; ++c)
+                binary_.push_back(*c);
+        }
+
+        /**
+         *  Inserts the container contents into a string.
+         *
+         *  @return A string from the binary data.
+         */
+        std::basic_string <CharType> toString() const
+        {
+            return {std::begin(binary_), std::end(binary_)};
+        }
+
         Base64Binary& operator= (ContainerT <CharType> const& container)
         {
             binary_ = container;
+            return *this;
+        }
+
+        Base64Binary& operator= (const CharType* str)
+        {
+            binary_.clear();
+            for (auto const* c = str; *c != '\0'; ++c)
+                binary_.push_back(*c);
             return *this;
         }
 
@@ -180,6 +208,8 @@ namespace JSON
                 return 62;
             if (c == '/')
                 return 63;
+            if (c == '=')
+                return 64;
             else
                 throw std::invalid_argument ("input contains characters that are not base64");
             return 0;
