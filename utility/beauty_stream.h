@@ -34,6 +34,20 @@ namespace JSON
         {
             namespace io = boost::iostreams;
 
+            escape_ = false;
+            if (disabled_)
+                if (c == '\\')
+                    escape_ = true;
+
+            if (c == '"' && !escape_)
+                disabled_ = !disabled_;
+
+            if (disabled_)
+            {
+                io::put(snk, c);
+                return true;
+            }
+
             if (c == '{')
             {
                 if (nestingStack_.top() == NestingState::IN_ARRAY)
@@ -84,6 +98,8 @@ namespace JSON
 
     private:
         int indentation_;
+        bool escape_;
+        bool disabled_;
         std::stack <NestingState> nestingStack_;
     };
 }
