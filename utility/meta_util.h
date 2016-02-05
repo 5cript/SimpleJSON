@@ -113,7 +113,7 @@ namespace JSON
         template <typename... List>
         struct cexpr_string
         {
-            using size_type = std::make_signed_t <std::size_t>;
+            using size_type = std::make_signed <std::size_t>::type;
 
             using type = pack <List...>;
             constexpr static const size_type size = sizeof...(List);

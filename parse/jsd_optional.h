@@ -11,11 +11,12 @@ namespace JSON
     {
         try
         {
-            auto opt = object.tree.get_optional <T> (name);
-            if (!opt)
-                return; // its ok, it was optional
-            else
-                value = opt.get();
+            if (object.tree.get_optional <std::string> (name))
+            {
+                T v;
+                parse(v, name, object, options);
+                value = v;
+            }
         }
         catch (boost::property_tree::ptree_bad_data& exc)
         {
