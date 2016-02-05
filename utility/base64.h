@@ -118,7 +118,7 @@ namespace JSON
 		void resize (size_type n) { binary_.resize(n); }
 		void resize (size_type n, const value_type& val) { binary_.resize(n, val); }
 
-        std::ostream& stringify(std::ostream& stream, StringificationOptions const& options = DEFAULT_OPTIONS) const
+        std::ostream& stringify(std::ostream& stream, StringificationOptions const& = DEFAULT_OPTIONS) const
         {
             stream << "\"";
             encodeBase64(stream, binary_);
@@ -126,7 +126,7 @@ namespace JSON
             return stream;
         }
 
-        void parse(std::string const& name, PropertyTree const& tree, ParsingOptions const& options = DEFAULT_PARSER_OPTIONS)
+        void parse(std::string const& name, PropertyTree const& tree, ParsingOptions const& = DEFAULT_PARSER_OPTIONS)
         {
             std::string str = tree.tree.get<std::string>(name);
             decodeBase64(str, binary_);
