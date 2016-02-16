@@ -2,6 +2,7 @@
 #define JSD_MAP_H_INCLUDED
 
 #include "jsd_core.h"
+#include <map>
 
 namespace JSON
 {
