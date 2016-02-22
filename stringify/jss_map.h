@@ -3,32 +3,14 @@
 
 #include "jss_core.h"
 #include "jss_optional.h"
+#include "map_commons.h"
 #include <map>
 
 namespace JSON
 {
-    namespace Internal
-    {
-        template <typename T,
-                  typename = typename std::enable_if <Internal::can_stringify<T>::value>::type >
-        void stringify_map_pair (std::ostream& stream, std::pair <const std::string, T> const& value, StringificationOptions const& options)
-        {
-            stringify(stream, value.first, value.second, options);
-        }
-
-        template <typename KeyT, typename ValueT,
-                  typename = typename std::enable_if <Internal::can_stringify<ValueT>::value && Internal::can_stringify<KeyT>::value>::type >
-        void stringify_map_pair_2 (std::ostream& stream, std::pair <const KeyT, ValueT> const& value, StringificationOptions const& options)
-        {
-            stringify(stream, {}, value.first, options);
-            stream << options.delimiter;
-            stringify(stream, {}, value.second, options);
-        }
-    }
-
     template <typename ValueT, typename CompareT = std::less <ValueT>, class AllocT = std::allocator <ValueT>,
               typename = typename std::enable_if <Internal::can_stringify<ValueT>::value>::type >
-    std::ostream& stringify (std::ostream& stream, std::string const& name, std::map<std::string, ValueT, CompareT, AllocT> const& values, StringificationOptions options)
+    std::ostream& stringify(std::ostream& stream, std::string const& name, std::map<std::string, ValueT, CompareT, AllocT> const& values, StringificationOptions options)
     {
         using namespace Internal;
 

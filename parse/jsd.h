@@ -5,6 +5,7 @@
 #include "jsd_string.h"
 #include "jsd_container.h"
 #include "jsd_map.h"
+#include "jsd_unordered_map.h"
 #include "jsd_array.h"
 #include "jsd_set.h"
 #include "jsd_pair.h"

@@ -23,6 +23,7 @@
 #include "jss_pair.h"
 #include "jss_valarray.h"
 #include "jss_map.h"
+#include "jss_unordered_map.h"
 #include "jss_set.h"
 #include "jss_atomic.h"
 #include "jss_smart_ptr.h"
