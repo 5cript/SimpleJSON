@@ -145,19 +145,19 @@ namespace JSON
             constexpr static const bool value = (Char::value == 0);
         };
 
-        #define SPLIT_1(s, x)    JSON::internal::char_<( x < sizeof(s) ? s[x] : '\0' )>
-        #define SPLIT_4(s, x)    SPLIT_1  (s, x), SPLIT_1  (s, x+1)  , SPLIT_1  (s, x+2)  , SPLIT_1  (s, x+3)
-        #define SPLIT_16(s, x)   SPLIT_4  (s, x), SPLIT_4  (s, x+4)  , SPLIT_4  (s, x+8)  , SPLIT_4  (s, x+12)
-        #define SPLIT_64(s, x)   SPLIT_16 (s, x), SPLIT_16 (s, x+16) , SPLIT_16 (s, x+32) , SPLIT_16 (s, x+48)
-        #define SPLIT_256(s, x)  SPLIT_64 (s, x), SPLIT_64 (s, x+64) , SPLIT_64 (s, x+128) , SPLIT_64 (s, x+194)
-        #define SPLIT_1024(s, x) SPLIT_256(s, x), SPLIT_256(s, x+256), SPLIT_256(s, x+512), SPLIT_256(s, x+768)
+        #define JS_SPLIT_1(s, x)    JSON::internal::char_<( x < sizeof(s) ? s[x] : '\0' )>
+        #define JS_SPLIT_4(s, x)    JS_SPLIT_1  (s, x), JS_SPLIT_1  (s, x+1)  , JS_SPLIT_1  (s, x+2)  , JS_SPLIT_1  (s, x+3)
+        #define JS_SPLIT_16(s, x)   JS_SPLIT_4  (s, x), JS_SPLIT_4  (s, x+4)  , JS_SPLIT_4  (s, x+8)  , JS_SPLIT_4  (s, x+12)
+        #define JS_SPLIT_64(s, x)   JS_SPLIT_16 (s, x), JS_SPLIT_16 (s, x+16) , JS_SPLIT_16 (s, x+32) , JS_SPLIT_16 (s, x+48)
+        #define JS_SPLIT_256(s, x)  JS_SPLIT_64 (s, x), JS_SPLIT_64 (s, x+64) , JS_SPLIT_64 (s, x+128) , JS_SPLIT_64 (s, x+194)
+        #define JS_SPLIT_1024(s, x) JS_SPLIT_256(s, x), JS_SPLIT_256(s, x+256), JS_SPLIT_256(s, x+512), JS_SPLIT_256(s, x+768)
 
-        #define STRING_IMPL(str, n) JSON::internal::apply_t <JSON::internal::trim_right_t <JSON::internal::pack <SPLIT_##n(str, 0)>, JSON::internal::is_zero>, JSON::internal::cexpr_string>
+        #define JS_STRING_IMPL(str, n) JSON::internal::apply_t <JSON::internal::trim_right_t <JSON::internal::pack <SPLIT_##n(str, 0)>, JSON::internal::is_zero>, JSON::internal::cexpr_string>
 
-        #define SHORT_STRING(str) STRING_IMPL(str, 16)
-        #define STRING(str) STRING_IMPL(str, 64)
-        #define LONG_STRING(str) STRING_IMPL(str, 256) // HEAVY
-        #define LONG_LONG_STRING(str) STRING_IMPL(str, 1024) // ULTRA HEAVY
+        #define SJSON_SHORT_STRING(str) JS_STRING_IMPL(str, 16)
+        #define SJSON_STRING(str) JS_STRING_IMPL(str, 64)
+        #define SJSON_LONG_STRING(str) JS_STRING_IMPL(str, 256) // HEAVY
+        #define SJSON_LONG_LONG_STRING(str) JS_STRING_IMPL(str, 1024) // ULTRA HEAVY
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
     }
 
