@@ -152,7 +152,7 @@ namespace JSON
         #define JS_SPLIT_256(s, x)  JS_SPLIT_64 (s, x), JS_SPLIT_64 (s, x+64) , JS_SPLIT_64 (s, x+128) , JS_SPLIT_64 (s, x+194)
         #define JS_SPLIT_1024(s, x) JS_SPLIT_256(s, x), JS_SPLIT_256(s, x+256), JS_SPLIT_256(s, x+512), JS_SPLIT_256(s, x+768)
 
-        #define JS_STRING_IMPL(str, n) JSON::internal::apply_t <JSON::internal::trim_right_t <JSON::internal::pack <SPLIT_##n(str, 0)>, JSON::internal::is_zero>, JSON::internal::cexpr_string>
+        #define JS_STRING_IMPL(str, n) JSON::internal::apply_t <JSON::internal::trim_right_t <JSON::internal::pack <JS_SPLIT_##n(str, 0)>, JSON::internal::is_zero>, JSON::internal::cexpr_string>
 
         #define SJSON_SHORT_STRING(str) JS_STRING_IMPL(str, 16)
         #define SJSON_STRING(str) JS_STRING_IMPL(str, 64)
