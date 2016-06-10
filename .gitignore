@@ -1,8 +1,9 @@
-/main.cpp
-/SimpleJSON.cbp
-/SimpleJSON.layout
+main.cpp
+SimpleJSON.cbp
+SimpleJSON.layout
 *.depend
-/bin/*
-/obj/*
-/test.txt
+bin/*
+obj/*
+test.txt
 SimpleJSON_build_log.html
+build/*
