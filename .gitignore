@@ -7,3 +7,4 @@ obj/*
 test.txt
 SimpleJSON_build_log.html
 build/*
+build32/*

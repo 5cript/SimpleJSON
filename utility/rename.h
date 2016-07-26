@@ -63,7 +63,7 @@ namespace JSON
         rename <T, Name>& operator=(rename <T, OtherName> const& other)
         {
             if (this == &other)
-                return;
+                return *this;
 
             objectValue_ = other.objectValue_;
             return *this;
