@@ -66,8 +66,6 @@ namespace JSON
 			return;												\
 		case (InvalidPropertyHandlingBehaviour::THROW):			\
 			throw exc;											\
-		default:												\
-			return;												\
 	}
 	// MAKRO END
 
@@ -83,8 +81,6 @@ namespace JSON
 			return;												\
 		case (InvalidPathHandlingBehaviour::THROW):			\
 			throw exc;											\
-		default:												\
-			return;												\
 	}
 	// MAKRO END
 }
