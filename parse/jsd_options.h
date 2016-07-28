@@ -26,7 +26,7 @@ namespace JSON
 
 
 		ParsingOptions(InvalidPropertyHandlingBehaviour invalidPropertyHandler = InvalidPropertyHandlingBehaviour::THROW,
-                       InvalidPathHandlingBehaviour invalidPathHandler = InvalidPathHandlingBehaviour::TAG);
+                       InvalidPathHandlingBehaviour invalidPathHandler = InvalidPathHandlingBehaviour::THROW);
 	};
 
 	const auto DefaultParserOptions = ParsingOptions{};
