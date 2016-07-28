@@ -1,7 +1,7 @@
 #ifndef JSD_FUNDAMENTAL_CPP_INCLUDED
 #define JSD_FUNDAMENTAL_CPP_INCLUDED
 
-#include "jsd_fundamental.h"
+#include "jsd_fundamental.hpp"
 
 namespace JSON
 {

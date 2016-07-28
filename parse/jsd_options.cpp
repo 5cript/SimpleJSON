@@ -1,4 +1,4 @@
-#include "jsd_options.h"
+#include "jsd_options.hpp"
 
 namespace JSON
 {

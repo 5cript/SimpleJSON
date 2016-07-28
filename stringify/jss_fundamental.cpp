@@ -1,4 +1,4 @@
-#include "jss_fundamental.h"
+#include "jss_fundamental.hpp"
 
 namespace JSON
 {

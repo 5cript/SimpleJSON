@@ -1,4 +1,4 @@
-#include "jss_pointer.h"
+#include "jss_pointer.hpp"
 
 namespace JSON
 {

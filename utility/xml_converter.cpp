@@ -1,5 +1,5 @@
-#include "xml_converter.h"
-#include "../parse/jsd_generic_parser.h"
+#include "xml_converter.hpp"
+#include "../parse/jsd_generic_parser.hpp"
 
 #include <boost/property_tree/xml_parser.hpp>
 

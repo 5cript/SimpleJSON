@@ -1,4 +1,4 @@
-#include "jss_error.h"
+#include "jss_error.hpp"
 
 using namespace JSON;
 

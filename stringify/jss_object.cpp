@@ -1,4 +1,4 @@
-#include "jss_object.h"
+#include "jss_object.hpp"
 
 namespace JSON
 {

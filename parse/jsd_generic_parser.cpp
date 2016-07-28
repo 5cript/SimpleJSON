@@ -1,4 +1,4 @@
-#include "jsd_generic_parser.h"
+#include "jsd_generic_parser.hpp"
 #include <boost/property_tree/json_parser.hpp>
 #include <boost/property_tree/xml_parser.hpp>
 #include <boost/property_tree/ini_parser.hpp>

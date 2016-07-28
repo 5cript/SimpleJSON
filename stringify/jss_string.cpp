@@ -1,4 +1,4 @@
-#include "jss_string.h"
+#include "jss_string.hpp"
 
 namespace JSON
 {

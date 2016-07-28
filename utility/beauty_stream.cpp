@@ -1,4 +1,4 @@
-#include "beauty_stream.h"
+#include "beauty_stream.hpp"
 
 namespace JSON
 {

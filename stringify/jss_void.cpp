@@ -1,4 +1,4 @@
-#include "jss_void.h"
+#include "jss_void.hpp"
 
 namespace JSON
 {
