@@ -1,5 +1,4 @@
-#ifndef JSS_FORWARD_H_INCLUDED
-#define JSS_FORWARD_H_INCLUDED
+#pragma once
 
 #include "jss_core.hpp"
 #include "container_traits.hpp"
@@ -17,5 +16,3 @@ namespace JSON
         return stream;
     }
 }
-
-#endif // JSS_FORWARD_H_INCLUDED

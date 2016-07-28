@@ -1,5 +1,4 @@
-#ifndef JSS_UNORDERED_MAP_H_INCLUDED
-#define JSS_UNORDERED_MAP_H_INCLUDED
+#pragma once
 
 #include "jss_core.hpp"
 #include "jss_optional.hpp"
@@ -61,5 +60,3 @@ namespace JSON
         return stream;
     }
 }
-
-#endif // JSS_UNORDERED_MAP_H_INCLUDED

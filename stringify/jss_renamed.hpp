@@ -1,5 +1,4 @@
-#ifndef JSS_RENAMED_H_INCLUDED
-#define JSS_RENAMED_H_INCLUDED
+#pragma once
 
 #include "jss_core.hpp"
 
@@ -16,5 +15,3 @@ namespace JSON
         return JSON::stringify(stream, name, value.getValue(), options);
     }
 }
-
-#endif // JSS_RENAMED_H_INCLUDED

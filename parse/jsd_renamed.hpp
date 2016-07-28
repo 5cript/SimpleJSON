@@ -1,5 +1,4 @@
-#ifndef JSD_RENAME_H_INCLUDED
-#define JSD_RENAME_H_INCLUDED
+#pragma once
 
 #include "jsd_core.hpp"
 
@@ -22,5 +21,3 @@ namespace JSON
         parse(value.getValue(), relName, object, options);
     }
 }
-
-#endif // JSD_RENAME_H_INCLUDED

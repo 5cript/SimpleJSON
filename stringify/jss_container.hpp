@@ -1,5 +1,4 @@
-#ifndef JSS_CONTAINER_H_INCLUDED
-#define JSS_CONTAINER_H_INCLUDED
+#pragma once
 
 #include "jss_core.hpp"
 #include "jss_object.hpp"
@@ -36,5 +35,3 @@ namespace JSON { namespace Internal
     }
 } // Internal
 } // JSON
-
-#endif // JSS_CONTAINER_H_INCLUDED

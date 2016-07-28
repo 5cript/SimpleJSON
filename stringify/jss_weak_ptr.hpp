@@ -1,5 +1,4 @@
-#ifndef JSS_WEAK_PTR_H_INCLUDED
-#define JSS_WEAK_PTR_H_INCLUDED
+#pragma once
 
 #include "jss_core.hpp"
 #include "jss_smart_ptr.hpp"
@@ -24,5 +23,3 @@ namespace JSON
     }
 
 }
-
-#endif // JSS_WEAK_PTR_H_INCLUDED

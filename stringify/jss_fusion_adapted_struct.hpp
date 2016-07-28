@@ -1,5 +1,4 @@
-#ifndef JSS_FUSION_ADAPTED_STRUCT_H_INCLUDED
-#define JSS_FUSION_ADAPTED_STRUCT_H_INCLUDED
+#pragma once
 
 #include "jss_core.hpp"
 
@@ -121,5 +120,3 @@ namespace JSON
         virtual ~Stringifiable() = default;
     };
 }
-
-#endif // JSS_FUSION_ADAPTED_STRUCT_H_INCLUDED

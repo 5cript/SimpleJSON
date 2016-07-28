@@ -1,5 +1,4 @@
-#ifndef JSS_MAP_H_INCLUDED
-#define JSS_MAP_H_INCLUDED
+#pragma once
 
 #include "jss_core.hpp"
 #include "jss_optional.hpp"
@@ -58,5 +57,3 @@ namespace JSON
         return stream;
     }
 }
-
-#endif // JSS_MAP_H_INCLUDED

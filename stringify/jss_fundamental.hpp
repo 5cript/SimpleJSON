@@ -1,5 +1,4 @@
-#ifndef JSS_FUNDAMENTAL_H_INCLUDED
-#define JSS_FUNDAMENTAL_H_INCLUDED
+#pragma once
 
 #include "jss_core.hpp"
 
@@ -21,5 +20,3 @@ namespace JSON
     std::ostream& stringify(std::ostream& stream, std::string const& name, char value, StringificationOptions const& options = DEFAULT_OPTIONS);
     std::ostream& stringify(std::ostream& stream, std::string const& name, wchar_t value, StringificationOptions const& options = DEFAULT_OPTIONS);
 }
-
-#endif // JSS_FUNDAMENTAL_H_INCLUDED

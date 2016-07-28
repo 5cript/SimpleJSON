@@ -1,5 +1,4 @@
-#ifndef JSS_CONVENIENCE_H_INCLUDED
-#define JSS_CONVENIENCE_H_INCLUDED
+#pragma once
 
 #include "jss_core.hpp"
 #include "jss_check.hpp"
@@ -26,5 +25,3 @@ namespace JSON
 
 #define json_serialize(NAME, STREAM) JSON::try_stringify(STREAM, #NAME, NAME)
 #define json_serialize_opt(NAME, STREAM, OPTIONS) JSON::try_stringify(STREAM, #NAME, NAME, OPTIONS)
-
-#endif // JSS_CONVENIENCE_H_INCLUDED

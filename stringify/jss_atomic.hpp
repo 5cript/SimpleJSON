@@ -1,5 +1,4 @@
-#ifndef JSS_ATOMIC_H_INCLUDED
-#define JSS_ATOMIC_H_INCLUDED
+#pragma once
 
 #include "jss_core.hpp"
 #include <atomic>
@@ -14,5 +13,3 @@ namespace JSON
         return stream;
     }
 }
-
-#endif // JSS_ATOMIC_H_INCLUDED

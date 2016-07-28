@@ -1,5 +1,4 @@
-#ifndef RSS_VALARRY_H_INCLUDED
-#define RSS_VALARRY_H_INCLUDED
+#pragma once
 
 // has no allocator and therefore is not compatible in jss_container
 #include "jss_optional.hpp"
@@ -33,5 +32,3 @@ namespace JSON
         return stream;
     }
 }
-
-#endif // RSS_VALARRY_H_INCLUDED

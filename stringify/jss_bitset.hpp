@@ -1,5 +1,4 @@
-#ifndef JSS_BITSET_H_INCLUDED
-#define JSS_BITSET_H_INCLUDED
+#pragma once
 
 #include "jss_core.hpp"
 #include <bitset>
@@ -30,5 +29,3 @@ namespace JSON
         return stream;
     }
 }
-
-#endif // JSS_BITSET_H_INCLUDED

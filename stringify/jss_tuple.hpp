@@ -1,5 +1,4 @@
-#ifndef JSS_TUPLE_H_INCLUDED
-#define JSS_TUPLE_H_INCLUDED
+#pragma once
 
 #include "jss_core.hpp"
 #include "jss_object.hpp"
@@ -67,5 +66,3 @@ namespace JSON
         return stringify(stream, name, {}, values, options);
     }
 }
-
-#endif // JSS_TUPLE_H_INCLUDED

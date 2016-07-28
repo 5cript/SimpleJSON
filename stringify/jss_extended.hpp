@@ -1,7 +1,4 @@
-#ifndef JSS_EXTENDED_H_INCLUDED
-#define JSS_EXTENDED_H_INCLUDED
+#pragma once
 
 #include "jss.hpp"
 #include "jss_fusion_adapted_struct.hpp"
-
-#endif // JSS_EXTENDED_H_INCLUDED

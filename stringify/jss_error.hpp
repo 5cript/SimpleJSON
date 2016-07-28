@@ -1,5 +1,4 @@
-#ifndef JSS_ERROR_H_INCLUDED
-#define JSS_ERROR_H_INCLUDED
+#pragma once
 
 #include <exception>
 #include <string>
@@ -63,5 +62,3 @@ namespace JSON
 
     #undef REGISTER_EXCEPTION
 }
-
-#endif // JSS_ERROR_H_INCLUDED

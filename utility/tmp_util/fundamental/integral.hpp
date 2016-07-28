@@ -1,5 +1,4 @@
-#ifndef MPLEX_FUNDAMENTAL_INTEGRAL_HPP_INCLUDED
-#define MPLEX_FUNDAMENTAL_INTEGRAL_HPP_INCLUDED
+#pragma once
 
 #include <type_traits>
 #include <cstdint>
@@ -42,5 +41,3 @@ namespace mplex
     using true_ = bool_ <true>;
     using false_ = bool_ <false>;
 }
-
-#endif // MPLEX_FUNDAMENTAL_INTEGRAL_HPP_INCLUDED

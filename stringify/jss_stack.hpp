@@ -1,5 +1,4 @@
-#ifndef JSS_STACK_H_INCLUDED
-#define JSS_STACK_H_INCLUDED
+#pragma once
 
 #include "jss_core.hpp"
 #include "jss_deque.hpp"
@@ -27,5 +26,3 @@ namespace JSON
         return stringify(stream, name, dq, options);
     }
 }
-
-#endif // JSS_STACK_H_INCLUDED

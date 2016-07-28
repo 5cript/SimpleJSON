@@ -1,5 +1,4 @@
-#ifndef JSS_SHARED_PTR_H_INCLUDED
-#define JSS_SHARED_PTR_H_INCLUDED
+#pragma once
 
 #include "jss_core.hpp"
 #include "jss_smart_ptr.hpp"
@@ -22,5 +21,3 @@ namespace JSON
         return internal::stringify_smart_ptr(stream, name, value, options);
     }
 }
-
-#endif // JSS_SHARED_PTR_H_INCLUDED

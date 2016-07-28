@@ -1,5 +1,4 @@
-#ifndef CONTAINER_TRAITS_H_INCLUDED
-#define CONTAINER_TRAITS_H_INCLUDED
+#pragma once
 
 // and iterator traits :D
 
@@ -23,5 +22,3 @@ struct has_forward_iterator : std::is_same <
     typename std::iterator_traits<typename ContainerT<T>::iterator>::iterator_category
     , std::forward_iterator_tag>
 {};
-
-#endif // CONTAINER_TRAITS_H_INCLUDED

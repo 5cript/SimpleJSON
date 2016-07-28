@@ -1,5 +1,4 @@
-#ifndef JSD_PAIR_H_INCLUDED
-#define JSD_PAIR_H_INCLUDED
+#pragma once
 
 #include "jsd_core.hpp"
 
@@ -25,5 +24,3 @@ namespace JSON
 
 	}
 }
-
-#endif

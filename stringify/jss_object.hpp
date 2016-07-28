@@ -1,5 +1,4 @@
-#ifndef JSS_OBJECT_H_INCLUDED
-#define JSS_OBJECT_H_INCLUDED
+#pragma once
 
 #include "jss_core.hpp"
 #include "jss_check.hpp"
@@ -56,5 +55,3 @@ namespace JSON
     #define JSON_VERIFY_CLASS_VALIDITY(T) \
     static_assert (JSON::Internal::is_js_object <T>::value, "The class/struct is not a stringifiable struct, please check the function signature");
 }
-
-#endif // JSS_OBJECT_H_INCLUDED

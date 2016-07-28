@@ -1,5 +1,4 @@
-#ifndef JSS_H_INCLUDED
-#define JSS_H_INCLUDED
+#pragma once
 
 // Do not include this file! include only those headers that you need
 // + jss_undefine
@@ -34,5 +33,3 @@
 #include "jss_renamed.hpp"
 
 // #include "jss_undefine.hpp"
-
-#endif // JSS_H_INCLUDED

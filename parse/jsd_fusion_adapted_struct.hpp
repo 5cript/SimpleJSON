@@ -1,5 +1,4 @@
-#ifndef JSD_FUSION_ADAPTED_STRUCT_H_INCLUDED
-#define JSD_FUSION_ADAPTED_STRUCT_H_INCLUDED
+#pragma once
 
 #include "jsd_core.hpp"
 #include "jsd_object.hpp"
@@ -77,5 +76,3 @@ namespace JSON
         virtual ~Parsable() = default;
     };
 }
-
-#endif // JSS_FUSION_ADAPTED_STRUCT_H_INCLUDED

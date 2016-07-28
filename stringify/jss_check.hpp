@@ -1,5 +1,4 @@
-#ifndef JSS_CHECK_H_INCLUDED
-#define JSS_CHECK_H_INCLUDED
+#pragma once
 
 #include "jss_core.hpp"
 #include <sstream>
@@ -40,5 +39,3 @@ namespace JSON { namespace Internal {
 
 }
 }
-
-#endif // JSS_CHECK_H_INCLUDED

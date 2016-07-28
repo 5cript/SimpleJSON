@@ -1,5 +1,4 @@
-#ifndef JSS_BIDIRECTIONAL_H_INCLUDED
-#define JSS_BIDIRECTIONAL_H_INCLUDED
+#pragma once
 
 #include "jss_core.hpp"
 #include "container_traits.hpp"
@@ -17,5 +16,3 @@ namespace JSON
         return stream;
     }
 }
-
-#endif // JSS_BIDIRECTIONAL_H_INCLUDED

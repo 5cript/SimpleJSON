@@ -1,5 +1,4 @@
-#ifndef IS_SAME_HPP_INCLUDED
-#define IS_SAME_HPP_INCLUDED
+#pragma once
 
 #include <type_traits>
 #include "integral.hpp"
@@ -22,5 +21,3 @@ namespace mplex {
         };
     };
 }
-
-#endif // IS_SAME_HPP_INCLUDED

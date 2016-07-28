@@ -1,5 +1,4 @@
-#ifndef JSS_PAIR_H_INCLUDED
-#define JSS_PAIR_H_INCLUDED
+#pragma once
 
 #include "jss_object.hpp"
 #include "jss_optional.hpp"
@@ -22,5 +21,3 @@ namespace JSON
         return stream;
     }
 }
-
-#endif // JSS_PAIR_H_INCLUDED

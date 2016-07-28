@@ -1,5 +1,4 @@
-#ifndef JSS_CORE_H_INCLUDED
-#define JSS_CORE_H_INCLUDED
+#pragma once
 
 #include "jss_options.hpp"
 #include "jss_error.hpp"
@@ -84,5 +83,3 @@ namespace JSON
 
     #define JSON_OBJECT_STRINGIFY(stream, options) object_scope(stream, options) _json_os__;
 }
-
-#endif // JSS_CORE_H_INCLUDED

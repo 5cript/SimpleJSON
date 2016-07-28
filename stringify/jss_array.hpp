@@ -1,5 +1,4 @@
-#ifndef JSS_ARRAY_H_INCLUDED
-#define JSS_ARRAY_H_INCLUDED
+#pragma once
 
 #include "jss_core.hpp"
 #include "jss_iterator.hpp"
@@ -29,5 +28,3 @@ namespace JSON
         return stream;
     }
 }
-
-#endif // JSS_ARRAY_H_INCLUDED

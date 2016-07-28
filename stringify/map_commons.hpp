@@ -1,5 +1,4 @@
-#ifndef MAP_COMMONS_H_INCLUDED
-#define MAP_COMMONS_H_INCLUDED
+#pragma once
 
 #include "jss_core.hpp"
 #include <utility>
@@ -25,5 +24,3 @@ namespace JSON
         }
     }
 }
-
-#endif // MAP_COMMONS_H_INCLUDED

@@ -1,5 +1,4 @@
-#ifndef JSD_UNORDERED_MAP_H_INCLUDED
-#define JSD_UNORDERED_MAP_H_INCLUDED
+#pragma once
 
 #include "jsd_core.hpp"
 #include <unordered_map>
@@ -31,5 +30,3 @@ namespace JSON
         }
 	}
 }
-
-#endif // JSD_UNORDERED_MAP_H_INCLUDED

@@ -1,5 +1,4 @@
-#ifndef MPLEX_FUNDAMENTAL_EVAL_IF_HPP_INCLUDED
-#define MPLEX_FUNDAMENTAL_EVAL_IF_HPP_INCLUDED
+#pragma once
 
 #include "integral.hpp"
 
@@ -35,5 +34,3 @@ namespace mplex {
     template <typename Condition, typename Fallback, typename Function, typename... Parameters>
     using eval_if_default_t = typename eval_if_default <Condition, Fallback, Function, Parameters...>::type;
 }
-
-#endif // MPLEX_FUNDAMENTAL_EVAL_IF_HPP_INCLUDED

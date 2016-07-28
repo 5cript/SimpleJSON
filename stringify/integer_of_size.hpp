@@ -1,5 +1,4 @@
-#ifndef INTEGER_OF_SIZE_H_INCLUDED
-#define INTEGER_OF_SIZE_H_INCLUDED
+#pragma once
 
 #include <cstdint>
 
@@ -34,5 +33,3 @@ __I_OF_SIZE(sizeof(int8_t), int8_t)
 __I_OF_SIZE(sizeof(int16_t), int16_t)
 __I_OF_SIZE(sizeof(int32_t), int32_t)
 __I_OF_SIZE(sizeof(int64_t), int64_t)
-
-#endif // INTEGER_OF_SIZE_H_INCLUDED

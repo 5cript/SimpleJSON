@@ -1,5 +1,4 @@
-#ifndef BASE64_H_INCLUDED
-#define BASE64_H_INCLUDED
+#pragma once
 
 #include "../stringify/jss_object.hpp"
 #include "../parse/jsd_core.hpp"
@@ -235,5 +234,3 @@ namespace JSON
         }
     }
 }
-
-#endif // BASE64_H_INCLUDED

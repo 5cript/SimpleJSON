@@ -1,5 +1,4 @@
-#ifndef JSS_QUEUE_H_INCLUDED
-#define JSS_QUEUE_H_INCLUDED
+#pragma once
 
 #include "jss_core.hpp"
 #include "jss_deque.hpp"
@@ -28,5 +27,3 @@ namespace JSON
         return stream;
     }
 }
-
-#endif // JSS_QUEUE_H_INCLUDED

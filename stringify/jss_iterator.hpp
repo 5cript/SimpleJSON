@@ -1,5 +1,4 @@
-#ifndef JSS_ITERATOR_H_INCLUDED
-#define JSS_ITERATOR_H_INCLUDED
+#pragma once
 
 #include "jss_core.hpp"
 #include "iterator_traits.hpp"
@@ -60,5 +59,3 @@ namespace JSON
         return stream;
     }
 }
-
-#endif // JSS_ITERATOR_H_INCLUDED

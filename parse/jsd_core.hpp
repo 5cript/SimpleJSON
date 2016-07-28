@@ -1,5 +1,4 @@
-#ifndef JSD_CORE_H_INCLUDED
-#define JSD_CORE_H_INCLUDED
+#pragma once
 
 #include "jsd_generic_parser.hpp"
 #include "jsd_options.hpp"
@@ -92,5 +91,3 @@ namespace JSON
             return base_name + "." + name;
 	}
 }
-
-#endif

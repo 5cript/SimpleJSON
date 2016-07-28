@@ -1,5 +1,4 @@
-#ifndef JSS_OPTIONAL_H_INCLUDED
-#define JSS_OPTIONAL_H_INCLUDED
+#pragma once
 
 #include "../utility/tmp_util/fundamental/eval_if.hpp"
 #include "../utility/tmp_util/fundamental/is_same.hpp"
@@ -82,5 +81,3 @@ namespace JSON
             return stream; // do nothing
     }
 }
-
-#endif // JSS_OPTIONAL_H_INCLUDED

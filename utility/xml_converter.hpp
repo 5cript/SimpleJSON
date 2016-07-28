@@ -1,5 +1,4 @@
-#ifndef XML_CONVERTER_H_INCLUDED
-#define XML_CONVERTER_H_INCLUDED
+#pragma once
 
 #include <iosfwd>
 
@@ -16,5 +15,3 @@ namespace JSON
      */
     std::ostream& convertJsonToXml(std::ostream& ostream, std::istream& istream);
 }
-
-#endif // XML_CONVERTER_H_INCLUDED

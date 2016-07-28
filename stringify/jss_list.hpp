@@ -1,7 +1,4 @@
-#ifndef JSS_LIST_H_INCLUDED
-#define JSS_LIST_H_INCLUDED
+#pragma once
 
 #include <list>
 #include "jss_bidirectional.hpp"
-
-#endif // JSS_LIST_H_INCLUDED

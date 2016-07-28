@@ -1,5 +1,4 @@
-#ifndef JSD_GENERIC_PARSER_H_INCLUDED
-#define JSD_GENERIC_PARSER_H_INCLUDED
+#pragma once
 
 #include <boost/property_tree/ptree.hpp>
 #include <boost/optional.hpp>
@@ -24,5 +23,3 @@ namespace JSON
 	boost::optional<PropertyTree> parse_auto(std::istream& stream);
 	boost::optional<PropertyTree> parse_xml(std::istream& stream);
 }
-
-#endif

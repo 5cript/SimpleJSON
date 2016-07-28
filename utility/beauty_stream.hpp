@@ -1,5 +1,4 @@
-#ifndef BEAUTY_STREAM_H_INCLUDED
-#define BEAUTY_STREAM_H_INCLUDED
+#pragma once
 
 #include <iosfwd>
 #include <stack>
@@ -103,6 +102,3 @@ namespace JSON
         std::stack <NestingState> nestingStack_;
     };
 }
-
-
-#endif // BEAUTY_STREAM_H_INCLUDED

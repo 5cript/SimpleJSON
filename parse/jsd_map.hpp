@@ -1,5 +1,4 @@
-#ifndef JSD_MAP_H_INCLUDED
-#define JSD_MAP_H_INCLUDED
+#pragma once
 
 #include "jsd_core.hpp"
 #include <map>
@@ -30,5 +29,3 @@ namespace JSON
         }
 	}
 }
-
-#endif

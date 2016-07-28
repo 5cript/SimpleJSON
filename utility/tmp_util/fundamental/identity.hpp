@@ -1,5 +1,4 @@
-#ifndef IDENTITY_HPP_INCLUDED
-#define IDENTITY_HPP_INCLUDED
+#pragma once
 
 namespace mplex {
     template <typename T>
@@ -14,5 +13,3 @@ namespace mplex {
         };
     };
 }
-
-#endif // IDENTITY_HPP_INCLUDED

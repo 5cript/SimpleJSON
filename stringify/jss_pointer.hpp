@@ -1,5 +1,4 @@
-#ifndef JSS_POINTER_H_INCLUDED
-#define JSS_POINTER_H_INCLUDED
+#pragma once
 
 #include "jss_core.hpp"
 #include "jss_check.hpp"
@@ -38,5 +37,3 @@ namespace JSON
 
     std::ostream& stringify(std::ostream& stream, std::string const& name, std::nullptr_t ptr, StringificationOptions const& options = DEFAULT_OPTIONS);
 }
-
-#endif // JSS_POINTER_H_INCLUDED

@@ -1,5 +1,4 @@
-#ifndef JSD_ARRAY_H_INCLUDED
-#define JSD_ARRAY_H_INCLUDED
+#pragma once
 
 #include "jsd_core.hpp"
 #include <array>
@@ -36,5 +35,3 @@ namespace JSON
         }
 	}
 }
-
-#endif

@@ -1,5 +1,4 @@
-#ifndef JSD_CONVENIENC_H_INCLUDED
-#define JSD_CONVENIENC_H_INCLUDED
+#pragma once
 
 #include "jsd_core.hpp"
 #include "jsd_check.hpp"
@@ -24,5 +23,3 @@ namespace JSON
 
 #define json_deserialize(NAME) JSON::try_parse(#NAME, NAME)
 #define json_deserialize_opt(NAME, OPTIONS) JSON::try_parse(#NAME, NAME, OPTIONS)
-
-#endif // JSD_CONVENIENCE_H_INCLUDED

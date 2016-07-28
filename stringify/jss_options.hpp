@@ -1,5 +1,4 @@
-#ifndef JSS_OPTIONS_H_INCLUDED
-#define JSS_OPTIONS_H_INCLUDED
+#pragma once
 
 #include <iomanip>
 #include <string>
@@ -39,5 +38,3 @@ namespace JSON
 
     static auto const ProduceNamedOutput = StringificationOptions{false, ",", false, {}, true};
 }
-
-#endif // JSS_OPTIONS_H_INCLUDED

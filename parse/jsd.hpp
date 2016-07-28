@@ -1,5 +1,4 @@
-#ifndef JSD_H_INCLUDED
-#define JSD_H_INCLUDED
+#pragma once
 
 #include "jsd_fundamental.hpp"
 #include "jsd_string.hpp"
@@ -16,5 +15,3 @@
 #include "jsd_renamed.hpp"
 #include "jsd_unique_ptr.hpp"
 #include "jsd_shared_ptr.hpp"
-
-#endif

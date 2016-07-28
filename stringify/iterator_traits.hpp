@@ -1,5 +1,4 @@
-#ifndef JSS_ITERATOR_TRAITS_H_INCLUDED
-#define JSS_ITERATOR_TRAITS_H_INCLUDED
+#pragma once
 
 #include <iterator>
 #include <type_traits>
@@ -21,6 +20,3 @@ struct is_forward_iterator : std::is_same <
     typename std::iterator_traits<T>::iterator_category
     , std::forward_iterator_tag>
 {};
-
-
-#endif // ITERATOR_TRAITS_H_INCLUDED

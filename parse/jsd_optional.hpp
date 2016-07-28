@@ -1,5 +1,4 @@
-#ifndef JSD_OPTIONAL_H_INCLUDED
-#define JSD_OPTIONAL_H_INCLUDED
+#pragma once
 
 #include "jsd_core.hpp"
 
@@ -27,5 +26,3 @@ namespace JSON
         // cannot throw ptree_bad_path
     }
 }
-
-#endif // JSD_OPTIONAL_H_INCLUDED

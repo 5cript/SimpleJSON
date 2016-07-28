@@ -1,5 +1,4 @@
-#ifndef JSD_ATOMIC_H_INCLUDED
-#define JSD_ATOMIC_H_INCLUDED
+#pragma once
 
 #include "jsd_core.hpp"
 #include <atomic>
@@ -26,5 +25,3 @@ namespace JSON
         }
 	}
 }
-
-#endif

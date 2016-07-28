@@ -1,5 +1,4 @@
-#ifndef JSD_SET_H_INCLUDED
-#define JSD_SET_H_INCLUDED
+#pragma once
 
 #include "jsd_core.hpp"
 #include "jsd_container.hpp"
@@ -32,5 +31,3 @@ namespace JSON
         }
 	}
 }
-
-#endif

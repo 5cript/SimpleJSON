@@ -1,5 +1,4 @@
-#ifndef JSS_SET_H_INCLUDED
-#define JSS_SET_H_INCLUDED
+#pragma once
 
 #include "jss_core.hpp"
 #include <set>
@@ -52,5 +51,3 @@ namespace JSON
         return stream;
     }
 }
-
-#endif // JSS_SET_H_INCLUDED

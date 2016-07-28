@@ -1,5 +1,4 @@
-#ifndef JSD_OPTIONS_H_INCLUDED
-#define JSD_OPTIONS_H_INCLUDED
+#pragma once
 
 namespace JSON
 {
@@ -36,5 +35,3 @@ namespace JSON
 
 	#define DEFAULT_PARSER_OPTIONS DefaultParserOptions
 }
-
-#endif

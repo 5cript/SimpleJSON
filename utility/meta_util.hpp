@@ -1,5 +1,4 @@
-#ifndef UTILITY_META_UTIL_H_INCLUDED
-#define UTILITY_META_UTIL_H_INCLUDED
+#pragma once
 
 #include <type_traits>
 
@@ -163,6 +162,3 @@ namespace JSON
 
 
 }
-
-
-#endif // UTILITY_META_UTIL_H_INCLUDED

@@ -1,5 +1,4 @@
-#ifndef UTILITY_RENAME_H_INCLUDED
-#define UTILITY_RENAME_H_INCLUDED
+#pragma once
 
 #include "../stringify/jss_core.hpp"
 #include "../stringify/jss_object.hpp"
@@ -134,5 +133,3 @@ namespace JSON
         };
     };
 }
-
-#endif // UTILITY_RENAME_H_INCLUDED

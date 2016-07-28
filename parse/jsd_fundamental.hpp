@@ -1,5 +1,4 @@
-#ifndef JSD_FUNDAMENTAL_H_INCLUDED
-#define JSD_FUNDAMENTAL_H_INCLUDED
+#pragma once
 
 #include "jsd_core.hpp"
 
@@ -31,5 +30,3 @@ namespace JSON
     void parse(wchar_t& value, std::string const& name,
 			   PropertyTree const& object, ParsingOptions const& options = DEFAULT_PARSER_OPTIONS);
 }
-
-#endif

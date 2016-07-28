@@ -1,5 +1,4 @@
-#ifndef JSS_FUSION_VECTOR_H_INCLUDED
-#define JSS_FUSION_VECTOR_H_INCLUDED
+#pragma once
 
 #include "jss_core.hpp"
 #include "jss_tuple.hpp"
@@ -12,5 +11,3 @@
 namespace JSON
 {
 }
-
-#endif // JSS_FUSION_VECTOR_H_INCLUDED

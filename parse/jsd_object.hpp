@@ -1,5 +1,4 @@
-#ifndef JSD_OBJECT_H_INCLUDED
-#define JSD_OBJECT_H_INCLUDED
+#pragma once
 
 #include "jsd_core.hpp"
 
@@ -49,5 +48,3 @@ namespace JSON
 		value.parse(name, tree, options);
 	}
 }
-
-#endif // JSD_OBJECT_H_INCLUDED

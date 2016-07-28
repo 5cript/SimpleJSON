@@ -1,5 +1,4 @@
-#ifndef JSS_MUTEX_H_INCLUDED
-#define JSS_MUTEX_H_INCLUDED
+#pragma once
 
 #include "jss_core.hpp"
 #include <mutex>
@@ -18,5 +17,3 @@ namespace JSON
         return stream;
     }
 }
-
-#endif // JSS_MUTEX_H_INCLUDED
