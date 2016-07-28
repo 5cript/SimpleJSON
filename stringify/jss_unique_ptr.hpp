@@ -19,5 +19,7 @@ namespace JSON
             throw UniquePtrNullptrException{};
 
         internal::stringify_smart_ptr(stream, name, value, options);
+
+        return stream;
     }
 }
