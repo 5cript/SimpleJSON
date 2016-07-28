@@ -1,6 +1,8 @@
 #ifndef JSD_OPTIONAL_H_INCLUDED
 #define JSD_OPTIONAL_H_INCLUDED
 
+#include "jsd_core.h"
+
 #include <boost/optional.hpp>
 
 namespace JSON
