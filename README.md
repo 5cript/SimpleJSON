@@ -3,10 +3,12 @@
 
 1. [Preface](https://github.com/5cript/SimpleJSON#preface)
 2. [Introduction](https://github.com/5cript/SimpleJSON#introduction)
-3. [Details](https://github.com/5cript/SimpleJSON#details)
+3. [Example 1](https://github.com/5cript/SimpleJSON#Example1)
+4. [Example 2](https://github.com/5cript/SimpleJSON#Example2)
+5. [Details](https://github.com/5cript/SimpleJSON#details)
   * [How does stringify work?](https://github.com/5cript/SimpleJSON#how-does-stringify-work)
   * [stringify behaviour (and STL stringification)](https://github.com/5cript/SimpleJSON#stringify-behaviour-and-stl-stuff-stringification)
-4. [Reference](https://github.com/5cript/SimpleJSON#reference)
+6. [Reference](https://github.com/5cript/SimpleJSON#reference)
 
 ## Preface
 Please submit pull requests if you don't agree with some behaviour or found a bug, I would appreciate it.
@@ -34,7 +36,7 @@ Dependencies:
 > boost/fusion <br>
 > boost/mpl <br>
 
-Code example:
+##Example1
 ```C++
 #ifndef Q_MOC_RUN // A Qt workaround, for those of you who use Qt
 #   include "SimpleJSON/parse/jsd.h"
@@ -101,6 +103,109 @@ int main()
         std::cout << i << "\n";
 }
 ```
+
+##Example2
+ (Showing polymorphic serlialization / deserialization)
+```C++
+#ifndef Q_MOC_RUN // A Qt workaround, for those of you who use Qt
+#   include "SimpleJSON/parse/jsd.hpp"
+#   include "SimpleJSON/parse/jsd_convenience.hpp"
+#   include "SimpleJSON/stringify/jss.hpp"
+#   include "SimpleJSON/stringify/jss_fusion_adapted_struct.hpp"
+#endif
+
+#include "SimpleJSON/utility/polymorphy.hpp"
+
+#include <string>
+#include <vector>
+#include <sstream>
+#include <fstream>
+
+struct Base
+{
+    virtual ~Base() = default;
+};
+
+struct Line : Base
+            , public JSON::Stringifiable <Line>
+            , public JSON::Parsable <Line>
+{
+    std::string text;
+};
+
+struct PrimalList : Base
+                  , public JSON::Stringifiable <PrimalList>
+                  , public JSON::Parsable <PrimalList>
+{
+    std::vector <std::shared_ptr <Base>> elements;
+};
+
+JSON_DECLARE_POLYMORPHIC
+(
+    Base, (Line)(PrimalList)
+)
+
+BOOST_FUSION_ADAPT_STRUCT
+(
+    Base
+)
+
+BOOST_FUSION_ADAPT_STRUCT
+(
+    Line,
+    text
+)
+
+BOOST_FUSION_ADAPT_STRUCT
+(
+    PrimalList,
+    elements
+)
+
+template <typename T>
+void parse(T& cc, std::istream& json)
+{
+    auto tree = JSON::parse_json(json);
+    JSON::parse(cc, "json_pno", tree);
+}
+
+template <typename T>
+std::ostream& stringify(std::ostream& stream, T const& cc)
+{
+    stream << "{";
+    JSON::stringify(stream, "json_pno", cc, JSON::ProduceNamedOutput);
+    stream << "}";
+    return stream;
+}
+
+template <typename T>
+//using smart_ptr_t = std::shared_ptr <T>;
+using smart_ptr_t = std::unique_ptr<T>;
+
+int main()
+{
+    smart_ptr_t <Base> a {new Line};
+    static_cast <Line*> (a.get())->text = "test";
+
+    std::stringstream sstr;
+    stringify(sstr, a);
+
+    smart_ptr_t <Base> b;
+    parse(b, sstr);
+
+    if (b)
+        std::cout << "b!\n";
+
+    //std::cout << JSON::polydecls <Base>::identify_type(b.get()) << "\n";
+
+    /////////////////////////////////////////////////////////////////////////
+    // Lets check if we got what we set
+    /////////////////////////////////////////////////////////////////////////
+
+    std::cout << static_cast <Line*> (b.get())->text << "\n";
+}
+```
+
 
 ## Details
 ### How does stringify work?
