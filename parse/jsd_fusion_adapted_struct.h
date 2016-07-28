@@ -69,7 +69,7 @@ namespace JSON
     template <typename Derived>
     struct Parsable
     {
-        void parse(std::string const& name, PropertyTree const& tree, ParsingOptions const& options = DEFAULT_PARSER_OPTIONS)
+        void parse(std::string const& name, PropertyTree const& tree, ParsingOptions const& options = {})
         {
             AdaptedParser<Derived> parser;
             parser(*static_cast <Derived*> (this), name, tree, options);

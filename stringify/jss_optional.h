@@ -1,9 +1,9 @@
 #ifndef JSS_OPTIONAL_H_INCLUDED
 #define JSS_OPTIONAL_H_INCLUDED
 
-#include "tmp_util/fundamental/eval_if.hpp"
-#include "tmp_util/fundamental/is_same.hpp"
-#include "tmp_util/fundamental/null_type.hpp"
+#include "../utility/tmp_util/fundamental/eval_if.hpp"
+#include "../utility/tmp_util/fundamental/is_same.hpp"
+#include "../utility/tmp_util/fundamental/null_type.hpp"
 
 // really want to swap with std::optional
 #include <boost/optional.hpp>

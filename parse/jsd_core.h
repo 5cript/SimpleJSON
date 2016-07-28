@@ -83,6 +83,14 @@ namespace JSON
 			throw exc;											\
 	}
 	// MAKRO END
+
+	inline std::string member_name(std::string const& base_name, std::string const& name)
+	{
+	    if (base_name.empty())
+            return "";
+        else
+            return base_name + "." + name;
+	}
 }
 
 #endif

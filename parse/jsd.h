@@ -14,5 +14,6 @@
 #include "jsd_fusion_adapted_struct.h"
 #include "jsd_object.h"
 #include "jsd_renamed.h"
+#include "jsd_unique_ptr.h"
 
 #endif

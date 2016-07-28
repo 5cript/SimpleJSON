@@ -4,12 +4,15 @@
 #include "jss_core.h"
 
 #ifndef JSS_OBJECT_H_INCLUDED
-#include "jss_object.h"
+#   include "jss_object.h"
 #endif
 
 #include "jss_optional.h"
+#include "../utility/polymorphy.h"
 
 #include <iostream>
+#include <type_traits>
+
 #include <boost/fusion/mpl.hpp>
 #include <boost/fusion/adapted.hpp>
 #include <boost/fusion/include/at.hpp>
@@ -20,7 +23,40 @@
 
 namespace JSON
 {
-    template <typename T>
+    namespace internal
+    {
+        template <typename Base, typename Derived, bool Enable = !std::is_same <Base, Derived>::value>
+        struct Polify
+        {
+        };
+
+        template <typename Base, typename Derived>
+        struct Polify <Base, Derived, false>
+        {
+            template <typename... List>
+            static void exec(List&...)
+            {
+                // not enabled
+            }
+        };
+
+        template <typename Base, typename Derived>
+        struct Polify <Base, Derived, true>
+        {
+            static void exec(std::ostream& stream, bool& first, Derived const& object)
+            {
+                using polydecl_type = polydecls <Base>;
+                if (std::is_same <typename polydecl_type::type, no_poly>::value == false)
+                {
+                    // leave polymorphy mark behind
+                    stream << "\"__cxx_type\": \"" << polydecl_type::identify_type(&object) << "\"";
+                    first = false;
+                }
+            }
+        };
+    }
+
+    template <typename T, typename Base = T>
     class AdaptedStringifier
     {
     public:
@@ -37,6 +73,7 @@ namespace JSON
             bool first = true;
 
             stream << '{';
+            internal::Polify <Base, T>::exec(stream, first, object);
             boost::mpl::for_each<range> (std::bind<void>(_helper(boost::fusion::result_of::size<T>::type::value), std::placeholders::_1, std::ref(stream), std::ref(first), std::ref(object), std::ref(options)));
             stream << '}';
             return stream;
@@ -70,7 +107,15 @@ namespace JSON
         {
             options.in_object = true;
             options.ignore_name = false;
-            AdaptedStringifier<Derived> stringifier;
+            AdaptedStringifier <Derived> stringifier;
+            return stringifier(stream, *static_cast <Derived const*> (this), options);
+        }
+        template <typename Base>
+        std::ostream& stringify(std::ostream& stream, StringificationOptions options) const
+        {
+            options.in_object = true;
+            options.ignore_name = false;
+            AdaptedStringifier <Derived, Base> stringifier;
             return stringifier(stream, *static_cast <Derived const*> (this), options);
         }
         virtual ~Stringifiable() = default;
