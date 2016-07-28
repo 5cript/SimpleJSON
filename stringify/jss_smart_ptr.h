@@ -14,6 +14,8 @@ namespace JSON
         {
             static void exec(std::ostream& stream, const std::string& name, T const& value, StringificationOptions const& options)
             {
+                if (options.in_object && !options.ignore_name)
+                    WRITE_NAME(stream);
                 value->stringify(stream, options);
             }
         };
@@ -24,6 +26,8 @@ namespace JSON
             static void exec(std::ostream& stream, const std::string& name, T const& value, StringificationOptions const& options)
             {
                 //value->stringify(stream, options);
+                if (options.in_object && !options.ignore_name)
+                    WRITE_NAME(stream);
                 polydecls <typename T::element_type>::smart_pointer_set(value, stream, options);
             }
         };
@@ -40,15 +44,12 @@ namespace JSON
         template <typename T>
         std::ostream& stringify_smart_ptr(std::ostream& stream, const std::string& name, T const& value, StringificationOptions const& options = {})
         {
-            if (options.in_object && !options.ignore_name)
-                WRITE_NAME(stream);
-
             using element_type = typename std::decay<decltype(value)>::type::element_type;
 
             internal::smart_pointer_stringifier <
                 typename std::decay<decltype(value)>::type,
                 std::is_class <element_type>::value,
-                !std::is_same <element_type, no_poly>::value
+                is_polydecl <element_type>::value
             >::exec(stream, name, value, options);
             return stream;
         }

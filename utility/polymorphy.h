@@ -25,11 +25,12 @@ namespace JSON
     struct polydecls
     {
         using type = no_poly;
+    };
 
-        static std::string identify_type(T const*)
-        {
-            return "SimpleJson_internal_error";
-        }
+    template <typename T>
+    struct is_polydecl
+    {
+        static constexpr bool const value = !std::is_same <typename polydecls <T>::type, no_poly>::value;
     };
 
     template <typename BaseT, typename PackT>

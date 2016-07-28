@@ -9,13 +9,13 @@ namespace JSON
 {
     namespace internal
     {
-        template <typename T, bool ClassType, bool Enabler>
+        template <typename T, bool ClassType, bool Poly>
         struct smart_pointer_parser
         {
         };
 
         template <typename T>
-        struct smart_pointer_parser <T, true, true>
+        struct smart_pointer_parser <T, true, false>
         {
             static void get(T& value, std::string const& name, PropertyTree const& object, ParsingOptions const& options)
             {
@@ -25,7 +25,7 @@ namespace JSON
         };
 
         template <typename T>
-        struct smart_pointer_parser <T, false, true>
+        struct smart_pointer_parser <T, false, false>
         {
             static void get(T& value, std::string const& name, PropertyTree const& object, ParsingOptions const& options)
             {
@@ -36,7 +36,7 @@ namespace JSON
         };
 
         template <typename T>
-        struct smart_pointer_parser <T, true, false>
+        struct smart_pointer_parser <T, true, true>
         {
             static void get(T& value, std::string const& name, PropertyTree const& object, ParsingOptions const& options)
             {
@@ -73,7 +73,7 @@ namespace JSON
         };
 
         template <typename T>
-        struct smart_pointer_parser <T, false, false>
+        struct smart_pointer_parser <T, false, true>
         {
             static void get(T& value, std::string const& name, PropertyTree const& object, ParsingOptions const& options)
             {
@@ -88,14 +88,13 @@ namespace JSON
         {
 
             using element_type = typename std::decay<decltype(value)>::type::element_type;
-            using polydecl_type = polydecls <element_type>;
 
             internal::smart_pointer_parser <T,
                                             std::is_class <element_type>::value,
-                                            std::is_same <typename polydecl_type::type, no_poly>::value>::get(value,
-                                                                                                              name,
-                                                                                                              object,
-                                                                                                              options);
+                                            is_polydecl <element_type>::value>::get(value,
+                                                                                    name,
+                                                                                    object,
+                                                                                    options);
         }
     }
 }
