@@ -15,5 +15,6 @@
 #include "jsd_object.h"
 #include "jsd_renamed.h"
 #include "jsd_unique_ptr.h"
+#include "jsd_shared_ptr.h"
 
 #endif
