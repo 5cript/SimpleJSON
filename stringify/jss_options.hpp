@@ -20,21 +20,24 @@ namespace JSON
         bool reverse_order;
         PointerHandling ptr_behaviour;
         bool in_object;
+        bool strings_are_binary;
 
         StringificationOptions (bool ignore_name = false,
                                 std::string delimiter = ",",
                                 bool reverse_order = false,
                                 PointerHandling ptr_behaviour = {},
-                                bool in_object = false)
+                                bool in_object = false,
+                                bool strings_are_binary = false)
             : ignore_name {ignore_name}
             , delimiter {delimiter}
             , reverse_order {reverse_order}
             , ptr_behaviour {ptr_behaviour}
             , in_object {in_object}
+            , strings_are_binary {strings_are_binary}
         {}
     };
 
     #define DEFAULT_OPTIONS StringificationOptions{}
 
-    static auto const ProduceNamedOutput = StringificationOptions{false, ",", false, {}, true};
+    static auto const ProduceNamedOutput = StringificationOptions{false, ",", false, {}, true, false};
 }

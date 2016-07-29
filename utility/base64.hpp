@@ -17,12 +17,12 @@
 
 namespace JSON
 {
-    template <typename CharType = char, template <typename T, typename = std::allocator <T> > class ContainerT = std::vector>
+    template <typename CharType = char, template <typename...> class ContainerT = std::vector>
     void encodeBase64(std::ostream& stream, ContainerT <CharType> const& bytes);
-    template <typename CharType = char, template <typename T, typename = std::allocator <T> > class ContainerT = std::vector>
+    template <typename CharType = char, template <typename...> class ContainerT = std::vector>
     void decodeBase64(std::string const& input, ContainerT <CharType>& bytes);
 
-    template <typename CharType = char, template <typename T, typename = std::allocator <T> > class ContainerT = std::vector>
+    template <typename CharType = char, template <typename...> class ContainerT = std::vector>
     struct Base64Binary
     {
     private:
@@ -135,7 +135,7 @@ namespace JSON
 
 namespace JSON
 {
-    template <typename CharType, template <typename T, typename = std::allocator <T> > class ContainerT>
+    template <typename CharType, template <typename...> class ContainerT>
     void encodeBase64(std::ostream& stream, ContainerT <CharType> const& bytes)
     {
 		static CharType const table[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
@@ -174,7 +174,7 @@ namespace JSON
         }
     }
 
-    template <typename CharType, template <typename T, typename = std::allocator <T> > class ContainerT>
+    template <typename CharType, template <typename...> class ContainerT>
     void decodeBase64(std::string const& input, ContainerT <CharType>& bytes)
     {
 		// static CharType const table[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";

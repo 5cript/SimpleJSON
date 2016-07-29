@@ -1,4 +1,5 @@
 #include "jss_string.hpp"
+#include "../utility/base64.hpp"
 
 namespace JSON
 {
@@ -6,11 +7,21 @@ namespace JSON
     {
         WRITE_NAME(stream);
         stream << '"';
-        for (auto const& i : value)
+        if (!options.strings_are_binary)
         {
-            if (i == '"' || i == '\\')
-                stream.put('\\');
-            stream.put(i);
+            /*
+            for (auto const& i : value)
+            {
+                if (i == '"' || i == '\\')
+                    stream.put('\\');
+                stream.put(i);
+            }
+            */
+            stream << value;
+        }
+        else
+        {
+            encodeBase64(stream, value);
         }
         stream << '"';
         return stream;

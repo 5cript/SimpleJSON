@@ -1,18 +1,17 @@
-#include "object.hpp"
+#include "array.hpp"
 
 namespace JSON
 {
 //#####################################################################################################################
-    ObjectBuilder::ObjectBuilder(JSON::StringificationOptions options)
+    ArrayBuilder::ArrayBuilder(JSON::StringificationOptions options)
         : result_{}
-        , fresh_{true}
+        , fresh_{}
         , options_{std::move(options)}
     {
-        result_ << "{";
-        options_.in_object = true;
+        result_ << '[';
     }
 //---------------------------------------------------------------------------------------------------------------------
-    void ObjectBuilder::comma()
+    void ArrayBuilder::comma()
     {
         if (!fresh_)
         {
@@ -22,47 +21,48 @@ namespace JSON
             fresh_ = false;
     }
 //---------------------------------------------------------------------------------------------------------------------
-    void ObjectBuilder::setOptions(JSON::StringificationOptions options)
+    void ArrayBuilder::setOptions(JSON::StringificationOptions options)
     {
         options_ = options;
     }
 //---------------------------------------------------------------------------------------------------------------------
-    JSON::StringificationOptions& ObjectBuilder::getOptions()
+    JSON::StringificationOptions& ArrayBuilder::getOptions()
     {
         return options_;
     }
 //#####################################################################################################################
-    ObjectReader::ObjectReader(PropertyTree const* tree, std::string const& path, JSON::ParsingOptions options)
-        : tree_{tree}
-        , treeCopy_{boost::none}
-        , name_{path}
+    ArrayReader::ArrayReader(PropertyTree const& tree, std::string const& path, JSON::ParsingOptions options)
+        : name_{path}
         , options_{std::move(options)}
     {
-
+        tree_.tree = tree.tree.get_child (path);
+        reset();
     }
 //---------------------------------------------------------------------------------------------------------------------
-    ObjectReader::ObjectReader(PropertyTree const* tree, JSON::ParsingOptions options)
-        : tree_{tree}
-        , treeCopy_{boost::none}
-        , name_{}
+    ArrayReader::ArrayReader(PropertyTree const& tree, JSON::ParsingOptions options)
+        : name_{}
         , options_{std::move(options)}
     {
+        tree_.tree = tree.tree.get_child ("");
+        reset();
     }
 //---------------------------------------------------------------------------------------------------------------------
-    ObjectReader::ObjectReader(boost::property_tree::ptree::iterator iter, std::string const& path, JSON::ParsingOptions options)
-        : tree_{nullptr}
-        , treeCopy_{iter->second}
-        , name_{path}
-        , options_{std::move(options)}
+    ArrayReader::operator bool() const
     {
+        return iter_ != tree_.tree.end();
     }
 //---------------------------------------------------------------------------------------------------------------------
-    void ObjectReader::setOptions(JSON::ParsingOptions options)
+    void ArrayReader::reset()
+    {
+        iter_ = tree_.tree.begin();
+    }
+//---------------------------------------------------------------------------------------------------------------------
+    void ArrayReader::setOptions(JSON::ParsingOptions options)
     {
         options_ = options;
     }
 //---------------------------------------------------------------------------------------------------------------------
-    JSON::ParsingOptions& ObjectReader::getOptions()
+    JSON::ParsingOptions& ArrayReader::getOptions()
     {
         return options_;
     }

@@ -1,4 +1,5 @@
 #include "jsd_string.hpp"
+#include "../utility/base64.hpp"
 
 namespace JSON {
 
@@ -7,7 +8,16 @@ void parse(std::string& value, std::string const& name,
 {
     try
     {
-        GET_VALUE(std::string, name, value, "");
+        if (!options.strings_are_binary)
+        {
+            GET_VALUE(std::string, name, value, "");
+        }
+        else
+        {
+            std::string encoded;
+            GET_VALUE(std::string, name, encoded, "");
+            decodeBase64(encoded, value);
+        }
     }
     catch (boost::property_tree::ptree_bad_data& exc)
     {

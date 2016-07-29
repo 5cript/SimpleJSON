@@ -22,10 +22,11 @@ namespace JSON
     {
 		InvalidPropertyHandlingBehaviour invalidPropertyHandler;
 		InvalidPathHandlingBehaviour invalidPathHandler;
-
+        bool strings_are_binary;
 
 		ParsingOptions(InvalidPropertyHandlingBehaviour invalidPropertyHandler = InvalidPropertyHandlingBehaviour::THROW,
-                       InvalidPathHandlingBehaviour invalidPathHandler = InvalidPathHandlingBehaviour::THROW);
+                       InvalidPathHandlingBehaviour invalidPathHandler = InvalidPathHandlingBehaviour::THROW,
+                       bool strings_are_binary = false);
 	};
 
 	const auto DefaultParserOptions = ParsingOptions{};
