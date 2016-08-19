@@ -1,5 +1,8 @@
 #pragma once
 
+#include "jss_core.hpp"
+#include "../utility/polymorphy.hpp"
+
 namespace JSON
 {
     namespace internal
