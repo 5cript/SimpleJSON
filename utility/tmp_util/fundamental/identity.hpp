@@ -1,6 +1,6 @@
 #pragma once
 
-namespace mplex {
+namespace JSON {
     template <typename T>
     struct identity {
         using type = T;

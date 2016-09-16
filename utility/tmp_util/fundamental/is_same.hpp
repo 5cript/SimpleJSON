@@ -3,7 +3,7 @@
 #include <type_traits>
 #include "integral.hpp"
 
-namespace mplex {
+namespace JSON {
     struct is_same {
         template <typename T, typename U>
         struct apply {

@@ -1,5 +1,5 @@
 #pragma once
 
-namespace mplex {
+namespace JSON {
     struct null_t {};
 }

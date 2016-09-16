@@ -2,7 +2,7 @@
 
 #include "integral.hpp"
 
-namespace mplex {
+namespace JSON {
 
     template <typename Condition, typename Fallback, typename Function, typename... Parameters>
     struct eval_if_default
