@@ -5,6 +5,7 @@
 
 #include "jss_core.hpp"
 #include "jss_fundamental.hpp"
+#include "jss_enum.hpp"
 #include "jss_string.hpp"
 #include "jss_list.hpp"
 #include "jss_vector.hpp"

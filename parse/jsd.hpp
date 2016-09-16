@@ -1,6 +1,7 @@
 #pragma once
 
 #include "jsd_fundamental.hpp"
+#include "jsd_enum.hpp"
 #include "jsd_string.hpp"
 #include "jsd_container.hpp"
 #include "jsd_map.hpp"
