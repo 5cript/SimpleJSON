@@ -23,7 +23,7 @@ namespace JSON
             static no& test(...);
 
             constexpr static const bool value = sizeof(test<T>(nullptr)) == sizeof(yes);
-            using type = mplex::bool_ <value>;
+            using type = JSON::bool_ <value>;
         };
 
         template <typename T>
@@ -41,11 +41,11 @@ namespace JSON
         template <typename T>
         struct is_optional
         {
-            using __value_type = mplex::eval_if_default_t <has_value_type_t <T>, mplex::null_t, get_value_type, T>;
-            using type = mplex::eval_if_default_t <
-                mplex::bool_ <!std::is_same <__value_type, mplex::null_t>::value>,
-                mplex::false_,
-                mplex::is_same,
+            using __value_type = JSON::eval_if_default_t <has_value_type_t <T>, JSON::null_t, get_value_type, T>;
+            using type = JSON::eval_if_default_t <
+                JSON::bool_ <!std::is_same <__value_type, JSON::null_t>::value>,
+                JSON::false_,
+                JSON::is_same,
                 T,
                 boost::optional <__value_type>
             >;
