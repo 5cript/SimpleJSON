@@ -8,17 +8,69 @@
 
 namespace JSON
 {
+    /*
+    template <typename T, bool Selector>
+    struct ResetIfAssignableImpl
+    {
+        static void constexpr exec(...) {}
+    };
+
+    template <typename T>
+    struct ResetIfAssignableImpl <T, true>
+    {
+        static void constexpr exec(T& t)
+        {
+            t = {};
+        }
+    };
+
+    template <typename T>
+    struct ResetIfAssignable
+    {
+        static void constexpr exec(T& t)
+        {
+            ResetIfAssignableImpl <T, std::is_copy_assignable <T>::value>::exec(t);
+        }
+    };
+
+    template <typename T, bool Selector>
+    struct AssignIfAssignableImpl
+    {
+        static void constexpr exec(...) {}
+    };
+
+    template <typename T>
+    struct AssignIfAssignableImpl <T, true>
+    {
+        template <typename V>
+        static void constexpr exec(T& t, V&& value)
+        {
+            t = std::forward <V&&> (value);
+        }
+    };
+
+    template <typename T>
+    struct AssignIfAssignable
+    {
+        template <typename V>
+        static void constexpr exec(T& t, V&& value)
+        {
+            AssignIfAssignableImpl <T, std::is_trivially_copy_assignable <T>::value && std::is_copy_constructible <T>::value>::exec(t, value);
+        }
+    };
+    */
+
     #define GET_VALUE(TYPE, NAME, TEMP, TAG_VALUE) \
     if (options.invalidPathHandler == InvalidPathHandlingBehaviour::IGNORE_ALL_ERROR || \
         options.invalidPathHandler == InvalidPathHandlingBehaviour::TAG) \
     { \
-        value = {}; \
+        /* ResetIfAssignable <typename std::decay <decltype(value)>::type>::exec(value);  */\
         auto opt = object.tree.get_optional <TYPE> (NAME); \
         if (!opt) { \
             if (options.invalidPathHandler == InvalidPathHandlingBehaviour::IGNORE_ALL_ERROR) \
                 return; \
             else { \
-                value = TAG_VALUE; \
+                /* AssignIfAssignable <typename std::decay <decltype(value)>::type>::exec(value, typename std::decay <decltype(value)>::type {TAG_VALUE}); */ \
                 return; \
             } \
         } \
@@ -35,13 +87,13 @@ namespace JSON
     if (options.invalidPathHandler == InvalidPathHandlingBehaviour::IGNORE_ALL_ERROR || \
         options.invalidPathHandler == InvalidPathHandlingBehaviour::TAG) \
     { \
-        value = {}; \
+        /* ResetIfAssignable <typename std::decay <decltype(value)>::type>::exec(value); */ \
         auto opt = object.tree.get_child_optional (NAME); \
         if (!opt) { \
             if (options.invalidPathHandler == InvalidPathHandlingBehaviour::IGNORE_ALL_ERROR) \
                 return; \
             else { \
-                value = TAG_VALUE; \
+                /* AssignIfAssignable <typename std::decay <decltype(value)>::type>::exec(value, typename std::decay <decltype(value)>::type {TAG_VALUE}); */ \
                 return; \
             } \
         } \
@@ -56,10 +108,10 @@ namespace JSON
     #define DEFAULT_PROPERTY_ERROR_HANDLER(DEFAULT_VALUE, TAG_VALUE)		\
 	switch (options.invalidPropertyHandler) {								\
 		case (InvalidPropertyHandlingBehaviour::DEFAULT):		\
-			value = DEFAULT_VALUE;								\
+			/* value = {}; */\
 			return;												\
 		case (InvalidPropertyHandlingBehaviour::TAG):			\
-			value = TAG_VALUE;									\
+			\
 			return;												\
 		case (InvalidPropertyHandlingBehaviour::IGNORE_ALL_ERROR):		\
 			return;												\
@@ -71,10 +123,10 @@ namespace JSON
 	#define DEFAULT_PATH_ERROR_HANDLER(DEFAULT_VALUE, TAG_VALUE)		\
 	switch (options.invalidPathHandler) {								\
 		case (InvalidPathHandlingBehaviour::DEFAULT):		\
-			value = DEFAULT_VALUE;								\
+			/* value = {}; */\
 			return;												\
 		case (InvalidPathHandlingBehaviour::TAG):			\
-			value = TAG_VALUE;									\
+			\
 			return;												\
 		case (InvalidPathHandlingBehaviour::IGNORE_ALL_ERROR):		\
 			return;												\
