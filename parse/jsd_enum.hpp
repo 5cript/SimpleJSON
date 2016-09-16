@@ -1,6 +1,7 @@
 #pragma once
 
 #include "jsd_core.hpp"
+#include "../utility/tmp_util/type_of_size.hpp"
 
 #include <type_traits>
 
