@@ -9,3 +9,4 @@ SimpleJSON_build_log.html
 build/*
 build32/*
 *.astcache
+__history/
