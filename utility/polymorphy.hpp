@@ -9,6 +9,9 @@
 
 #include <boost/preprocessor/seq/enum.hpp>
 #include <boost/type_index.hpp>
+#ifdef __BORLANDC__
+#	include <boost/algorithm/string/replace.hpp>
+#endif
 
 /**
  *  WARNING! This does not work if you can construct a polymorphic type with the base class.
@@ -31,10 +34,24 @@ namespace JSON
     struct is_polydecl
     {
         static constexpr bool const value = !std::is_same <typename polydecls <T>::type, no_poly>::value;
+	};
+
+	template <typename T>
+	std::string type_name_factory()
+	{
+#if defined(JSON_TYPENAME_PATCH)
+		return JSONPatch::type_name_factory <T>();
+#elif defined(__BORLANDC__)
+        auto name = boost::typeindex::type_id_with_cvr <T>().pretty_name();
+		boost::replace_all(name, "@", "::");
+        return name.substr(1, name.length() - 1);
+#else
+		return boost::typeindex::type_id_with_cvr <T>().pretty_name();
+#endif
     };
 
     template <typename BaseT, typename PackT>
-    struct dyn_cast_test {};
+	struct dyn_cast_test {};
 
     template <typename BaseT, typename Head, typename... Tail>
     struct dyn_cast_test <BaseT, pack<Head, Tail...>>
@@ -48,11 +65,11 @@ namespace JSON
             if (!is_exact_type(poly_ptr))
                 return dyn_cast_test <BaseT, pack<Tail...>>::find_type(poly_ptr);
             else
-                return boost::typeindex::type_id_with_cvr<Head>().pretty_name();
+				return type_name_factory <Head>();
         }
         static BaseT* create(std::string const& type_name)
         {
-            if (boost::typeindex::type_id_with_cvr<Head>().pretty_name() == type_name)
+			if (type_name_factory <Head>() == type_name)
             {
                 return new Head;
             }
@@ -62,9 +79,9 @@ namespace JSON
         template <template <typename...> class T, typename... List> \
         static void smart_pointer_get(T<List...>& smart, std::string const& type_name, std::string const& name,\
                                       PropertyTree const& tree, ParsingOptions const& options)
-        {
-            if (boost::typeindex::type_id_with_cvr<Head>().pretty_name() == type_name)
-            {
+		{
+			if (type_name_factory <Head>() == type_name)
+			{
                 smart.reset(new Head);
                 static_cast <Head*> (smart.get())->Head::parse(name, tree, options);
             }
