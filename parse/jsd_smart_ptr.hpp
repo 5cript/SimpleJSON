@@ -47,8 +47,12 @@ namespace JSON
                     // causes exceptions for proper error.
                     object.tree.get <tree_probe> (name);
 
-                    // expects type name
-                    auto type_name = object.tree.get_optional <std::string> (name + ".__cxx_type");
+					// expects type name
+					boost::optional <std::string> type_name;
+					if (!name.empty())
+						type_name = object.tree.get_optional <std::string> (name + ".__cxx_type");
+					else
+						type_name = object.tree.get_optional <std::string> (name + "__cxx_type");
                     if (!type_name)
                         throw std::runtime_error (
                             std::string("object with name '") +
