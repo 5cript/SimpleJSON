@@ -9,6 +9,7 @@
 
 #include <boost/preprocessor/seq/enum.hpp>
 #include <boost/type_index.hpp>
+
 #ifdef __BORLANDC__
 #	include <boost/algorithm/string/replace.hpp>
 #endif
@@ -48,7 +49,7 @@ namespace JSON
 #else
 		return boost::typeindex::type_id_with_cvr <T>().pretty_name();
 #endif
-    };
+    }
 
     template <typename BaseT, typename PackT>
 	struct dyn_cast_test {};
