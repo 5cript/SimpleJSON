@@ -10,12 +10,23 @@ namespace JSON
     public:
         ArrayBuilder(JSON::StringificationOptions options = {});
 
-        template <typename T>
-        void add(T&& value)
-        {
-            comma();
+		template <typename T>
+		ArrayBuilder& add(T&& value)
+		{
+			comma();
 
-            stringify(result_, "", std::forward <T&&> (value), options_);
+			stringify(result_, "", std::forward <T&&> (value), options_);
+
+			return *this;
+		}
+
+		ArrayBuilder& addRaw(std::string const& value)
+		{
+			comma();
+
+			result_ << value;
+
+			return *this;
         }
 
         std::string get() const

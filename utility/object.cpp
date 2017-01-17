@@ -15,9 +15,7 @@ namespace JSON
     void ObjectBuilder::comma()
     {
         if (!fresh_)
-        {
-            result_ << ",";
-        }
+			result_ << ",";
         else
             fresh_ = false;
     }

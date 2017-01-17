@@ -16,12 +16,24 @@ namespace JSON
         JSON::StringificationOptions& getOptions();
 
         template <typename T>
-        void add(std::string const& key, T&& value)
-        {
-            comma();
+		ObjectBuilder& add(std::string const& key, T&& value)
+		{
+			comma();
 
-            stringify(result_, key, std::forward <T&&> (value), options_);
-        }
+			stringify(result_, key, std::forward <T&&> (value), options_);
+			return *this;
+		}
+
+		template <typename T>
+		ObjectBuilder& addRaw(std::string const& key, std::string const& value)
+		{
+			comma();
+
+			result_ << '"' << key << "\":";
+            result_ << value;
+
+			return *this;
+		}
 
         std::string get() const
         {
@@ -48,16 +60,18 @@ namespace JSON
         JSON::ParsingOptions& getOptions();
 
         template <typename T>
-        void get(std::string const& name, T& object) const
-        {
-            std::string path;
-            if (!name_.empty())
-                path += name_ + ".";
+		ObjectReader const& get(std::string const& name, T& object) const
+		{
+			std::string path;
+			if (!name_.empty())
+				path += name_ + ".";
 
-            if (tree_ != nullptr)
-                parse(object, path + name, *tree_, options_);
-            else
-                parse(object, path + name, treeCopy_.get(), options_);
+			if (tree_ != nullptr)
+				parse(object, path + name, *tree_, options_);
+			else
+				parse(object, path + name, treeCopy_.get(), options_);
+
+			return *this;
         }
 
         template <typename T>
