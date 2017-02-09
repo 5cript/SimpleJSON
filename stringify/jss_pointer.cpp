@@ -2,7 +2,7 @@
 
 namespace JSON
 {
-    std::ostream& stringify(std::ostream& stream, std::string const& name, std::nullptr_t ptr, StringificationOptions const& options)
+    std::ostream& stringify(std::ostream& stream, std::string const& name, std::nullptr_t, StringificationOptions const& options)
     {
         switch (options.ptr_behaviour)
         {
@@ -16,7 +16,7 @@ namespace JSON
             case (PointerHandling::ADDRESS):
             {
                 WRITE_NAME(stream);
-                stream << reinterpret_cast <uint_of_size<sizeof(void*)>::type> (ptr);
+                stream << 0u;
                 return stream;
             }
             default: {}
