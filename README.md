@@ -36,7 +36,7 @@ Dependencies:
 > boost/fusion <br>
 > boost/mpl <br>
 
-##Example1
+## Example1
 ```C++
 #ifndef Q_MOC_RUN // A Qt workaround, for those of you who use Qt
 #   include "SimpleJSON/parse/jsd.hpp"
@@ -104,7 +104,7 @@ int main()
 }
 ```
 
-##Example2
+## Example2
  (Showing polymorphic serlialization / deserialization)
 ```C++
 #ifndef Q_MOC_RUN // A Qt workaround, for those of you who use Qt
