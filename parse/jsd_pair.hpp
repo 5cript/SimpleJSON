@@ -10,8 +10,10 @@ namespace JSON
 	{
 		try
 		{
-		    GET_VALUE(T, name+".first", value.first, std::make_pair(T(), U()));
-		    GET_VALUE(T, name+".second", value.second, std::make_pair(T(), U()));
+		    parse(value.first, name+".first", object, options);
+		    parse(value.second, name+".second", object, options);
+		    //GET_VALUE(T, name+".first", value.first, std::make_pair(T(), U()));
+		    //GET_VALUE(U, name+".second", value.second, std::make_pair(T(), U()));
 		}
 		catch (boost::property_tree::ptree_bad_data& exc)
 		{
