@@ -89,6 +89,7 @@ namespace JSON
                 {
                     if (!first)
                         os << options.delimiter;
+
                     stringify(os, boost::fusion::extension::struct_member_name<T, Index::value>::call(), member, options);
                     first = false;
                 }

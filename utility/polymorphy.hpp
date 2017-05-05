@@ -6,6 +6,7 @@
 #include <stdexcept>
 #include <type_traits>
 #include <functional>
+#include <iostream>
 
 #include <boost/preprocessor/seq/enum.hpp>
 #include <boost/type_index.hpp>
@@ -84,7 +85,8 @@ namespace JSON
 			if (type_name_factory <Head>() == type_name)
 			{
                 smart.reset(new Head);
-                static_cast <Head*> (smart.get())->Head::parse(name, tree, options);
+                //static_cast <Head*> (smart.get())->Head::parse(name, tree, options);
+                dynamic_cast <Head*> (smart.get())->Head::parse(name, tree, options);
             }
             else
                 dyn_cast_test <BaseT, pack<Tail...>>::smart_pointer_get(smart, type_name, name, tree, options);
@@ -94,10 +96,12 @@ namespace JSON
         {
             if (is_exact_type(smart.get()))
             {
-                static_cast <Head*> (smart.get())->template stringify <BaseT>(stream, options);
+                //static_cast <Head*> (smart.get())->template stringify <BaseT>(stream, options);
+                dynamic_cast <Head*> (smart.get())->template stringify <BaseT>(stream, options);
             }
-            else
+            else {
                 dyn_cast_test <BaseT, pack<Tail...>>::smart_pointer_set(smart, stream, options);
+            }
         }
     };
 

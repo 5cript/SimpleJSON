@@ -19,6 +19,8 @@ namespace JSON
         {
             static void get(T& value, std::string const& name, PropertyTree const& object, ParsingOptions const& options)
             {
+                //! Trying to create abstract class here?
+                //! Your polydecls are not correct!
                 value.reset(new typename std::decay<T>::type::element_type{});
                 value->parse(name, object, options);
             }
