@@ -3,18 +3,15 @@
 #include "jsd_core.hpp"
 #include "jsd_object.hpp"
 
-#include <boost/fusion/mpl.hpp>
+#include <boost/fusion/mpl/at.hpp>
+
 #include <boost/fusion/adapted.hpp>
+
 #include <boost/fusion/include/at.hpp>
-#include <boost/fusion/include/for_each.hpp>
+
 #include <boost/mpl/range_c.hpp>
 #include <boost/mpl/for_each.hpp>
-#include <boost/phoenix/phoenix.hpp>
 #include <boost/fusion/include/size.hpp>
-
-#include <iostream>
-#include <functional>
-#include <type_traits>
 
 namespace JSON
 {
