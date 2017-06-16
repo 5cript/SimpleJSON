@@ -1,15 +1,26 @@
 #pragma once
 
 #include "../parse/jsd_core.hpp"
-#include "tmp_util/fundamental/pack.hpp"
 
 #include <stdexcept>
 #include <type_traits>
 #include <functional>
 #include <iostream>
 
-#include <boost/preprocessor/seq/enum.hpp>
-#include <boost/type_index.hpp>
+#include <boost/version.hpp>
+
+#ifndef BOOST_VERSION
+#   error "BOOST_VERSION macro undefined, even though boost/version.hpp is included (broken boost installation?)"
+#endif // BOOST_VERSION
+
+#if BOOST_VERSION < 105600 && !defined(__BORLANDC__)
+#   warning "Polymorphic adaptation is disabled, because the boost version is too old."
+#   define DISABLE_POLY_JSON
+#else
+#   include <boost/type_index.hpp>
+#   include <boost/preprocessor/seq/enum.hpp>
+#   include "tmp_util/fundamental/pack.hpp"
+#endif // BOOST_VERSION
 
 #ifdef __BORLANDC__
 #	include <boost/algorithm/string/replace.hpp>
@@ -38,6 +49,7 @@ namespace JSON
         static constexpr bool const value = !std::is_same <typename polydecls <T>::type, no_poly>::value;
 	};
 
+#ifndef DISABLE_POLY_JSON
 	template <typename T>
 	std::string type_name_factory()
 	{
@@ -165,3 +177,6 @@ namespace JSON \
         } \
     }; \
 }
+#else
+}
+#endif // DISABLE_POLY_JSON

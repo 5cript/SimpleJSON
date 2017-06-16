@@ -6,6 +6,17 @@
 
 namespace JSON
 {
+
+    template <typename T>
+    std::ostream& try_stringify_start(std::ostream& stream, std::string const& name, T const& obj, StringificationOptions const& options = DEFAULT_OPTIONS,
+                                      typename std::enable_if <Internal::can_stringify<T>::value, void>::type* = nullptr)
+    {
+        stream.put('{');
+        stringify(stream, name, obj, options);
+        stream.put('}');
+        return stream;
+    }
+
     template <typename T>
     std::ostream& try_stringify(std::ostream& stream, std::string const& name, T const& obj, StringificationOptions const& options = DEFAULT_OPTIONS,
                                    typename std::enable_if <Internal::can_stringify<T>::value, void>::type* = nullptr)
