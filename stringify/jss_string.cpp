@@ -21,7 +21,7 @@ namespace JSON
         }
         else
         {
-            encodeBase64(stream, value);
+            encodeBase64 <char, std::basic_string> (stream, value);
         }
         stream << '"';
         return stream;

@@ -16,7 +16,7 @@ void parse(std::string& value, std::string const& name,
         {
             std::string encoded;
             GET_VALUE(std::string, name, encoded, "");
-            decodeBase64(encoded, value);
+            decodeBase64 <char, std::basic_string> (encoded, value);
         }
     }
     catch (boost::property_tree::ptree_bad_data& exc)
