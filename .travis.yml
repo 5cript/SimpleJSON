@@ -11,6 +11,7 @@ addons:
       - gcc-6
       - g++-6
       - cmake
+      - boost
 
 script:
   - sudo ln -s /usr/bin/gcc-6 /usr/local/bin/gcc
