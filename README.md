@@ -1,7 +1,7 @@
-# SimpleJSON
+# SimpleJSON ![Travis CI](https://travis-ci.org/5cript/SimpleJSON.svg?branch=master)
 
 
-1. [Preface](https://github.com/5cript/SimpleJSON#preface)
+1. [Preface](https://github.com/5cript/SimpleJSON#preface) 
 2. [Introduction](https://github.com/5cript/SimpleJSON#introduction)
 3. [Example 1](https://github.com/5cript/SimpleJSON#Example1)
 4. [Example 2](https://github.com/5cript/SimpleJSON#Example2)
