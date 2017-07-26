@@ -122,8 +122,8 @@ namespace JSON
             struct at {
                 static_assert(N < size, "Index out of bounds");
 
-                constexpr static const char value = pack_element <N, type>::type::value;
-                using type = typename pack_element <N, type>::type;
+                constexpr static const char value = pack_element <N, cexpr_string::type>::type::value;
+                using type = typename pack_element <N, cexpr_string::type>::type;
             };
 
             template <size_type N>
