@@ -2,19 +2,15 @@ sudo: required
 dist: trusty
 language: cpp
 
-matrix:
-  include:
-    # works on Precise and Trusty
-    - compiler: gcc
-    - os: linux
-      addons:
-        apt:
-          sources:
-            - ubuntu-toolchain-r-test
-          packages:
-            - g++-6
-      env:
-        - MATRIX_EVAL="CC=clang-3.6 && CXX=clang++-3.6"
+- os: linux
+  addons:
+    apt:
+      sources:
+        - ubuntu-toolchain-r-test
+      packages:
+        - g++-6
+  env:
+    - MATRIX_EVAL="CC=gcc-6 && CXX=g++-6"
 
 script:
   - mkdir build
