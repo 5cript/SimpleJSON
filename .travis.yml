@@ -1,12 +1,10 @@
-install: 
 language: cpp
 compiler:
-	- clang
-	- gcc
-	
+  - clang
+  - gcc
+
 script:
-    - mkdir build
-    - cd build
-    - cmake ..
-    - make
-	
+  - mkdir build
+  - cd build
+  - cmake ..
+  - make
