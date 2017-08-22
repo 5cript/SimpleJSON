@@ -13,7 +13,7 @@
 #   error "BOOST_VERSION macro undefined, even though boost/version.hpp is included (broken boost installation?)"
 #endif // BOOST_VERSION
 
-#if BOOST_VERSION < 105600 && !defined(__BORLANDC__)
+#if BOOST_VERSION < 105600 && !defined(__BORLANDC__) && !defined(JS_DISABLE_BOOST_WARNING)
 #   warning "Polymorphic adaptation is disabled, because the boost version is too old."
 #   define DISABLE_POLY_JSON
 #else
