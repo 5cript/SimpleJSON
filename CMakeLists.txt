@@ -11,4 +11,4 @@ file(GLOB sources "parse/*.cpp" "stringify/*.cpp" "utility/*.cpp")
 add_library(SimpleJSON STATIC ${sources})
 
 # Compiler Options
-target_compile_options(SimpleJSON PRIVATE -fexceptions -std=c++14 -O2 -Wall -pedantic-errors -pedantic)
+target_compile_options(SimpleJSON PRIVATE -fexceptions -std=c++14 -O3 -Wall -pedantic-errors -pedantic)
