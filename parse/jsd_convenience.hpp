@@ -19,6 +19,22 @@ namespace JSON
     {
         static_assert (Internal::can_parse<T>::value, "the object you try to parse has no applicable interface");
     }
+
+    template <typename T>
+    T make_from_json(std::istream& stream)
+    {
+        T res;
+        JSON::parse(res, "", JSON::parse_json(stream));
+        return res;
+    }
+
+    template <typename T>
+    T make_from_json(std::string const& str)
+    {
+        T res;
+        JSON::parse(res, "", JSON::parse_json(str));
+        return res;
+    }
 }
 
 #define json_deserialize(NAME) JSON::try_parse(#NAME, NAME)

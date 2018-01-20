@@ -36,6 +36,35 @@ Dependencies:
 > boost/fusion <br>
 > boost/mpl <br>
 
+## Example0
+```C++
+#ifndef Q_MOC_RUN // A Qt workaround, for those of you who use Qt
+#   include "SimpleJSON/parse/jsd.hpp"
+#   include "SimpleJSON/stringify/jss.hpp"
+#   include "SimpleJSON/stringify/jss_fusion_adapted_struct.hpp"
+#endif
+
+struct Object : public JSON::Stringifiable <Object>
+              , public JSON::Parsable <Object>
+{
+    int A;
+    std::string B;
+    float C;
+}; 
+BOOST_FUSION_ADAPT_STRUCT(Object, A, B, C)
+
+int main()
+{
+	auto o = JSON::make_from_json <Object> (R"(  
+		{
+			"A": 0,
+			"B": "Hello",
+			"C": 2.4
+		}
+	)");
+}
+```
+
 ## Example1
 ```C++
 #ifndef Q_MOC_RUN // A Qt workaround, for those of you who use Qt

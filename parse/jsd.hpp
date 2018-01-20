@@ -16,3 +16,4 @@
 #include "jsd_renamed.hpp"
 #include "jsd_unique_ptr.hpp"
 #include "jsd_shared_ptr.hpp"
+#include "jsd_convenience.hpp"
