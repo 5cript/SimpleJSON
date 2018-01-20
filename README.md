@@ -39,9 +39,9 @@ Dependencies:
 ## Example0
 ```C++
 #ifndef Q_MOC_RUN // A Qt workaround, for those of you who use Qt
-#   include "SimpleJSON/parse/jsd.hpp"
-#   include "SimpleJSON/stringify/jss.hpp"
-#   include "SimpleJSON/stringify/jss_fusion_adapted_struct.hpp"
+#   include <SimpleJSON/parse/jsd.hpp>
+#   include <SimpleJSON/stringify/jss.hpp>
+#   include <SimpleJSON/stringify/jss_fusion_adapted_struct.hpp>
 #endif
 
 struct Object : public JSON::Stringifiable <Object>
@@ -68,10 +68,10 @@ int main()
 ## Example1
 ```C++
 #ifndef Q_MOC_RUN // A Qt workaround, for those of you who use Qt
-#   include "SimpleJSON/parse/jsd.hpp"
-#   include "SimpleJSON/parse/jsd_convenience.hpp"
-#   include "SimpleJSON/stringify/jss.hpp"
-#   include "SimpleJSON/stringify/jss_fusion_adapted_struct.hpp"
+#   include <SimpleJSON/parse/jsd.hpp>
+#   include <SimpleJSON/parse/jsd_convenience.hpp>
+#   include <SimpleJSON/stringify/jss.hpp>
+#   include <SimpleJSON/stringify/jss_fusion_adapted_struct.hpp>
 #endif
 
 #include <string>
@@ -137,10 +137,10 @@ int main()
  (Showing polymorphic serlialization / deserialization)
 ```C++
 #ifndef Q_MOC_RUN // A Qt workaround, for those of you who use Qt
-#   include "SimpleJSON/parse/jsd.hpp"
-#   include "SimpleJSON/parse/jsd_convenience.hpp"
-#   include "SimpleJSON/stringify/jss.hpp"
-#   include "SimpleJSON/stringify/jss_fusion_adapted_struct.hpp"
+#   include <SimpleJSON/parse/jsd.hpp>
+#   include <SimpleJSON/parse/jsd_convenience.hpp>
+#   include <SimpleJSON/stringify/jss.hpp>
+#   include <SimpleJSON/stringify/jss_fusion_adapted_struct.hpp>
 #endif
 
 #include "SimpleJSON/utility/polymorphy.hpp"
