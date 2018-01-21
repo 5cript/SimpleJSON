@@ -21,6 +21,14 @@ namespace JSON
     }
 
     template <typename T>
+    T make_from_json(std::istream&& stream)
+    {
+        T res;
+        JSON::parse(res, "", JSON::parse_json(stream));
+        return res;
+    }
+
+    template <typename T>
     T make_from_json(std::istream& stream)
     {
         T res;
