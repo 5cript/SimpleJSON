@@ -8,7 +8,7 @@ namespace JSON
 	template <typename ValueT, typename HashT = std::hash <std::string>, class PredT = std::equal_to <std::string>,
               typename AllocT = std::allocator <std::pair <const std::string, ValueT>>>
 	void parse(std::unordered_map<std::string, ValueT, HashT, PredT, AllocT>& value, std::string const& name,
-               PropertyTree const& object, ParsingOptions const& options = DEFAULT_PARSER_OPTIONS)
+               PropertyTree const& object, ParsingOptions const& options = {})
 	{
 		try
 		{

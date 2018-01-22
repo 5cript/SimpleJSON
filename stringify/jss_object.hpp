@@ -37,7 +37,7 @@ namespace JSON
     template <typename T,
               class = typename std::enable_if<std::is_class<T>::value>::type,
               class = typename std::enable_if<Internal::is_js_object<T>::value>::type >
-    std::ostream& stringify(std::ostream& stream, std::string const& name, T const& value, StringificationOptions const& options = DEFAULT_OPTIONS)
+    std::ostream& stringify(std::ostream& stream, std::string const& name, T const& value, StringificationOptions const& options = {})
     {
         using namespace Internal;
 
@@ -50,7 +50,7 @@ namespace JSON
         return stream;
     }
 
-    std::ostream& js_make_object(std::ostream& stream, std::vector <std::string> const& elements, StringificationOptions const& options = DEFAULT_OPTIONS);
+    std::ostream& js_make_object(std::ostream& stream, std::vector <std::string> const& elements, StringificationOptions const& options = {});
 
     #define JSON_VERIFY_CLASS_VALIDITY(T) \
     static_assert (JSON::Internal::is_js_object <T>::value, "The class/struct is not a stringifiable struct, please check the function signature");

@@ -31,7 +31,7 @@ namespace JSON
 
     template <typename IteratorT,
               typename = typename std::enable_if <Internal::can_stringify<typename IteratorT::value_type>::value>::type >
-    std::ostream& stringify (std::ostream& stream, const std::string& name, Internal::IteratorRange<IteratorT> const& range, StringificationOptions options = DEFAULT_OPTIONS,
+    std::ostream& stringify (std::ostream& stream, const std::string& name, Internal::IteratorRange<IteratorT> const& range, StringificationOptions options = {},
                              typename std::enable_if <is_random_access_iterator<IteratorT>::value ||
                                                       is_bidirectional_iterator<IteratorT>::value ||
                                                       is_forward_iterator<IteratorT>::value>::type* = nullptr)

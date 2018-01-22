@@ -13,7 +13,7 @@ namespace JSON
                 Internal::can_stringify<T>::value ||
                 !std::is_same <typename polydecls <T>::type, no_poly>::value
               >::type >
-    std::ostream& stringify (std::ostream& stream, const std::string& name, std::shared_ptr<T> const& value, StringificationOptions const& options = DEFAULT_OPTIONS)
+    std::ostream& stringify (std::ostream& stream, const std::string& name, std::shared_ptr<T> const& value, StringificationOptions const& options = {})
     {
         if (!value)
             throw SharedPtrNullptrException{};

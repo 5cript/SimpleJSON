@@ -5,5 +5,5 @@
 namespace JSON
 {
 	void parse(std::string& value, std::string const& name,
-			   PropertyTree const& object, ParsingOptions const& options = DEFAULT_PARSER_OPTIONS);
+			   PropertyTree const& object, ParsingOptions const& options = {});
 }

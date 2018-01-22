@@ -7,7 +7,7 @@ namespace JSON
 {
 	template <typename T>
 	void parse(std::atomic<T>& value, std::string const& name,
-               PropertyTree const& object, ParsingOptions const& options = DEFAULT_PARSER_OPTIONS)
+               PropertyTree const& object, ParsingOptions const& options = {})
 	{
 		try
 		{

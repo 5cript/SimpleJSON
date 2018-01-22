@@ -12,7 +12,7 @@ namespace JSON
 {
     template <typename T, template <typename, class = std::allocator <T> > class ContainerT = std::deque,
               class = typename std::enable_if<std::is_arithmetic<T>::value>::type>
-    std::ostream& stringify(std::ostream& stream, std::string const& name, std::stack <T, ContainerT <T> > values, StringificationOptions const& options = DEFAULT_OPTIONS)
+    std::ostream& stringify(std::ostream& stream, std::string const& name, std::stack <T, ContainerT <T> > values, StringificationOptions const& options = {})
     {
         std::deque <T> dq;
         while (!values.empty())

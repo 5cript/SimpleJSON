@@ -10,7 +10,7 @@ namespace JSON
                                               && !std::is_enum<T>::value         >::type
 			 >
 	void parse(T& value, std::string const& name,
-			   PropertyTree const& object, ParsingOptions const& options = DEFAULT_PARSER_OPTIONS)
+			   PropertyTree const& object, ParsingOptions const& options = {})
 	{
 		try
 		{
@@ -27,7 +27,7 @@ namespace JSON
 	}
 
 	void parse(char& value, std::string const& name,
-               PropertyTree const& object, ParsingOptions const& options = DEFAULT_PARSER_OPTIONS);
+               PropertyTree const& object, ParsingOptions const& options = {});
     void parse(wchar_t& value, std::string const& name,
-			   PropertyTree const& object, ParsingOptions const& options = DEFAULT_PARSER_OPTIONS);
+			   PropertyTree const& object, ParsingOptions const& options = {});
 }

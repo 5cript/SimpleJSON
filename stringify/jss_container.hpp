@@ -11,7 +11,7 @@ namespace JSON { namespace Internal
     template <typename T, template <typename, class = std::allocator <T> > class ContainerT,
               typename FuncT = std::function <typename ContainerT<T>::const_iterator(ContainerT<T> const&)>,
               class = typename std::enable_if<Internal::can_stringify<typename ContainerT<T>::value_type>::value>::type >
-    inline std::ostream& stringify_i(std::ostream& stream, std::string const& name, ContainerT <T> const& values, StringificationOptions const& options = DEFAULT_OPTIONS)
+    inline std::ostream& stringify_i(std::ostream& stream, std::string const& name, ContainerT <T> const& values, StringificationOptions const& options = {})
     {
         using namespace Internal;
 

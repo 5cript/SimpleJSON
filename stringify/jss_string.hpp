@@ -5,5 +5,5 @@
 
 namespace JSON
 {
-    std::ostream& stringify (std::ostream& stream, std::string const& name, std::string const& value, StringificationOptions const& options = DEFAULT_OPTIONS);
+    std::ostream& stringify (std::ostream& stream, std::string const& name, std::string const& value, StringificationOptions const& options = {});
 }

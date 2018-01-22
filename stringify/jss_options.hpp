@@ -37,7 +37,5 @@ namespace JSON
         {}
     };
 
-    #define DEFAULT_OPTIONS StringificationOptions{}
-
     static auto const ProduceNamedOutput = StringificationOptions{false, ",", false, {}, true, false};
 }

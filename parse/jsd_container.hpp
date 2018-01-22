@@ -6,7 +6,7 @@ namespace JSON
 {
 	template <typename T, template <typename, class = std::allocator <T> > class ContainerT>
 	void parse(ContainerT<T>& value, std::string const& name,
-               PropertyTree const& object, ParsingOptions const& options = DEFAULT_PARSER_OPTIONS)
+               PropertyTree const& object, ParsingOptions const& options = {})
 	{
 		try
 		{

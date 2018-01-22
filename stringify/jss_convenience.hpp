@@ -8,7 +8,7 @@ namespace JSON
 {
 
     template <typename T>
-    std::ostream& try_stringify_start(std::ostream& stream, std::string const& name, T const& obj, StringificationOptions const& options = DEFAULT_OPTIONS,
+    std::ostream& try_stringify_start(std::ostream& stream, std::string const& name, T const& obj, StringificationOptions const& options = {},
                                       typename std::enable_if <Internal::can_stringify<T>::value, void>::type* = nullptr)
     {
         stream.put('{');
@@ -18,7 +18,7 @@ namespace JSON
     }
 
     template <typename T>
-    std::ostream& try_stringify(std::ostream& stream, std::string const& name, T const& obj, StringificationOptions const& options = DEFAULT_OPTIONS,
+    std::ostream& try_stringify(std::ostream& stream, std::string const& name, T const& obj, StringificationOptions const& options = {},
                                    typename std::enable_if <Internal::can_stringify<T>::value, void>::type* = nullptr)
     {
         stringify(stream, name, obj, options);
@@ -26,7 +26,7 @@ namespace JSON
     }
 
     template <typename T>
-    std::ostream& try_stringify(std::ostream& stream, std::string const&, T const&, StringificationOptions const& = DEFAULT_OPTIONS,
+    std::ostream& try_stringify(std::ostream& stream, std::string const&, T const&, StringificationOptions const& = {},
                                  typename std::enable_if <!Internal::can_stringify<T>::value, int>::type* = nullptr)
     {
         static_assert (Internal::can_stringify<T>::value, "the object you try to convert is not convertible to JSON");

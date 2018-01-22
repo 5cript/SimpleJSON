@@ -7,7 +7,7 @@ namespace JSON
 {
 	template <typename ValueT, typename CompareT = std::less <ValueT>, class AllocT = std::allocator <ValueT>>
 	void parse(std::map<std::string, ValueT, CompareT, AllocT>& value, std::string const& name,
-               PropertyTree const& object, ParsingOptions const& options = DEFAULT_PARSER_OPTIONS)
+               PropertyTree const& object, ParsingOptions const& options = {})
 	{
 		try
 		{

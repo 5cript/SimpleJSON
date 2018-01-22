@@ -72,7 +72,7 @@ namespace JSON
     }
 
     template <typename T>
-    std::ostream& stringify (std::ostream& stream, std::string const& name, boost::optional <T> const& value, StringificationOptions const& options = DEFAULT_OPTIONS)
+    std::ostream& stringify (std::ostream& stream, std::string const& name, boost::optional <T> const& value, StringificationOptions const& options = {})
     {
         // only write if actually existing
         if (value)

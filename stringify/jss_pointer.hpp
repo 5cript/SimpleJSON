@@ -8,7 +8,7 @@ namespace JSON
 {
     // pure object pointers:
     template <typename T>
-    std::ostream& stringify(std::ostream& stream, std::string const& name, T ptr, StringificationOptions const& options = DEFAULT_OPTIONS,
+    std::ostream& stringify(std::ostream& stream, std::string const& name, T ptr, StringificationOptions const& options = {},
                                typename std::enable_if <
                                   ( std::is_pointer<T>::value || std::is_member_object_pointer<T>::value )
                                   && !std::is_function<T>::value && !std::is_member_function_pointer<T>::value
@@ -35,5 +35,5 @@ namespace JSON
         return stream;
     }
 
-    std::ostream& stringify(std::ostream& stream, std::string const& name, std::nullptr_t ptr, StringificationOptions const& options = DEFAULT_OPTIONS);
+    std::ostream& stringify(std::ostream& stream, std::string const& name, std::nullptr_t ptr, StringificationOptions const& options = {});
 }

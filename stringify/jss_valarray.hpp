@@ -8,7 +8,7 @@
 namespace JSON
 {
     template <typename T>
-    std::ostream& stringify(std::ostream& stream, std::string const& name, std::valarray <T> const& values, StringificationOptions const& options = DEFAULT_OPTIONS,
+    std::ostream& stringify(std::ostream& stream, std::string const& name, std::valarray <T> const& values, StringificationOptions const& options = {},
                             typename std::enable_if<Internal::can_stringify<T>::value>::type* = nullptr)
     {
         using namespace Internal;

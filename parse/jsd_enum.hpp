@@ -9,7 +9,7 @@ namespace JSON
 {
     template <typename T>
 	void parse(T& value, std::string const& name,
-			   PropertyTree const& object, ParsingOptions const& options = DEFAULT_PARSER_OPTIONS,
+			   PropertyTree const& object, ParsingOptions const& options = {},
 			   typename std::enable_if<std::is_enum<T>::value>::type* = nullptr)
     {
         try

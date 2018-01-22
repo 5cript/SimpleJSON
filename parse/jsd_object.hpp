@@ -43,7 +43,7 @@ namespace JSON
 
 	template <typename T>
 	typename std::enable_if <Internal::isParsable<T>::value, void>::type
-	parse(T& value, std::string const& name, PropertyTree const& tree, ParsingOptions const& options = DEFAULT_PARSER_OPTIONS)
+	parse(T& value, std::string const& name, PropertyTree const& tree, ParsingOptions const& options = {})
 	{
 		value.parse(name, tree, options);
 	}

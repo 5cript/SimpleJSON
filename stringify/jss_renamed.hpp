@@ -7,7 +7,7 @@
 namespace JSON
 {
     template <typename T, typename Name>
-    std::ostream& stringify(std::ostream& stream, std::string const&, rename <T, Name> const& value, StringificationOptions options = DEFAULT_OPTIONS)
+    std::ostream& stringify(std::ostream& stream, std::string const&, rename <T, Name> const& value, StringificationOptions options = {})
     {
         constexpr const auto name = Name::c_str;
         WRITE_NAME(stream);

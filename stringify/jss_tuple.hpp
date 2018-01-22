@@ -42,7 +42,7 @@ namespace JSON
     }
 
     template <template <typename, typename = std::allocator <std::string> > class NameContainerT, typename ... Types>
-    std::ostream& stringify (std::ostream& stream, std::string const& name, NameContainerT <std::string> const& names, std::tuple <Types...> values, StringificationOptions options = DEFAULT_OPTIONS)
+    std::ostream& stringify (std::ostream& stream, std::string const& name, NameContainerT <std::string> const& names, std::tuple <Types...> values, StringificationOptions options = {})
     {
         std::deque <std::string> d_names {names.begin(), names.end()};
         std::vector <std::string> result;
@@ -54,14 +54,14 @@ namespace JSON
     }
 
     template <typename ... Types>
-    std::ostream& stringify (std::ostream& stream, std::string const& name, std::initializer_list <std::string> const& names, std::tuple <Types...> values, StringificationOptions const& options = DEFAULT_OPTIONS)
+    std::ostream& stringify (std::ostream& stream, std::string const& name, std::initializer_list <std::string> const& names, std::tuple <Types...> values, StringificationOptions const& options = {})
     {
         return stringify <std::deque>(stream, name, std::deque<std::string>{names}, values, options);
     }
 
     // for classes and checkings
     template <typename ... Types>
-    std::ostream& stringify (std::ostream& stream, std::string const& name, std::tuple <Types...> values, StringificationOptions const& options = DEFAULT_OPTIONS)
+    std::ostream& stringify (std::ostream& stream, std::string const& name, std::tuple <Types...> values, StringificationOptions const& options = {})
     {
         return stringify(stream, name, {}, values, options);
     }
