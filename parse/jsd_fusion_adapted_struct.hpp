@@ -19,7 +19,8 @@ namespace JSON
     class AdaptedParser
     {
     public:
-        void operator()(T& object, std::string const& name, PropertyTree const& tree, ParsingOptions const& options) const
+        typename std::enable_if <Internal::isParsable<T>::value, void>::type
+        operator()(T& object, std::string const& name, PropertyTree const& tree, ParsingOptions const& options) const
         {
             //! If you get an Error here, you likely forgot to use BOOST_FUSION_ADAPT_STRUCT !
 

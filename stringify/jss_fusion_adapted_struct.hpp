@@ -7,6 +7,7 @@
 #endif
 
 #include "jss_optional.hpp"
+#include "../utility/optional_info.hpp"
 #include "../utility/polymorphy.hpp"
 
 #include <type_traits>
