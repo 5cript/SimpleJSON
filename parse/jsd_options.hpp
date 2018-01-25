@@ -29,9 +29,9 @@ namespace JSON
             InvalidPathHandlingBehaviour invalidPathHandler = InvalidPathHandlingBehaviour::THROW,
             bool strings_are_binary = false
         )
-            : invalidPropertyHandler(invalidPropertyHandler)
-            , invalidPathHandler(invalidPathHandler)
-            , strings_are_binary(strings_are_binary)
+            : invalidPropertyHandler{invalidPropertyHandler}
+            , invalidPathHandler{invalidPathHandler}
+            , strings_are_binary{strings_are_binary}
         {}
 	};
 

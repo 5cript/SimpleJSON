@@ -9,15 +9,17 @@ namespace JSON
         stream << '"';
         if (!options.strings_are_binary)
         {
-            /*
-            for (auto const& i : value)
+            if (options.escape_strings)
             {
-                if (i == '"' || i == '\\')
-                    stream.put('\\');
-                stream.put(i);
+                for (auto const& i : value)
+                {
+                    if (i == '"' || i == '\\')
+                        stream.put('\\');
+                    stream.put(i);
+                }
             }
-            */
-            stream << value;
+            else
+                stream << value;
         }
         else
         {

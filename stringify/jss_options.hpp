@@ -21,19 +21,22 @@ namespace JSON
         PointerHandling ptr_behaviour;
         bool in_object;
         bool strings_are_binary;
+        bool escape_strings;
 
         StringificationOptions (bool ignore_name = false,
                                 std::string delimiter = ",",
                                 bool reverse_order = false,
                                 PointerHandling ptr_behaviour = {},
                                 bool in_object = false,
-                                bool strings_are_binary = false)
+                                bool strings_are_binary = false,
+                                bool escape_strings = true)
             : ignore_name {ignore_name}
             , delimiter {delimiter}
             , reverse_order {reverse_order}
             , ptr_behaviour {ptr_behaviour}
             , in_object {in_object}
             , strings_are_binary {strings_are_binary}
+            , escape_strings {escape_strings}
         {}
     };
 
