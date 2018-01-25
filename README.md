@@ -5,16 +5,17 @@
 2. [Introduction](https://github.com/5cript/SimpleJSON#introduction)
 3. [Example 1](https://github.com/5cript/SimpleJSON#Example1)
 4. [Example 2](https://github.com/5cript/SimpleJSON#Example2)
+4. [Useful Utility](https://github.com/5cript/SimpleJSON#Useful-Utility)
 5. [Details](https://github.com/5cript/SimpleJSON#details)
   * [How does stringify work?](https://github.com/5cript/SimpleJSON#how-does-stringify-work)
   * [stringify behaviour (and STL stringification)](https://github.com/5cript/SimpleJSON#stringify-behaviour-and-stl-stuff-stringification)
 6. [Reference](https://github.com/5cript/SimpleJSON#reference)
 
 ## Preface
-Please submit pull requests if you don't agree with some behaviour or found a bug, I would appreciate it.
+Please submit pull requests if you don't agree with some behavior or found a bug, I would appreciate it.
 The library is further matured now and changes less. 
 
-This library can parse and stringify and is designed for easy use.
+This library can parse and stringify and is designed for ease of use.
 Nobody wants to write parsing and stringification methods for every class they write. We rather want it
 to work "just like that" without thinking about it. This is where this library fits in.
 This idea of producing and consuming JSON has become the "Hello World of Introspection".
@@ -24,19 +25,19 @@ Since release 0.3, the library also features basic JSON beautification using boo
 ## Introduction
 A JSON stringifier / parser that uses boost fusion introspection methods for automagic struct &lt;-> JSON conversion
 
-Its supports almost all STL contstructs in stringify and the most important for parse. 
+It supports almost all STL contstructs in stringify and the most important for parse. 
 With the STL as a basis it is an easy to extend mechanism using classes. Use boost fusion and the provided utility
 (see example below) or provide your own parse/stringify methods.
 
 NOTE: The performance of this library is mostly influenced by boost property tree which is used for parsing JSON.
-The main focus of this library is not speed, but ease of use and convenience. If you want to be fast, try RapidJson (not saying it is particullarly slow, but probably not suitable for high data frequency or big bulk data application)
+The main focus of this library is not speed, but ease of use and convenience. If you want to be fast, try RapidJson (not saying it is particularly slow, but probably not suitable for high data frequency or big bulk data application)
 
 Dependencies:
 > boost/property_tree <br>
 > boost/fusion <br>
 > boost/mpl <br>
 
-## Example0
+## Example 0
 ```C++
 #ifndef Q_MOC_RUN // A Qt workaround, for those of you who use Qt
 #   include <SimpleJSON/parse/jsd.hpp>
@@ -65,21 +66,13 @@ int main()
 }
 ```
 
-## Example1
+## Example 1
 ```C++
-#ifndef Q_MOC_RUN // A Qt workaround, for those of you who use Qt
-#   include <SimpleJSON/parse/jsd.hpp>
-#   include <SimpleJSON/parse/jsd_convenience.hpp>
-#   include <SimpleJSON/stringify/jss.hpp>
-#   include <SimpleJSON/stringify/jss_fusion_adapted_struct.hpp>
-#endif
-
 #include <string>
 #include <vector>
 #include <sstream>
 
-struct ConfigContent : public JSON::Stringifiable <ConfigContent>
-                     , public JSON::Parsable <ConfigContent>
+struct ConfigContent
 {
     int id;
     std::string libPath;
@@ -94,21 +87,8 @@ BOOST_FUSION_ADAPT_STRUCT
     (std::vector <std::string>, someContainer)
 )
 
-ConfigContent parse(std::istream& json)
-{
-    ConfigContent cc;
-    auto tree = JSON::parse_json(json);
-    JSON::parse(cc, "config_content", tree);
-    return cc;
-}
-
-std::ostream& stringify(std::ostream& stream, ConfigContent const& cc)
-{
-    stream << "{";
-    JSON::try_stringify(stream, "config_content", cc, JSON::ProduceNamedOutput);
-    stream << "}";
-    return stream;
-}
+JSON_INJECT_STRINGIFY(ConfigContent)
+JSON_INJECT_PARSE(ConfigContent)
 
 int main()
 {
@@ -118,8 +98,9 @@ int main()
     cc.someContainer = {"Hello", "World"};
 
     std::stringstream sstr;
-    stringify(sstr, cc);
-    auto unnecessarilyComplexCopy = parse(sstr);
+    JSON::stringify(sstr, "", cc);
+    ConfigContent unnecessarilyComplexCopy;
+    JSON::parse(unnecessarilyComplexCopy, "", JSON::parse_json(sstr));
 
     /////////////////////////////////////////////////////////////////////////
     // Lets check if we got what we set
@@ -133,7 +114,30 @@ int main()
 }
 ```
 
-## Example2
+##Example 1B
+An alternatvie to deriving. Does not handle polymorphic structs.
+Especially useful for structs, you did not create.
+```C++
+struct ConfigContent
+{
+    int id;
+    std::string libPath;
+    std::vector <std::string> someContainer;
+};
+
+BOOST_FUSION_ADAPT_STRUCT
+(
+    ConfigContent,
+    (int, id)
+    (std::string, libPath)
+    (std::vector <std::string>, someContainer)
+)
+
+JSON_INJECT_STRINGIFY(ConfigContent)
+JSON_INJECT_PARSE(ConfigContent)
+```
+
+## Example 2
  (Showing polymorphic serlialization / deserialization)
 ```C++
 #ifndef Q_MOC_RUN // A Qt workaround, for those of you who use Qt
@@ -235,6 +239,29 @@ int main()
 }
 ```
 
+## Useful Utility
+### JSON::Base64 <T> mem;
+mem will be handled as a base64 string. useful if mem can contain any character or binary sequence, including quotes.
+
+### fill_missing
+```C++
+auto tree = JSON::parse_json(str); // str contains some JSON.
+JSON::fill_missing <MyJsonType> ("", tree); // missing members in the tree of MyJsonType get default constructed.
+```
+### JSON::rename <T, Name>
+Renames a member. This is necessary if something is not a valid C++ identifier, such as "." or "6".
+```C++
+struct MyJsonType : /* ... */
+{
+	/**
+	 *	SJSON_SHORT_STRING -> handles up to 16 characters. (prefer whenever possible)
+	 *	SJSON_STRING -> handles up to 64 characters.
+	 *	SJSON_LONG_STRING -> 256 chars. (dont use if possible, heavy compiler performance hit)
+	 *	SJSON_LONG_LONG_STRING -> 1024 chars. (dont use if possible, heavy compiler performance hit)
+	 */
+	JSON::rename <std::string, SJSON_SHORT_STRING("__.bla")> blaProperty;
+};
+```
 
 ## Details
 ### How does stringify work?

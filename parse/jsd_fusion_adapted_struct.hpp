@@ -19,7 +19,8 @@ namespace JSON
     class AdaptedParser
     {
     public:
-        typename std::enable_if <Internal::isParsable<T>::value, void>::type
+        //typename std::enable_if <Internal::isParsable<T>::value, void>::type
+        void
         operator()(T& object, std::string const& name, PropertyTree const& tree, ParsingOptions const& options) const
         {
             //! If you get an Error here, you likely forgot to use BOOST_FUSION_ADAPT_STRUCT !
@@ -73,4 +74,19 @@ namespace JSON
         }
         virtual ~Parsable() = default;
     };
+}
+
+#define JSON_INJECT_PARSE(ClassName) \
+namespace JSON \
+{ \
+    void parse( \
+        ClassName& obj, \
+        std::string const& name, \
+        PropertyTree const& tree, \
+        ParsingOptions const& options = {} \
+    ) \
+    { \
+        AdaptedParser<ClassName> parser; \
+        parser(obj, name, tree, options); \
+    } \
 }

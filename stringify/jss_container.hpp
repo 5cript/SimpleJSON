@@ -4,6 +4,7 @@
 #include "jss_object.hpp"
 #include "jss_check.hpp"
 #include "jss_optional.hpp"
+#include "../utility/optional_info.hpp"
 #include <functional>
 
 namespace JSON { namespace Internal

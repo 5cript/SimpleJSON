@@ -118,3 +118,21 @@ namespace JSON
         virtual ~Stringifiable() = default;
     };
 }
+
+#define JSON_INJECT_STRINGIFY(ClassName) \
+namespace JSON \
+{ \
+    std::ostream& stringify( \
+        std::ostream& stream, \
+        std::string const& name, \
+        ClassName const& value, \
+        StringificationOptions options = {} \
+    ) \
+    { \
+        WRITE_NAME(stream); \
+        options.in_object = true; \
+        options.ignore_name = false; \
+        AdaptedStringifier <ClassName> stringifier; \
+        return stringifier(stream, value, options); \
+    } \
+}

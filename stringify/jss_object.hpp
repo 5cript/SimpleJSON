@@ -52,6 +52,6 @@ namespace JSON
 
     std::ostream& js_make_object(std::ostream& stream, std::vector <std::string> const& elements, StringificationOptions const& options = {});
 
-    #define JSON_VERIFY_CLASS_VALIDITY(T) \
+    #define JSON_ASSERT_CLASS_VALIDITY(T) \
     static_assert (JSON::Internal::is_js_object <T>::value, "The class/struct is not a stringifiable struct, please check the function signature");
 }

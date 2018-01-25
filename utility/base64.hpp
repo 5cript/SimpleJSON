@@ -22,40 +22,40 @@ namespace JSON
     template <typename CharType = char, template <typename...> class ContainerT = std::vector, typename... Dummys>
     void decodeBase64(std::string const& input, ContainerT <CharType, Dummys...>& bytes);
 
-    template <typename CharType = char, template <typename...> class ContainerT = std::vector>
+    template <typename ContainerT>
     struct Base64Binary
     {
-    private:
-        ContainerT <CharType> binary_;
+    protected:
+        ContainerT binary_;
 
     public:
 
-		using value_type		= CharType;
-		using allocator_type	= std::allocator <CharType>;
-		using reference			= CharType&;
-		using const_reference	= CharType const&;
-		using pointer			= typename std::allocator_traits <allocator_type>::pointer;
-		using const_pointer		= typename std::allocator_traits <allocator_type>::const_pointer;
-		using iterator			= typename ContainerT <CharType>::iterator;
-		using const_iterator	= typename ContainerT <CharType>::const_iterator;
-		using reverse_iterator	= typename ContainerT <CharType>::reverse_iterator;
-		using const_reverse_iterator = typename ContainerT <CharType>::const_reverse_iterator;
-		using difference_type	= typename ContainerT <CharType>::difference_type;
-		using size_type			= std::size_t;
+		using value_type		= typename ContainerT::value_type;
+		using allocator_type	= typename ContainerT::allocator_type;
+		using reference			= typename ContainerT::reference;
+		using const_reference	= typename ContainerT::const_reference;
+		using pointer			= typename ContainerT::pointer;
+		using const_pointer		= typename ContainerT::const_pointer;
+		using iterator			= typename ContainerT::iterator;
+		using const_iterator	= typename ContainerT::const_iterator;
+		using reverse_iterator	= typename ContainerT::reverse_iterator;
+		using const_reverse_iterator = typename ContainerT::const_reverse_iterator;
+		using difference_type	= typename ContainerT::difference_type;
+		using size_type			= typename ContainerT::size_type;
 
-        ContainerT <CharType>& get() { return binary_; }
+        ContainerT& get() { return binary_; }
 
-		Base64Binary ()
-		{ }
+		Base64Binary() = default;
+		virtual ~Base64Binary() = default;
 
-        explicit Base64Binary (ContainerT <CharType> container)
+        explicit Base64Binary(ContainerT container)
             : binary_(std::move(container))
         { }
 
         /**
          *  This constructor does stop on the null terminator '\0' (exclusive).
          */
-        Base64Binary (const CharType* init)
+        Base64Binary(const value_type* init)
             : binary_()
         {
             for (auto const* c = init; *c != '\0'; ++c)
@@ -67,18 +67,24 @@ namespace JSON
          *
          *  @return A string from the binary data.
          */
-        std::basic_string <CharType> toString() const
+        std::basic_string <value_type> toString() const
         {
             return {std::begin(binary_), std::end(binary_)};
         }
 
-        Base64Binary& operator= (ContainerT <CharType> const& container)
+        Base64Binary& operator=(ContainerT const& container)
         {
             binary_ = container;
             return *this;
         }
 
-        Base64Binary& operator= (const CharType* str)
+        friend std::ostream& operator<<(std::ostream& ostr, Base64Binary const& bb)
+        {
+            ostr << bb.binary_;
+            return ostr;
+        }
+
+        Base64Binary& operator=(const value_type* str)
         {
             binary_.clear();
             for (auto const* c = str; *c != '\0'; ++c)
@@ -86,7 +92,7 @@ namespace JSON
             return *this;
         }
 
-        operator ContainerT <CharType>& () { return binary_; }
+        operator ContainerT&() { return binary_; }
 
         iterator begin() { return binary_.begin(); }
         iterator end() { return binary_.end(); }
@@ -131,6 +137,9 @@ namespace JSON
             decodeBase64(str, binary_);
         }
     };
+
+    template <typename... List>
+    using Base64 = Base64Binary<List...>;
 }
 
 namespace JSON
