@@ -114,7 +114,7 @@ int main()
 }
 ```
 
-##Example 1B
+## Example 1B
 An alternatvie to deriving. Does not handle polymorphic structs.
 Especially useful for structs, you did not create.
 ```C++
@@ -240,10 +240,10 @@ int main()
 ```
 
 ## Useful Utility
-### JSON::Base64 <T> mem;
+### JSON::Base64 < T> mem;
 mem will be handled as a base64 string. useful if mem can contain any character or binary sequence, including quotes.
 
-### fill_missing
+### JSON::fill_missing
 ```C++
 auto tree = JSON::parse_json(str); // str contains some JSON.
 JSON::fill_missing <MyJsonType> ("", tree); // missing members in the tree of MyJsonType get default constructed.
