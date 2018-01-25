@@ -71,7 +71,6 @@ public:
                 else
                     deeperName = name + "." + boost::fusion::extension::struct_member_name<T, Index::value>::call();
 
-                std::cout << deeperName << "\n";
                 fill_missing <type>(deeperName, tree);
             }
             _helper(int len) : len(len) {}
