@@ -10,3 +10,4 @@ build/*
 build32/*
 *.astcache
 __history/
+build.sh
