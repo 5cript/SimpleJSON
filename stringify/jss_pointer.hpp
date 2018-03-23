@@ -27,7 +27,7 @@ namespace JSON
             }
             case (PointerHandling::ADDRESS):
             {
-                WRITE_NAME(stream);
+                SJSON_WRITE_NAME(stream);
                 stream << reinterpret_cast <uint_of_size<sizeof(void*)>::type> (ptr);
             }
             default: {};

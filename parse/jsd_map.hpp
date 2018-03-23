@@ -11,7 +11,7 @@ namespace JSON
 	{
 		try
 		{
-			GET_CHILD(name, pt, (std::map<std::string, ValueT, CompareT, AllocT>()));
+			SJSON_GET_CHILD(name, pt, (std::map<std::string, ValueT, CompareT, AllocT>()));
 			for (auto const& i : pt)
 			{
 				ValueT temp;
@@ -21,11 +21,11 @@ namespace JSON
 		}
 		catch (boost::property_tree::ptree_bad_data& exc)
 		{
-			DEFAULT_PROPERTY_ERROR_HANDLER((std::map<std::string, ValueT, CompareT, AllocT>()), (std::map<std::string, ValueT, CompareT, AllocT>()));
+			SJSON_DEFAULT_PROPERTY_ERROR_HANDLER((std::map<std::string, ValueT, CompareT, AllocT>()), (std::map<std::string, ValueT, CompareT, AllocT>()));
 		}
         catch (boost::property_tree::ptree_bad_path& exc)
         {
-			DEFAULT_PATH_ERROR_HANDLER((std::map<std::string, ValueT, CompareT, AllocT>()), (std::map<std::string, ValueT, CompareT, AllocT>()));
+			SJSON_DEFAULT_PATH_ERROR_HANDLER((std::map<std::string, ValueT, CompareT, AllocT>()), (std::map<std::string, ValueT, CompareT, AllocT>()));
         }
 	}
 }

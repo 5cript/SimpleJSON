@@ -21,7 +21,7 @@ namespace JSON
         }
         catch (boost::property_tree::ptree_bad_data& exc)
         {
-			DEFAULT_PROPERTY_ERROR_HANDLER(T(), T());
+			SJSON_DEFAULT_PROPERTY_ERROR_HANDLER(T(), T());
         }
         // cannot throw ptree_bad_path
     }

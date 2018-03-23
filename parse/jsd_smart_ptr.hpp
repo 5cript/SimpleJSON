@@ -33,7 +33,7 @@ namespace JSON
             {
                 using element_type = typename std::decay<T>::type::element_type;
                 value.reset(new element_type{});
-                GET_VALUE(element_type, name, *value, {});
+                SJSON_GET_VALUE(element_type, name, *value, {});
             }
         };
 
@@ -69,11 +69,11 @@ namespace JSON
                 }
                 catch (boost::property_tree::ptree_bad_data& exc)
                 {
-                    DEFAULT_PROPERTY_ERROR_HANDLER({},{});
+                    SJSON_DEFAULT_PROPERTY_ERROR_HANDLER({},{});
                 }
                 catch (boost::property_tree::ptree_bad_path& exc)
                 {
-                    DEFAULT_PATH_ERROR_HANDLER({},{});
+                    SJSON_DEFAULT_PATH_ERROR_HANDLER({},{});
                 }
             }
         };

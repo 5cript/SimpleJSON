@@ -16,16 +16,16 @@ namespace JSON
 		{
             using integer_type = typename type_of_size <sizeof(T) * 8>::type;
             integer_type temp;
-		    GET_VALUE(integer_type, name, temp, T());
+		    SJSON_GET_VALUE(integer_type, name, temp, T());
 		    value = static_cast <T>(temp);
 		}
 		catch (boost::property_tree::ptree_bad_data& exc)
 		{
-			DEFAULT_PROPERTY_ERROR_HANDLER(T(), T());
+			SJSON_DEFAULT_PROPERTY_ERROR_HANDLER(T(), T());
 		}
         catch (boost::property_tree::ptree_bad_path& exc)
         {
-			DEFAULT_PATH_ERROR_HANDLER(T(), T());
+			SJSON_DEFAULT_PATH_ERROR_HANDLER(T(), T());
         }
     }
 }

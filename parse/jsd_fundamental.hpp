@@ -5,24 +5,33 @@
 
 namespace JSON
 {
-	template <typename T,
-			  class = typename std::enable_if<  (std::is_arithmetic<T>::value && !std::is_same<T, char>::value && !std::is_same<T, wchar_t>::value)
-                                              && !std::is_enum<T>::value         >::type
-			 >
-	void parse(T& value, std::string const& name,
-			   PropertyTree const& object, ParsingOptions const& options = {})
+	template <
+        typename T,
+		class = typename std::enable_if<(
+            std::is_arithmetic<T>::value &&
+            !std::is_same<T, char>::value &&
+            !std::is_same<T, wchar_t>::value) &&
+            !std::is_enum<T>::value
+        >::type
+    >
+	void parse(
+        T& value,
+        std::string const& name,
+        PropertyTree const& object,
+        ParsingOptions const& options = {}
+    )
 	{
 		try
 		{
-		    GET_VALUE(T, name, value, T());
+		    SJSON_GET_VALUE(T, name, value, T());
 		}
 		catch (boost::property_tree::ptree_bad_data& exc)
 		{
-			DEFAULT_PROPERTY_ERROR_HANDLER(T(), T());
+			SJSON_DEFAULT_PROPERTY_ERROR_HANDLER(T(), T());
 		}
         catch (boost::property_tree::ptree_bad_path& exc)
         {
-			DEFAULT_PATH_ERROR_HANDLER(T(), T());
+			SJSON_DEFAULT_PATH_ERROR_HANDLER(T(), T());
         }
 	}
 

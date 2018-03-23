@@ -23,34 +23,34 @@ namespace JSON
 
     constexpr auto TemplateRecursionMaximum = 8;
 
-    #define CLASS_STRINGIFY_FUNCTION_NAME stringify
+    #define SJSON_CLASS_STRINGIFY_FUNCTION_NAME stringify
 
-    #define WRITE_NAME(STREAM)                          \
+    #define SJSON_WRITE_NAME(STREAM)                          \
     if (!options.ignore_name && options.in_object)      \
     {   STREAM << '"' << name << "\":";  }
 
-    #define WRITE_OBJECT_START(STREAM)                  \
-            WRITE_NAME(STREAM)                          \
+    #define SJSON_WRITE_OBJECT_START(STREAM)                  \
+            SJSON_WRITE_NAME(STREAM)                          \
     STREAM << "{"
 
-    #define WRITE_ARRAY_START(STREAM)                   \
-            WRITE_NAME(STREAM)                          \
+    #define SJSON_WRITE_ARRAY_START(STREAM)                   \
+            SJSON_WRITE_NAME(STREAM)                          \
     STREAM << "["
 
-    #define WRITE_OBJECT_END(STREAM)                    \
+    #define SJSON_WRITE_OBJECT_END(STREAM)                    \
     STREAM << "}"
 
-    #define WRITE_ARRAY_END(STREAM)                     \
+    #define SJSON_WRITE_ARRAY_END(STREAM)                     \
     STREAM << "]"
 
     inline std::ostream& stringify_object_start(std::ostream& stream, std::string const& name, StringificationOptions const& options)
     {
-        WRITE_OBJECT_START(stream);
+        SJSON_WRITE_OBJECT_START(stream);
         return stream;
     }
     inline std::ostream& stringify_object_end(std::ostream& stream)
     {
-        WRITE_OBJECT_END(stream);
+        SJSON_WRITE_OBJECT_END(stream);
         return stream;
     }
 
@@ -81,5 +81,5 @@ namespace JSON
         StringificationOptions& options_;
     };
 
-    #define JSON_OBJECT_STRINGIFY(stream, options) object_scope(stream, options) _json_os__;
+    #define SJSON_OBJECT_STRINGIFY(stream, options) object_scope(stream, options) _json_os__;
 }

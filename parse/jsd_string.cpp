@@ -10,22 +10,22 @@ void parse(std::string& value, std::string const& name,
     {
         if (!options.strings_are_binary)
         {
-            GET_VALUE(std::string, name, value, "");
+            SJSON_GET_VALUE(std::string, name, value, "");
         }
         else
         {
             std::string encoded;
-            GET_VALUE(std::string, name, encoded, "");
+            SJSON_GET_VALUE(std::string, name, encoded, "");
             decodeBase64 <char, std::basic_string> (encoded, value);
         }
     }
     catch (boost::property_tree::ptree_bad_data& exc)
     {
-        DEFAULT_PROPERTY_ERROR_HANDLER("", "");
+        SJSON_DEFAULT_PROPERTY_ERROR_HANDLER("", "");
     }
     catch (boost::property_tree::ptree_bad_path& exc)
     {
-        DEFAULT_PATH_ERROR_HANDLER("", "");
+        SJSON_DEFAULT_PATH_ERROR_HANDLER("", "");
     }
 }
 

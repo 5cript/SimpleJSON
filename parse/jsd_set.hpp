@@ -13,7 +13,7 @@ namespace JSON
 	{
 		try
 		{
-			GET_CHILD(name, pt, std::set<T>{});
+			SJSON_GET_CHILD(name, pt, std::set<T>{});
 			for (auto const& i : pt)
 			{
 				T temp;
@@ -23,11 +23,11 @@ namespace JSON
 		}
 		catch (boost::property_tree::ptree_bad_data& exc)
 		{
-			DEFAULT_PROPERTY_ERROR_HANDLER(std::set<T>{}, std::set<T>{});
+			SJSON_DEFAULT_PROPERTY_ERROR_HANDLER(std::set<T>{}, std::set<T>{});
 		}
         catch (boost::property_tree::ptree_bad_path& exc)
         {
-			DEFAULT_PATH_ERROR_HANDLER(std::set<T>{}, std::set<T>{});
+			SJSON_DEFAULT_PATH_ERROR_HANDLER(std::set<T>{}, std::set<T>{});
         }
 	}
 }

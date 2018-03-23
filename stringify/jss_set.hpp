@@ -11,7 +11,7 @@ namespace JSON
         static_assert (!Internal::is_optional <KVT>::value, "A set of boost::optional is not allowed");
         using namespace Internal;
 
-        WRITE_ARRAY_START(stream);
+        SJSON_WRITE_ARRAY_START(stream);
         if (!values.empty())
         {
             options.ignore_name = true;
@@ -24,7 +24,7 @@ namespace JSON
             }
             stringify (stream, {}, *values.rbegin(), options);
         }
-        WRITE_ARRAY_END(stream);
+        SJSON_WRITE_ARRAY_END(stream);
         return stream;
     }
 
@@ -33,7 +33,7 @@ namespace JSON
     {
         using namespace Internal;
 
-        WRITE_ARRAY_START(stream);
+        SJSON_WRITE_ARRAY_START(stream);
         options.ignore_name = true;
 
         bool first = true;
@@ -47,7 +47,7 @@ namespace JSON
                 first = false;
             }
         }
-        WRITE_ARRAY_END(stream);
+        SJSON_WRITE_ARRAY_END(stream);
         return stream;
     }
 }

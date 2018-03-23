@@ -15,7 +15,7 @@ namespace JSON
             }
             case (PointerHandling::ADDRESS):
             {
-                WRITE_NAME(stream);
+                SJSON_WRITE_NAME(stream);
                 stream << 0u;
                 return stream;
             }

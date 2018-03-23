@@ -14,7 +14,7 @@ namespace JSON
                             StringificationOptions const& options = {},
                             typename std::enable_if <std::is_enum <T>::value>::type* = nullptr)
     {
-        WRITE_NAME(stream);
+        SJSON_WRITE_NAME(stream);
         stream << static_cast <typename type_of_size <sizeof(T) * 8>::type> (value);
         return stream;
     }

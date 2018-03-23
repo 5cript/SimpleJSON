@@ -76,7 +76,7 @@ namespace JSON
     };
 }
 
-#define JSON_INJECT_PARSE(ClassName) \
+#define SJSON_INJECT_PARSE(ClassName) \
 namespace JSON \
 { \
     void parse( \

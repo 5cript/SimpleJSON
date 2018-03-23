@@ -16,6 +16,7 @@ namespace JSON
 		boost::property_tree::ptree tree;
 
 		PropertyTree(boost::property_tree::ptree tree = {});
+		void to_stream(std::ostream& stream);
 	};
 
 	PropertyTree parse_json(std::istream& stream);

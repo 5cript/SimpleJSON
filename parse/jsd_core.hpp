@@ -60,7 +60,7 @@ namespace JSON
     };
     */
 
-    #define GET_VALUE(TYPE, NAME, TEMP, TAG_VALUE) \
+    #define SJSON_GET_VALUE(TYPE, NAME, TEMP, TAG_VALUE) \
     if (options.invalidPathHandler == InvalidPathHandlingBehaviour::IGNORE_ALL_ERROR || \
         options.invalidPathHandler == InvalidPathHandlingBehaviour::TAG) \
     { \
@@ -82,7 +82,7 @@ namespace JSON
     }
     // MAKRO END
 
-    #define GET_CHILD(NAME, RESULT, TAG_VALUE) \
+    #define SJSON_GET_CHILD(NAME, RESULT, TAG_VALUE) \
     decltype(object.tree) RESULT;\
     if (options.invalidPathHandler == InvalidPathHandlingBehaviour::IGNORE_ALL_ERROR || \
         options.invalidPathHandler == InvalidPathHandlingBehaviour::TAG) \
@@ -105,7 +105,7 @@ namespace JSON
     }
     // MAKRO END
 
-    #define DEFAULT_PROPERTY_ERROR_HANDLER(DEFAULT_VALUE, TAG_VALUE)		\
+    #define SJSON_DEFAULT_PROPERTY_ERROR_HANDLER(DEFAULT_VALUE, TAG_VALUE)		\
 	switch (options.invalidPropertyHandler) {								\
 		case (InvalidPropertyHandlingBehaviour::DEFAULT):		\
 			/* value = {}; */\
@@ -120,7 +120,7 @@ namespace JSON
 	}
 	// MAKRO END
 
-	#define DEFAULT_PATH_ERROR_HANDLER(DEFAULT_VALUE, TAG_VALUE)		\
+	#define SJSON_DEFAULT_PATH_ERROR_HANDLER(DEFAULT_VALUE, TAG_VALUE)		\
 	switch (options.invalidPathHandler) {								\
 		case (InvalidPathHandlingBehaviour::DEFAULT):		\
 			/* value = {}; */\

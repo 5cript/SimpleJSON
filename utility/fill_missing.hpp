@@ -22,7 +22,7 @@ namespace JSON
     template <typename T>
     class Filler
     {
-public:
+    public:
         template <typename U = T>
         typename std::enable_if <Internal::isParsable<U>::value, void>::type
         operator()(std::string const& name, PropertyTree& tree) const

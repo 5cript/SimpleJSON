@@ -49,7 +49,7 @@ namespace JSON
         options.ignore_name = false;
         options.in_object = true;
         JS_Tuple::traverse_tuple<std::tuple> (values, result, d_names, options);
-        WRITE_NAME(stream);
+        SJSON_WRITE_NAME(stream);
         return js_make_object(stream, result);
     }
 

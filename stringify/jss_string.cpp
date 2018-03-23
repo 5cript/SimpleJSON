@@ -5,7 +5,7 @@ namespace JSON
 {
     std::ostream& stringify (std::ostream& stream, std::string const& name, std::string const& value, StringificationOptions const& options)
     {
-        WRITE_NAME(stream);
+        SJSON_WRITE_NAME(stream);
         stream << '"';
         if (!options.strings_are_binary)
         {

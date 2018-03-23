@@ -7,19 +7,25 @@
 namespace JSON
 {
 	using namespace boost::property_tree;
-
+//#####################################################################################################################
 	PropertyTree::PropertyTree(boost::property_tree::ptree tree)
 		: tree(tree)
 	{
 
 	}
-// ======================================================================================================
+//---------------------------------------------------------------------------------------------------------------------
+	void PropertyTree::to_stream(std::ostream& stream)
+	{
+        write_json(stream, tree);
+	}
+//#####################################################################################################################
 	PropertyTree parse_json(std::istream& stream)
 	{
 		ptree pt;
 		read_json(stream, pt);
 		return PropertyTree(pt);
 	}
+//---------------------------------------------------------------------------------------------------------------------
 	PropertyTree parse_json(std::string const& str)
 	{
 		std::stringstream sstr(str);
@@ -28,7 +34,7 @@ namespace JSON
 		read_json(sstr, pt);
 		return PropertyTree(pt);
 	}
-
+//---------------------------------------------------------------------------------------------------------------------
 	boost::optional<PropertyTree> parse_auto(std::istream& stream)
 	{
 		ptree pt;
@@ -62,7 +68,7 @@ namespace JSON
 
 		return boost::make_optional( PropertyTree(pt) );
 	}
-
+//---------------------------------------------------------------------------------------------------------------------
 	boost::optional<PropertyTree> parse_xml(std::istream& stream)
 	{
 		ptree pt;
@@ -75,4 +81,5 @@ namespace JSON
 			return boost::optional<PropertyTree>();
 		}
 	}
+//#####################################################################################################################
 }

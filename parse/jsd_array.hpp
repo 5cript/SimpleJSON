@@ -12,7 +12,7 @@ namespace JSON
 	{
 		try
 		{
-		    GET_CHILD(name, pt, {});
+		    SJSON_GET_CHILD(name, pt, {});
 
 			int pos = 0;
 			for (auto const& i : pt)
@@ -24,14 +24,16 @@ namespace JSON
 				else if (options.invalidPropertyHandler != InvalidPropertyHandlingBehaviour::IGNORE_ALL_ERROR)
 					throw std::out_of_range("there is more data to be read, but the array is full");
 			}
+            for (; pos < static_cast <decltype(pos)>(N); ++pos)
+                value[pos] = 0;
 		}
 		catch (boost::property_tree::ptree_bad_data& exc)
 		{
-			DEFAULT_PROPERTY_ERROR_HANDLER({}, {});
+			SJSON_DEFAULT_PROPERTY_ERROR_HANDLER({}, {});
 		}
         catch (boost::property_tree::ptree_bad_path& exc)
         {
-			DEFAULT_PATH_ERROR_HANDLER({}, {});
+			SJSON_DEFAULT_PATH_ERROR_HANDLER({}, {});
         }
 	}
 }

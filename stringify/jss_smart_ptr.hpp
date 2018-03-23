@@ -18,7 +18,7 @@ namespace JSON
             static void exec(std::ostream& stream, const std::string& name, T const& value, StringificationOptions const& options)
             {
                 if (options.in_object && !options.ignore_name)
-                    WRITE_NAME(stream);
+                    SJSON_WRITE_NAME(stream);
                 value->stringify(stream, options);
             }
         };
@@ -30,7 +30,7 @@ namespace JSON
             {
                 //value->stringify(stream, options);
                 if (options.in_object && !options.ignore_name)
-                    WRITE_NAME(stream);
+                    SJSON_WRITE_NAME(stream);
                 polydecls <typename T::element_type>::smart_pointer_set(value, stream, options);
             }
         };

@@ -14,7 +14,7 @@ namespace JSON
     {
         using namespace Internal;
 
-        WRITE_OBJECT_START(stream);
+        SJSON_WRITE_OBJECT_START(stream);
         options.in_object = true;
 
         bool first = true;
@@ -28,7 +28,7 @@ namespace JSON
                 first = false;
             }
         }
-        WRITE_OBJECT_END(stream);
+        SJSON_WRITE_OBJECT_END(stream);
         return stream;
     }
 
@@ -40,7 +40,7 @@ namespace JSON
     {
         using namespace Internal;
 
-        WRITE_ARRAY_START(stream);
+        SJSON_WRITE_ARRAY_START(stream);
         options.ignore_name = true;
 
         bool first = true;
@@ -50,13 +50,13 @@ namespace JSON
             {
                 if (!first)
                     stream << options.delimiter;
-                WRITE_ARRAY_START(stream);
+                SJSON_WRITE_ARRAY_START(stream);
                 stringify_map_pair_2(stream, i, options);
-                WRITE_ARRAY_END(stream);
+                SJSON_WRITE_ARRAY_END(stream);
                 first = false;
             }
         }
-        WRITE_ARRAY_END(stream);
+        SJSON_WRITE_ARRAY_END(stream);
         return stream;
     }
 }

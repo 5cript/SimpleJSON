@@ -10,7 +10,7 @@ namespace JSON
     std::ostream& stringify(std::ostream& stream, std::string const&, rename <T, Name> const& value, StringificationOptions options = {})
     {
         constexpr const auto name = Name::c_str;
-        WRITE_NAME(stream);
+        SJSON_WRITE_NAME(stream);
         options.ignore_name = true;
         return JSON::stringify(stream, name, value.getValue(), options);
     }

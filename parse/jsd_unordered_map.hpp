@@ -12,7 +12,7 @@ namespace JSON
 	{
 		try
 		{
-			GET_CHILD(name, pt, (std::unordered_map<std::string, ValueT>()));
+			SJSON_GET_CHILD(name, pt, (std::unordered_map<std::string, ValueT>()));
 			for (auto const& i : pt)
 			{
 				ValueT temp;
@@ -22,11 +22,11 @@ namespace JSON
 		}
 		catch (boost::property_tree::ptree_bad_data& exc)
 		{
-			DEFAULT_PROPERTY_ERROR_HANDLER((std::unordered_map<std::string, ValueT>()), (std::unordered_map<std::string, ValueT>()));
+			SJSON_DEFAULT_PROPERTY_ERROR_HANDLER((std::unordered_map<std::string, ValueT>()), (std::unordered_map<std::string, ValueT>()));
 		}
         catch (boost::property_tree::ptree_bad_path& exc)
         {
-			DEFAULT_PATH_ERROR_HANDLER((std::unordered_map<std::string, ValueT>()), (std::unordered_map<std::string, ValueT>()));
+			SJSON_DEFAULT_PATH_ERROR_HANDLER((std::unordered_map<std::string, ValueT>()), (std::unordered_map<std::string, ValueT>()));
         }
 	}
 }

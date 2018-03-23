@@ -19,7 +19,7 @@ namespace JSON
 
             struct BaseMixin
             {
-                std::ostream& CLASS_STRINGIFY_FUNCTION_NAME(std::ostream& stream, StringificationOptions){ return stream; }
+                std::ostream& SJSON_CLASS_STRINGIFY_FUNCTION_NAME(std::ostream& stream, StringificationOptions){ return stream; }
             };
             struct Base : public Type, public BaseMixin {};
 
@@ -41,7 +41,7 @@ namespace JSON
     {
         using namespace Internal;
 
-        WRITE_NAME(stream);
+        SJSON_WRITE_NAME(stream);
 
         //! if you get an error here, your provided stringify functions is not const
         //! or if you used BOOST_FUSION_ADAPT_STRUCT, your adaption is incorrect
@@ -52,6 +52,6 @@ namespace JSON
 
     std::ostream& js_make_object(std::ostream& stream, std::vector <std::string> const& elements, StringificationOptions const& options = {});
 
-    #define JSON_ASSERT_CLASS_VALIDITY(T) \
+    #define SJSON_ASSERT_CLASS_VALIDITY(T) \
     static_assert (JSON::Internal::is_js_object <T>::value, "The class/struct is not a stringifiable struct, please check the function signature");
 }

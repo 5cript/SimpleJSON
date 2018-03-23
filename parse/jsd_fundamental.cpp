@@ -11,18 +11,18 @@ namespace JSON
         try
         {
             std::string s;
-            GET_VALUE(std::string, name, s, char());
+            SJSON_GET_VALUE(std::string, name, s, char());
 
             if (!s.empty())
                 value = s[0];
         }
 		catch (boost::property_tree::ptree_bad_data& exc)
 		{
-			DEFAULT_PROPERTY_ERROR_HANDLER(char(), char());
+			SJSON_DEFAULT_PROPERTY_ERROR_HANDLER(char(), char());
 		}
         catch (boost::property_tree::ptree_bad_path& exc)
         {
-			DEFAULT_PATH_ERROR_HANDLER(char(), char());
+			SJSON_DEFAULT_PATH_ERROR_HANDLER(char(), char());
         }
     }
     void parse(wchar_t& value, std::string const& name,
@@ -31,18 +31,18 @@ namespace JSON
         try
         {
             std::string s;
-            GET_VALUE(std::string, name, s, wchar_t());
+            SJSON_GET_VALUE(std::string, name, s, wchar_t());
 
             if (!s.empty())
                 value = s[0];
         }
 		catch (boost::property_tree::ptree_bad_data& exc)
 		{
-			DEFAULT_PROPERTY_ERROR_HANDLER(wchar_t(), wchar_t());
+			SJSON_DEFAULT_PROPERTY_ERROR_HANDLER(wchar_t(), wchar_t());
 		}
         catch (boost::property_tree::ptree_bad_path& exc)
         {
-			DEFAULT_PATH_ERROR_HANDLER(wchar_t(), wchar_t());
+			SJSON_DEFAULT_PATH_ERROR_HANDLER(wchar_t(), wchar_t());
         }
     }
 }

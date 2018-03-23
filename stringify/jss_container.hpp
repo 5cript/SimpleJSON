@@ -16,7 +16,7 @@ namespace JSON { namespace Internal
     {
         using namespace Internal;
 
-        WRITE_ARRAY_START(stream);
+        SJSON_WRITE_ARRAY_START(stream);
         auto noNameOption = options;
         noNameOption.ignore_name = true;
 
@@ -31,7 +31,7 @@ namespace JSON { namespace Internal
                 first = false;
             }
         }
-        WRITE_ARRAY_END(stream);
+        SJSON_WRITE_ARRAY_END(stream);
         return stream;
     }
 } // Internal

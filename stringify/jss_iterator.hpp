@@ -36,7 +36,7 @@ namespace JSON
                                                       is_bidirectional_iterator<IteratorT>::value ||
                                                       is_forward_iterator<IteratorT>::value>::type* = nullptr)
     {
-        WRITE_ARRAY_START(stream);
+        SJSON_WRITE_ARRAY_START(stream);
         options.ignore_name = true;
         if (range.end() != range.begin())
         {
@@ -55,7 +55,7 @@ namespace JSON
                 }
             }
         }
-        WRITE_ARRAY_END(stream);
+        SJSON_WRITE_ARRAY_END(stream);
         return stream;
     }
 }

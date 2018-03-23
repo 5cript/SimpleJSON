@@ -70,7 +70,14 @@ namespace JSON
 
             stream << '{';
             internal::Polify <Base, T>::exec(stream, first, object);
-            boost::mpl::for_each<range> (std::bind<void>(_helper(boost::fusion::result_of::size<T>::type::value), std::placeholders::_1, std::ref(stream), std::ref(first), std::ref(object), std::ref(options)));
+            boost::mpl::for_each<range>(std::bind<void>(_helper(
+                boost::fusion::result_of::size<T>::type::value),
+                std::placeholders::_1,
+                std::ref(stream),
+                std::ref(first),
+                std::ref(object),
+                std::ref(options)
+            ));
             stream << '}';
             return stream;
         }
@@ -119,7 +126,7 @@ namespace JSON
     };
 }
 
-#define JSON_INJECT_STRINGIFY(ClassName) \
+#define SJSON_INJECT_STRINGIFY(ClassName) \
 namespace JSON \
 { \
     std::ostream& stringify( \
@@ -129,7 +136,7 @@ namespace JSON \
         StringificationOptions options = {} \
     ) \
     { \
-        WRITE_NAME(stream); \
+        SJSON_WRITE_NAME(stream); \
         options.in_object = true; \
         options.ignore_name = false; \
         AdaptedStringifier <ClassName> stringifier; \

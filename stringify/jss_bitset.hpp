@@ -9,14 +9,14 @@ namespace JSON
     template <size_t Size, size_t TemplateRecursionMax = TemplateRecursionMaximum>
     std::ostream& stringify (std::ostream& stream, std::string const& name, std::bitset<Size> const& values, StringificationOptions const& options = {})
     {
-        WRITE_ARRAY_START(stream);
+        SJSON_WRITE_ARRAY_START(stream);
         for (unsigned i = 0; i < Size - 1; ++i)
         {
             stream << values[i];
             stream << options.delimiter;
         }
         stream << values[Size - 1];
-        WRITE_ARRAY_END(stream);
+        SJSON_WRITE_ARRAY_END(stream);
         return stream;
     }
 
@@ -24,8 +24,8 @@ namespace JSON
     std::ostream& stringify (std::ostream& stream, std::string const& name, std::bitset<Size> const& values, StringificationOptions const& options = {},
                                 typename std::enable_if <Size==0>::type* = nullptr)
     {
-        WRITE_ARRAY_START(stream);
-        WRITE_ARRAY_END(stream);
+        SJSON_WRITE_ARRAY_START(stream);
+        SJSON_WRITE_ARRAY_END(stream);
         return stream;
     }
 }
