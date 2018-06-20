@@ -289,7 +289,7 @@ std::string | "..." |
 fundamental types | themselves |
 JSON::IteratorRange <STL_IteratorT> | [...] |
 std::map &lt;std::string, T> | {"key": "value", "key2": "value2", ...} | A map basically represents a JSON object
-std::mutex | nothing | Only use if you must!
+std::mutex | nothing | ??? why would you???
 std::set | [...] |
 std::stack | [...] | Don't use if possible, better use deque.
 std::queue | [...] | Don't use if possible, better use deque.
