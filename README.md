@@ -87,8 +87,8 @@ BOOST_FUSION_ADAPT_STRUCT
     (std::vector <std::string>, someContainer)
 )
 
-JSON_INJECT_STRINGIFY(ConfigContent)
-JSON_INJECT_PARSE(ConfigContent)
+SJSON_INJECT_STRINGIFY(ConfigContent)
+SJSON_INJECT_PARSE(ConfigContent)
 
 int main()
 {
