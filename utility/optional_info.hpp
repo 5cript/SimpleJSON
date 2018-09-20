@@ -4,8 +4,15 @@
 #include "../utility/tmp_util/fundamental/is_same.hpp"
 #include "../utility/tmp_util/fundamental/null_type.hpp"
 
-// really want to swap with std::optional
 #include <boost/optional.hpp>
+
+#ifdef __has_include                           // Check if __has_include is present
+#   if __has_include(<optional>)                // Check for a standard library
+#       include <optional>
+#   elif __has_include(<experimental/optional>) // Check for an experimental version
+#       include <experimental/optional>
+#   endif
+#endif
 
 namespace JSON
 {
@@ -42,14 +49,21 @@ namespace JSON
         struct is_optional
         {
             using __value_type = JSON::eval_if_default_t <has_value_type_t <T>, JSON::null_t, get_value_type, T>;
-            using type = JSON::eval_if_default_t <
+            using type_boost = JSON::eval_if_default_t <
                 JSON::bool_ <!std::is_same <__value_type, JSON::null_t>::value>,
                 JSON::false_,
                 JSON::is_same,
                 T,
                 boost::optional <__value_type>
             >;
-            constexpr static const bool value = type::value;
+            using type_stl = JSON::eval_if_default_t <
+                JSON::bool_ <!std::is_same <__value_type, JSON::null_t>::value>,
+                JSON::false_,
+                JSON::is_same,
+                T,
+                std::optional <__value_type>
+            >;
+            constexpr static const bool value = type_boost::value || type_stl::value;
         };
 
         template <typename T, bool _is_optional>
