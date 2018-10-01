@@ -9,6 +9,16 @@ namespace JSON
         return stream;
     }
 
+    std::ostream& stringify(std::ostream& stream, std::string const& name, bool value, StringificationOptions const& options)
+    {
+        SJSON_WRITE_NAME(stream);
+        if (value)
+            stream << "true";
+        else
+            stream << "false";
+        return stream;
+    }
+
     std::ostream& stringify(std::ostream& stream, std::string const& name, wchar_t value, StringificationOptions const& options)
     {
         SJSON_WRITE_NAME(stream);

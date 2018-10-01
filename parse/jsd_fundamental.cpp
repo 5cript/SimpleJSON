@@ -5,6 +5,22 @@
 
 namespace JSON
 {
+    void parse(bool& value, std::string const& name,
+               PropertyTree const& object, ParsingOptions const& options)
+    {
+        try
+        {
+            SJSON_GET_VALUE(bool, name, value, bool());
+        }
+		catch (boost::property_tree::ptree_bad_data& exc)
+		{
+			SJSON_DEFAULT_PROPERTY_ERROR_HANDLER(char(), char());
+		}
+        catch (boost::property_tree::ptree_bad_path& exc)
+        {
+			SJSON_DEFAULT_PATH_ERROR_HANDLER(char(), char());
+        }
+    }
     void parse(char& value, std::string const& name,
               PropertyTree const& object, ParsingOptions const& options)
     {

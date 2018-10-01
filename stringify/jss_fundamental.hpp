@@ -17,6 +17,7 @@ namespace JSON
         return stream;
     }
 
+    std::ostream& stringify(std::ostream& stream, std::string const& name, bool value, StringificationOptions const& options = {});
     std::ostream& stringify(std::ostream& stream, std::string const& name, char value, StringificationOptions const& options = {});
     std::ostream& stringify(std::ostream& stream, std::string const& name, wchar_t value, StringificationOptions const& options = {});
 }

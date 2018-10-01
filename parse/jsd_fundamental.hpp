@@ -35,6 +35,8 @@ namespace JSON
         }
 	}
 
+	void parse(bool& value, std::string const& name,
+               PropertyTree const& object, ParsingOptions const& options = {});
 	void parse(char& value, std::string const& name,
                PropertyTree const& object, ParsingOptions const& options = {});
     void parse(wchar_t& value, std::string const& name,
