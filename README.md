@@ -239,6 +239,44 @@ int main()
 }
 ```
 
+## Example 3
+Shows formatted output to a file
+```C++
+#ifndef Q_MOC_RUN // A Qt workaround, for those of you who use Qt
+#   include <SimpleJSON/parse/jsd.hpp>
+#   include <SimpleJSON/stringify/jss.hpp>
+#   include <SimpleJSON/stringify/jss_fusion_adapted_struct.hpp>
+#endif
+
+struct Object : public JSON::Stringifiable <Object>
+              , public JSON::Parsable <Object>
+{
+    int A;
+    std::string B;
+    float C;
+}; 
+BOOST_FUSION_ADAPT_STRUCT(Object, A, B, C)
+
+int main()
+{
+    Object o;
+    try_stringifiy_beautiful("myfile.json", "root", o);
+
+    // alternative:
+    {
+        boost::iostreams::filtering_ostream filter;
+
+        // or however else, refer to boost::iostreams doc
+        filter.push(JSON::BeautifiedStreamWrapper{});
+        filter.push(boost::iostreams::file_sink(file));
+
+        // will not compile with a readable message, 
+        // if Object is not a JSON::Stringifiable
+        JSON::try_stringify_start(filter, "root", o);
+    }
+}
+```
+
 ## Useful Utility
 ### JSON::Base64 < T> mem;
 mem will be handled as a base64 string. useful if mem can contain any character or binary sequence, including quotes.

@@ -3,6 +3,10 @@
 #include "jss_core.hpp"
 #include "jss_check.hpp"
 
+#include "../utility/beauty_stream.hpp"
+
+#include <boost/iostreams/device/file.hpp>
+#include <boost/iostreams/filtering_stream.hpp>
 
 namespace JSON
 {
@@ -31,6 +35,20 @@ namespace JSON
     {
         static_assert (Internal::can_stringify<T>::value, "the object you try to convert is not convertible to JSON");
         return stream;
+    }
+
+    /**
+     *  Only works with files.
+     */
+    template <typename T>
+    void try_stringify_beautiful(std::string const& file, std::string const& name, T const& obj, StringificationOptions const& opts = {})
+    {
+        boost::iostreams::filtering_ostream filter;
+
+        filter.push(JSON::BeautifiedStreamWrapper{});
+        filter.push(boost::iostreams::file_sink(file));
+
+        JSON::try_stringify_start(filter, name, obj, opts);
     }
 }
 
