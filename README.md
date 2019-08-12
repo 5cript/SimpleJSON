@@ -272,7 +272,7 @@ int main()
 
         // will not compile with a readable message, 
         // if Object is not a JSON::Stringifiable
-        JSON::try_stringify_start(filter, "root", o);
+        JSON::try_stringify_start(filter, o);
     }
 }
 ```

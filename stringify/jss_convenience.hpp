@@ -41,14 +41,14 @@ namespace JSON
      *  Only works with files.
      */
     template <typename T>
-    void try_stringify_beautiful(std::string const& file, std::string const& name, T const& obj, StringificationOptions const& opts = {})
+    void try_stringify_beautiful(std::string const& file, T const& obj, StringificationOptions const& opts = {})
     {
         boost::iostreams::filtering_ostream filter;
 
         filter.push(JSON::BeautifiedStreamWrapper{});
         filter.push(boost::iostreams::file_sink(file));
 
-        JSON::try_stringify_start(filter, name, obj, opts);
+        JSON::try_stringify(filter, "", obj, opts);
     }
 }
 
