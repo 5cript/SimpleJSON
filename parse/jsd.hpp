@@ -17,3 +17,4 @@
 #include "jsd_unique_ptr.hpp"
 #include "jsd_shared_ptr.hpp"
 #include "jsd_convenience.hpp"
+#include "jsd_nested_json.hpp"

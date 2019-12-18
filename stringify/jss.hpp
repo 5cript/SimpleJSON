@@ -32,5 +32,6 @@
 #include "jss_check.hpp"
 #include "jss_optional.hpp"
 #include "jss_renamed.hpp"
+#include "jss_nested_json.hpp"
 
 // #include "jss_undefine.hpp"
