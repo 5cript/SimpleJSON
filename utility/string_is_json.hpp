@@ -11,6 +11,11 @@ namespace JSON
     {
         std::string json;
 
+        json_string()
+            : json{}
+        {
+        }
+
         json_string(std::string json)
             : json{std::move(json)}
         {

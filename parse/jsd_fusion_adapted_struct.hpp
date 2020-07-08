@@ -79,7 +79,7 @@ namespace JSON
 #define SJSON_INJECT_PARSE(ClassName) \
 namespace JSON \
 { \
-    void parse( \
+    inline void parse( \
         ClassName& obj, \
         std::string const& name, \
         PropertyTree const& tree, \

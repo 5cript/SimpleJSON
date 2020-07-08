@@ -129,7 +129,7 @@ namespace JSON
 #define SJSON_INJECT_STRINGIFY(ClassName) \
 namespace JSON \
 { \
-    std::ostream& stringify( \
+    inline std::ostream& stringify( \
         std::ostream& stream, \
         std::string const& name, \
         ClassName const& value, \
